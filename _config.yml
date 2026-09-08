@@ -88,9 +88,9 @@ defaults:
       layout: default
   - scope:
       path: ""
-      type: "privacy_docs"
+      type: "privacy"
     values:
-      layout: privacy_docs
+      layout: privacy
 
 
 wikirefs:
