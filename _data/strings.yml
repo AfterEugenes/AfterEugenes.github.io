@@ -20,7 +20,7 @@ hero:
   role: { en: "Offensive security student & pentester", fr: "Étudiant en sécurité offensive & pentester" }
   lede:
     en: "Hi, I'm Eugene, an offensive security student and pentester. I break into things and then write down exactly how it happened. Here you'll find my HackTheBox and CTF writeups, privacy guides, and the projects I build along the way."
-    fr: "Salut, moi c'est Eugene, étudiant en sécurité offensive et pentester. J'explore des failles, puis j'écris exactement comment. Vous trouverez ici mes writeups HackTheBox et CTF, des guides vie privée, et les projets que je construis au passage."
+    fr: "Salut, moi c'est Eugene, étudiant en sécurité offensive et pentester. J'explore des failles, puis je vous indique comment. Vous trouverez ici mes writeups HackTheBox et CTF, des guides vie privée, et les projets que je construis au passage."
   btn_writeups: { en: "Read the writeups", fr: "Lire les writeups" }
   btn_about: { en: "About me", fr: "À propos" }
   stat_htb: { en: "HTB writeups", fr: "Writeups HTB" }
@@ -92,7 +92,7 @@ privacy:
   newest: { en: "Newest", fr: "Nouveau" }
   lede:
     en: "My running notes on privacy tooling: messengers, browsers, e-mail, cryptography, VPNs and more. Each guide weighs the good, the bad and the ugly, including the cases where the answer is simply \"don't use it\". Browse by category on the left, or start from the newest notes below."
-    fr: "Mes notes en cours sur les outils de vie privée : messageries, navigateurs, e-mails, cryptographie, VPN et plus. Chaque guide pèse le bon, le mauvais et le laid, y compris quand la réponse est simplement \"à ne pas utiliser\". Parcourez par catégorie à gauche, ou commencez par les notes récentes ci-dessous."
+    fr: "Mes notes en cours sur les outils de vie privée : messageries, navigateurs, e-mails, cryptographie, VPN et plus. Chaque guide pèse le bon, le mauvais et le truand, y compris quand la réponse est simplement \"à ne pas utiliser\". Parcourez par catégorie à gauche, ou commencez par les notes récentes ci-dessous."
   newest_notes: { en: "Newest notes", fr: "Notes récentes" }
   categories: { en: "Categories", fr: "Catégories" }
   files_one: { en: "file", fr: "fichier" }

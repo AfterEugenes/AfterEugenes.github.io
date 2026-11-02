@@ -1,9 +1,14 @@
 # CV / About content — edit freely, no HTML needed.
 # Details drawn from cv/typst/cv_eb_pentest_en.typ
+# *_fr keys feed the EN/FR toggle; missing ones fall back to English.
 profile: >-
   I'm Eugène, a cybersecurity student at ENSIMAG in Grenoble with a taste for
   offensive security. I break into things, write down exactly how it happened,
   and help people stay private online.
+profile_fr: >-
+  Je suis Eugène, étudiant en cybersécurité à ENSIMAG Grenoble avec un goût pour
+  la sécurité offensive. J'explore des failles, j'écris exactement comment c'est
+  passé, et j'aide les gens à rester privés en ligne.
 
 contact:
   email: contact@eugenetl.com
@@ -20,53 +25,95 @@ skills:
       - "Linux: exploitation and privilege escalation through sudo, SUIDs and misconfigured services (gtfobins, linpeas)"
       - "Windows & AD: Kerberoasting and privilege escalation"
       - "Methodology: recon, exploitation, post-exploitation and a clean report at the end"
+    items_fr:
+      - "Applications web : exploitation OWASP Top 10, XSS, SSRF, injection GraphQL, SQLi, LFI et path traversal (labs PortSwigger)"
+      - "Linux : exploitation et élévation de privilèges via sudo, SUIDs et services mal configurés (gtfobins, linpeas)"
+      - "Windows & AD : Kerberoasting et élévation de privilèges"
+      - "Méthodologie : recon, exploitation, post-exploitation et un rapport propre à la fin"
   - name: Scripting & development
+    name_fr: Scripting & développement
     items:
       - "C: memory management, data structures, multithreading"
       - "C++: libraries, optimisation, parallel execution"
       - "Python: tooling, graphs, databases"
       - "Bash: automation of recon and exploitation workflows"
+    items_fr:
+      - "C : gestion mémoire, structures de données, multithreading"
+      - "C++ : bibliothèques, optimisation, exécution parallèle"
+      - "Python : outillage, graphes, bases de données"
+      - "Bash : automatisation des workflows de recon et d'exploitation"
   - name: Also
+    name_fr: Aussi
     items:
       - "English C1 (fluent), French native"
       - "Technical writing: pentest reports, writeups and reviews"
+    items_fr:
+      - "Anglais C1 (courant), français natif"
+      - "Rédaction technique : rapports de pentest, writeups et reviews"
 
 experience:
   - role: Research internship on side-channel attacks
+    role_fr: Stage de recherche sur les attaques par canal auxiliaire
     org: NAIST, Nara, Japan
+    org_fr: NAIST, Nara, Japon
     when: June to August 2026
+    when_fr: Juin à août 2026
     items:
       - "Side-channel analysis: SPA, DPA and CPA against AES, up to the 9th round"
       - "Study of deanonymization attacks on Tor"
+    items_fr:
+      - "Analyse par canal auxiliaire : SPA, DPA et CPA contre AES, jusqu'au 9e round"
+      - "Étude des attaques de déanonymisation sur Tor"
   - role: Pentest internship
+    role_fr: Stage de pentest
     org: Maestro startup, Grenoble
+    org_fr: Startup Maestro, Grenoble
     when: July to August 2025
+    when_fr: Juillet à août 2025
     items:
       - "Security assessment of a web, cloud and mobile infrastructure (Supabase, Flutter, Android Studio)"
       - "Vulnerability report with remediation guidance delivered to the team"
+    items_fr:
+      - "Audit de sécurité d'une infrastructure web, cloud et mobile (Supabase, Flutter, Android Studio)"
+      - "Rapport de vulnérabilités avec pistes de remédiation livré à l'équipe"
 
 education:
   - org: ENSIMAG, Grenoble
     when: 2023 to 2027
+    when_fr: 2023 à 2027
     detail: Double degree, Master in Cybersecurity & Information Systems Engineering
+    detail_fr: Double diplôme, Master Cybersécurité & Ingénierie des Systèmes d'Information
     items:
       - "Advanced cryptography and protocols (RSA, side-channel analysis)"
       - "Networks: ARP, HTTP, TCP, DHCP, VPNs and tunnels"
       - "Computer architecture: VHDL CPU design"
       - "Development projects: C window handler, Java game, compiler written in C++"
+    items_fr:
+      - "Cryptographie avancée et protocoles (RSA, analyse par canal auxiliaire)"
+      - "Réseaux : ARP, HTTP, TCP, DHCP, VPN et tunnels"
+      - "Architecture des ordinateurs : conception d'un CPU en VHDL"
+      - "Projets de développement : gestionnaire de fenêtres en C, jeu en Java, compilateur écrit en C++"
 
 achievements:
   - name: CTFs
     value: "Top 17 at K17, top 90 at Hack.LU, top 100 at Cryptonite. Also played CSAW, Patriot CTF and the French Navy CTF."
+    value_fr: "Top 17 à K17, top 90 à Hack.LU, top 100 à Cryptonite. Également joué CSAW, Patriot CTF et le CTF de la Marine nationale."
   - name: HackTheBox
     value: "Seasonal machines and the 2025 university CTF, all documented as writeups."
+    value_fr: "Machines saisonnières et CTF universitaire 2025, le tout documenté en writeups."
   - name: RootMe
     value: "Half of App-Script completed: CSP bypass, SQLi, de-obfuscation, cron jobs, SUIDs."
+    value_fr: "La moitié d'App-Script complétée : contournement de CSP, SQLi, déobfuscation, cron jobs, SUIDs."
   - name: PortSwigger
     value: "Labs across XSS, SSRF, GraphQL injection, SQLi and path traversal."
+    value_fr: "Labs sur XSS, SSRF, injection GraphQL, SQLi et path traversal."
 
 extra:
   - name: Student life
+    name_fr: Vie étudiante
     value: "Vice-president of a cinema club: weekly screenings, finances and arthouse discovery events."
+    value_fr: "Vice-président d'un club de cinéma : projections hebdomadaires, finances et événements de découverte d'art et d'essai."
   - name: Side projects
+    name_fr: Projets perso
     value: "Made a student short-film, and I still write about films from time to time."
+    value_fr: "Réalisation d'un court-métrage étudiant, et j'écris encore sur des films de temps en temps."

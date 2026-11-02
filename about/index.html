@@ -10,7 +10,7 @@ permalink: /about/
 <div class="container">
   <header class="page-head">
     <h1>{% include t.html group="nav" key="about" %}</h1>
-    <p class="lede">{{ cv.profile }}</p>
+    <p class="lede"><span class="i18n" data-fr="{{ cv.profile_fr | escape }}">{{ cv.profile }}</span></p>
   </header>
 
   <div class="about-grid">
@@ -19,9 +19,9 @@ permalink: /about/
         <h2>{% include t.html group="about" key="skills" %}</h2>
         {% for skill in cv.skills %}
         <div class="skill-row">
-          <b>{{ skill.name }}</b>
+          <b><span class="i18n" data-fr="{{ skill.name_fr | default: skill.name | escape }}">{{ skill.name }}</span></b>
           <ul>
-            {% for item in skill.items %}<li>{{ item }}</li>{% endfor %}
+            {% for item in skill.items %}<li><span class="i18n" data-fr="{{ skill.items_fr[forloop.index0] | escape }}">{{ item }}</span></li>{% endfor %}
           </ul>
         </div>
         {% endfor %}
@@ -31,10 +31,13 @@ permalink: /about/
         <h2>{% include t.html group="about" key="experience" %}</h2>
         {% for xp in cv.experience %}
         <div class="xp">
-          <h3>{{ xp.role }}</h3>
-          <div class="xp-org">{{ xp.org }} · {{ xp.when }}</div>
+          <h3><span class="i18n" data-fr="{{ xp.role_fr | default: xp.role | escape }}">{{ xp.role }}</span></h3>
+          <div class="xp-org">
+            <span class="i18n" data-fr="{{ xp.org_fr | default: xp.org | escape }}">{{ xp.org }}</span> ·
+            <span class="i18n" data-fr="{{ xp.when_fr | default: xp.when | escape }}">{{ xp.when }}</span>
+          </div>
           <ul>
-            {% for item in xp.items %}<li>{{ item }}</li>{% endfor %}
+            {% for item in xp.items %}<li><span class="i18n" data-fr="{{ xp.items_fr[forloop.index0] | escape }}">{{ item }}</span></li>{% endfor %}
           </ul>
         </div>
         {% endfor %}
@@ -45,9 +48,12 @@ permalink: /about/
         {% for entry in cv.education %}
         <div class="xp">
           <h3>{{ entry.org }}</h3>
-          <div class="xp-org">{{ entry.when }} · {{ entry.detail }}</div>
+          <div class="xp-org">
+            <span class="i18n" data-fr="{{ entry.when_fr | default: entry.when | escape }}">{{ entry.when }}</span> ·
+            <span class="i18n" data-fr="{{ entry.detail_fr | default: entry.detail | escape }}">{{ entry.detail }}</span>
+          </div>
           <ul>
-            {% for item in entry.items %}<li>{{ item }}</li>{% endfor %}
+            {% for item in entry.items %}<li><span class="i18n" data-fr="{{ entry.items_fr[forloop.index0] | escape }}">{{ item }}</span></li>{% endfor %}
           </ul>
         </div>
         {% endfor %}
@@ -57,7 +63,7 @@ permalink: /about/
         <h2>{% include t.html group="about" key="achievements" %}</h2>
         <ul class="rank-list">
           {% for a in cv.achievements %}
-          <li><b>{{ a.name }}</b><br>{{ a.value }}</li>
+          <li><b>{{ a.name }}</b><br><span class="i18n" data-fr="{{ a.value_fr | escape }}">{{ a.value }}</span></li>
           {% endfor %}
         </ul>
       </div>
@@ -66,7 +72,7 @@ permalink: /about/
         <h2>{% include t.html group="about" key="beyond" %}</h2>
         <ul class="rank-list">
           {% for e in cv.extra %}
-          <li><b>{{ e.name }}</b><br>{{ e.value }}</li>
+          <li><b><span class="i18n" data-fr="{{ e.name_fr | default: e.name | escape }}">{{ e.name }}</span></b><br><span class="i18n" data-fr="{{ e.value_fr | escape }}">{{ e.value }}</span></li>
           {% endfor %}
         </ul>
       </div>

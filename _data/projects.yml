@@ -1,30 +1,37 @@
 # Personal projects shown on /projects/
+# *_fr keys feed the EN/FR toggle; missing ones fall back to English.
 - name: Raft
   url: https://github.com/AfterEugenes/raft
   description: Interactive CLI tool in Rust with a REPL-style interface, command parsing and URL handling. In development.
+  description_fr: Outil CLI interactif en Rust avec une interface de type REPL, parsing de commandes et gestion d'URL. En développement.
   tags: [Rust, Cysec tools]
 
 - name: PUF (Ports and Urls Filter)
   url: https://github.com/AfterEugenes/puf
   description: "Flask web app to run and manage fuzzing and nmap scans: quick command launch, result storage and filtering, target management. Customisable via config."
+  description_fr: "App web Flask pour lancer et gérer des scans de fuzzing et nmap : lancement rapide de commandes, stockage et filtrage des résultats, gestion des cibles. Personnalisable via la config."
   tags: [Python, Cysec tools]
 
 - name: PyShooter
   url: https://github.com/TheLastOfEugenes/Shooterpython
   description: Simple shooter game in Python.
+  description_fr: Un simple jeu de shooter en Python.
   tags: [Python, Game]
 
 - name: Seem-simi
   url: https://github.com/TheLastOfEugenes/seemsimi
   description: A simplistic version of the infamous Simsimi. Still in development.
+  description_fr: Une version simplifiée du célèbre Simsimi. En développement.
   tags: [Python]
 
 - name: Dofus-like
   url: https://github.com/TheLastOfEugenes/dofus_like
   description: A simplistic group project version of the famous Dofus game, coded in C.
+  description_fr: Un projet de groupe simplifié du célèbre jeu Dofus, codé en C.
   tags: [C, Game]
 
 - name: TheLastOfEugenes.github.io
   url: https://github.com/TheLastOfEugenes/TheLastOfEugenes.github.io
   description: My first personal website, the ancestor of this one.
+  description_fr: Mon premier site personnel, l'ancêtre de celui-ci.
   tags: [Web]

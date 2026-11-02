@@ -102,7 +102,7 @@ layout: default
     <div>
       <h2>{% include t.html group="home" key="more_about" %}</h2>
       <p class="muted">
-        {{ site.data.cv.profile }}
+        <span class="i18n" data-fr="{{ site.data.cv.profile_fr | escape }}">{{ site.data.cv.profile }}</span>
         {% include t.html group="home" key="about_extra" %}
       </p>
       <p class="muted">{% include t.html group="home" key="about_extra2" %}</p>

@@ -32,7 +32,7 @@ permalink: /portfolio/
     {% for site_item in items %}
     <a class="project-card" href="{{ site_item.url }}">
       <h3>{{ site_item.name }}</h3>
-      <p>{{ site_item.description }}</p>
+      <p><span class="i18n" data-fr="{{ site_item.description_fr | escape }}">{{ site_item.description }}</span></p>
       <div class="tag-row">
         {% for tag in site_item.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
       </div>
