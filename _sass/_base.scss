@@ -99,6 +99,31 @@ table {
   background: rgba(103, 232, 249, 0.28);
 }
 
+// dark scrollbars everywhere (Chrome/Brave show white ones by default)
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dim);
+}
+
 .skip-link {
   position: absolute;
   left: -999px;

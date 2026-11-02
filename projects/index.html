@@ -7,8 +7,8 @@ permalink: /projects/
 
 <div class="container">
   <header class="page-head">
-    <h1>Projects</h1>
-    <p class="lede">Tools and experiments I build when a problem annoys me enough, mostly security tooling and games.</p>
+    <h1>{% include t.html group="nav" key="projects" %}</h1>
+    <p class="lede">{% include t.html group="projects" key="lede" %}</p>
   </header>
 
   <div class="card-grid">
@@ -19,7 +19,7 @@ permalink: /projects/
       <div class="tag-row">
         {% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
       </div>
-      <p class="repo-link">View on GitHub →</p>
+      <p class="repo-link">{% include t.html group="projects" key="view_github" %}</p>
     </a>
     {% endfor %}
   </div>

@@ -11,10 +11,15 @@ permalink: /writeups/ctf/
 <div class="container">
   <header class="page-head">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> › <span>CTF</span>
+      <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="article" key="breadcrumb_writeups" %}</a> › <span>CTF</span>
     </nav>
     <h1>CTF events</h1>
-    <p class="lede">{{ ctf_posts.size }} challenge writeups across {{ years | size }} season{% if years.size > 1 %}s{% endif %} of CTFs.</p>
+    <p class="lede">
+      {{ ctf_posts.size }}
+      {% if ctf_posts.size > 1 %}{% include t.html group="ctf" key="lede_many" %}{% else %}{% include t.html group="ctf" key="lede_one" %}{% endif %}
+      {{ years | size }}
+      {% if years.size > 1 %}{% include t.html group="ctf" key="seasons_many" %}{% else %}{% include t.html group="ctf" key="seasons_one" %}{% endif %}
+    </p>
   </header>
 
   {% for year in years %}
@@ -28,8 +33,8 @@ permalink: /writeups/ctf/
       {% assign event_page = site.CTF | where: "layout", "ctf-event" | where: "event", event.name | first %}
       <div class="group-head">
         <h3>{{ event.name }}</h3>
-        <span class="group-count">{{ event.items | size }} challenges</span>
-        {% if event_page %}<a class="group-link" href="{{ event_page.url | relative_url }}">Event page</a>{% endif %}
+        <span class="group-count">{{ event.items | size }} {% if event.items.size > 1 %}{% include t.html group="ctf" key="challenges_many" %}{% else %}{% include t.html group="ctf" key="challenges_one" %}{% endif %}</span>
+        {% if event_page %}<a class="group-link" href="{{ event_page.url | relative_url }}">{% include t.html group="ctf" key="event_page" %}</a>{% endif %}
       </div>
       <div class="card-grid" style="margin-bottom: 32px;">
         {% assign items = event.items | sort: "date" %}

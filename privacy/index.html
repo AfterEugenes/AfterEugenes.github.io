@@ -12,16 +12,12 @@ permalink: /privacy/
 
   <div class="privacy-main">
     <header class="page-head">
-      <h1>Privacy</h1>
-      <p class="lede">
-        My running notes on privacy tooling: messengers, browsers, e-mail, cryptography, VPNs and more.
-        Each guide weighs the good, the bad and the ugly, including the cases where the answer is
-        simply "don't use it". Browse by category on the left, or start from the newest notes below.
-      </p>
+      <h1>{% include t.html group="nav" key="privacy" %}</h1>
+      <p class="lede">{% include t.html group="privacy" key="lede" %}</p>
     </header>
 
     <section class="related">
-      <h2>Newest notes</h2>
+      <h2>{% include t.html group="privacy" key="newest_notes" %}</h2>
       <ul class="file-list">
         {% assign recent = site.privacy_docs | where: "layout", "privacy-doc" | sort: "date" | reverse %}
         {% for doc in recent limit: 5 %}
@@ -34,13 +30,13 @@ permalink: /privacy/
     </section>
 
     <section class="related">
-      <h2>Categories</h2>
+      <h2>{% include t.html group="privacy" key="categories" %}</h2>
       <div class="card-grid">
         {% for cat in nav.categories %}
           <a class="writeup-card privacy" href="{% if cat.url %}{{ cat.url | relative_url }}{% else %}{{ '/privacy/' | relative_url }}{% endif %}">
             <div class="card-top">
               <span class="card-kind">PRIVACY</span>
-              <span class="badge">{{ cat.notes | size }} file{% if cat.notes.size != 1 %}s{% endif %}</span>
+              <span class="badge">{{ cat.notes | size }} {% if cat.notes.size > 1 %}{% include t.html group="privacy" key="files_many" %}{% else %}{% include t.html group="privacy" key="files_one" %}{% endif %}</span>
             </div>
             <h3 class="card-title">{{ cat.name }}</h3>
           </a>

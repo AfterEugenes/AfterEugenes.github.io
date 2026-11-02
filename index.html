@@ -12,32 +12,27 @@ layout: default
     <div>
       <p class="hero-kicker">Tech Lab; Deep Research</p>
       <h1 class="hero-title">TL;<em>DR</em></h1>
-      <p class="hero-lede">
-        Hi, I'm Eugene, an offensive security student and pentester.
-        I break into things and then write down exactly how it happened.
-        Here you'll find my HackTheBox and CTF writeups, privacy guides,
-        and the projects I build along the way.
-      </p>
+      <p class="hero-lede">{% include t.html group="hero" key="lede" %}</p>
       <div class="hero-actions">
-        <a class="btn" href="{{ '/writeups/' | relative_url }}">Read the writeups</a>
-        <a class="btn ghost" href="{{ '/about/' | relative_url }}">About me</a>
+        <a class="btn" href="{{ '/writeups/' | relative_url }}">{% include t.html group="hero" key="btn_writeups" %}</a>
+        <a class="btn ghost" href="{{ '/about/' | relative_url }}">{% include t.html group="hero" key="btn_about" %}</a>
       </div>
       <div class="stats-strip">
-        <div class="stat"><b>{{ htb_posts.size }}</b><span>HTB writeups</span></div>
-        <div class="stat"><b>{{ ctf_posts.size }}</b><span>CTF writeups</span></div>
-        <div class="stat"><b>{{ privacy_count }}</b><span>Privacy notes</span></div>
+        <div class="stat"><b>{{ htb_posts.size }}</b><span>{% include t.html group="hero" key="stat_htb" %}</span></div>
+        <div class="stat"><b>{{ ctf_posts.size }}</b><span>{% include t.html group="hero" key="stat_ctf" %}</span></div>
+        <div class="stat"><b>{{ privacy_count }}</b><span>{% include t.html group="hero" key="stat_privacy" %}</span></div>
       </div>
     </div>
 
     <div class="profile-panel">
-        <div class="profile-monogram">E</div>
+      <div class="profile-monogram">E</div>
       <h2 class="profile-name">Eugene</h2>
-      <p class="profile-role">Offensive security student &amp; pentester</p>
+      <p class="profile-role">{% include t.html group="hero" key="role" %}</p>
       <ul class="profile-facts">
-        <li><span>Focus</span>Web apps, Active Directory, Linux, privacy</li>
-        <li><span>Writing</span>HTB machines and CTF events, step by step</li>
-        <li><span>Side quest</span>Designing and hosting sites for people</li>
-        <li><span>Reach me</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><span class="fact-label">{% include t.html group="hero" key="label_focus" %}</span>Web apps, Active Directory, Linux, privacy</li>
+        <li><span class="fact-label">{% include t.html group="hero" key="label_interests" %}</span>{% include t.html group="hero" key="interests" %}</li>
+        <li><span class="fact-label">{% include t.html group="hero" key="label_writing" %}</span>{% include t.html group="hero" key="writing" %}</li>
+        <li><span class="fact-label">{% include t.html group="hero" key="label_reach" %}</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
       </ul>
     </div>
   </div>
@@ -48,27 +43,27 @@ layout: default
     <div class="section-cards">
       <a class="section-card writeups" href="{{ '/writeups/' | relative_url }}">
         <div class="sc-icon">✍️</div>
-        <h3>Writeups</h3>
-        <p>HackTheBox machines and CTF challenges, from first scan to root.</p>
-        <span class="sc-count">{{ all_writeups.size }} published</span>
+        <h3>{% include t.html group="home" key="card_writeups_t" %}</h3>
+        <p>{% include t.html group="home" key="card_writeups_d" %}</p>
+        <span class="sc-count">{{ all_writeups.size }} {% include t.html group="home" key="card_writeups_c" %}</span>
       </a>
       <a class="section-card privacy" href="{{ '/privacy/' | relative_url }}">
         <div class="sc-icon">🕶️</div>
-        <h3>Privacy</h3>
-        <p>Guides to messengers, browsers, mail and tools that keep you private.</p>
-        <span class="sc-count">{{ privacy_count }} notes</span>
+        <h3>{% include t.html group="home" key="card_privacy_t" %}</h3>
+        <p>{% include t.html group="home" key="card_privacy_d" %}</p>
+        <span class="sc-count">{{ privacy_count }} {% include t.html group="home" key="card_privacy_c" %}</span>
       </a>
       <a class="section-card projects" href="{{ '/projects/' | relative_url }}">
         <div class="sc-icon">🛠️</div>
-        <h3>Projects</h3>
-        <p>Tools and experiments I build: fuzzers, cheatsheets, games.</p>
-        <span class="sc-count">{{ site.data.projects | size }} projects</span>
+        <h3>{% include t.html group="home" key="card_projects_t" %}</h3>
+        <p>{% include t.html group="home" key="card_projects_d" %}</p>
+        <span class="sc-count">{{ site.data.projects | size }} {% include t.html group="home" key="card_projects_c" %}</span>
       </a>
       <a class="section-card portfolio" href="{{ '/portfolio/' | relative_url }}">
         <div class="sc-icon">🌐</div>
-        <h3>Portfolio</h3>
-        <p>Websites I design and host for people. Secure by default.</p>
-        <span class="sc-count">Services</span>
+        <h3>{% include t.html group="home" key="card_portfolio_t" %}</h3>
+        <p>{% include t.html group="home" key="card_portfolio_d" %}</p>
+        <span class="sc-count">{% include t.html group="home" key="card_portfolio_c" %}</span>
       </a>
     </div>
   </div>
@@ -77,13 +72,13 @@ layout: default
 <section class="section alt">
   <div class="container">
     <div class="section-head">
-      <h2>Latest writeups</h2>
-      <a class="section-link" href="{{ '/writeups/' | relative_url }}">See all writeups</a>
+      <h2>{% include t.html group="home" key="latest" %}</h2>
+      <a class="section-link" href="{{ '/writeups/' | relative_url }}">{% include t.html group="home" key="see_all" %}</a>
     </div>
 
     <div class="home-writeups">
       <div class="col-htb">
-        <div class="col-head"><h3>HackTheBox</h3><div class="bar"></div></div>
+        <div class="col-head"><h3>{% include t.html group="home" key="htb" %}</h3><div class="bar"></div></div>
         <div class="col-stack">
           {% for post in htb_posts limit: 3 %}
             {% include writeup-card.html post=post %}
@@ -91,7 +86,7 @@ layout: default
         </div>
       </div>
       <div class="col-ctf">
-        <div class="col-head"><h3>CTFs</h3><div class="bar"></div></div>
+        <div class="col-head"><h3>{% include t.html group="home" key="ctfs" %}</h3><div class="bar"></div></div>
         <div class="col-stack">
           {% for post in ctf_posts limit: 3 %}
             {% include writeup-card.html post=post %}
@@ -105,22 +100,19 @@ layout: default
 <section class="section">
   <div class="container home-about">
     <div>
-      <h2>More about me</h2>
+      <h2>{% include t.html group="home" key="more_about" %}</h2>
       <p class="muted">
         {{ site.data.cv.profile }}
-        Right now I'm focused on web application pentesting, Active Directory and Linux
-        privilege escalation, and on documenting everything I learn along the way.
+        {% include t.html group="home" key="about_extra" %}
       </p>
-      <p class="muted">
-        I also design and host websites for people who want something simple, clean and secure.
-      </p>
-      <a class="btn" href="{{ '/about/' | relative_url }}">Full CV &amp; achievements</a>
+      <p class="muted">{% include t.html group="home" key="about_extra2" %}</p>
+      <a class="btn" href="{{ '/about/' | relative_url }}">{% include t.html group="home" key="full_cv" %}</a>
     </div>
     <div class="contact-box">
-      <h3>Get in touch</h3>
-      <p class="muted">Questions, collaboration, or a website project?</p>
-      <a class="btn" href="mailto:{{ site.email }}">Email me</a>
-      <a class="btn ghost" href="{{ '/portfolio/' | relative_url }}">My services</a>
+      <h3>{% include t.html group="home" key="get_in_touch" %}</h3>
+      <p class="muted">{% include t.html group="home" key="contact_text" %}</p>
+      <a class="btn" href="mailto:{{ site.email }}">{% include t.html group="home" key="email_me" %}</a>
+      <a class="btn ghost" href="{{ '/portfolio/' | relative_url }}">{% include t.html group="home" key="my_services" %}</a>
     </div>
   </div>
 </section>

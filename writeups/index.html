@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Writeups
-description: HackTheBox machines and CTF challenge writeups, from first scan to root.
+description: "HackTheBox machines and CTF challenge writeups, from first scan to root."
 permalink: /writeups/
 ---
 
@@ -12,10 +12,7 @@ permalink: /writeups/
 <div class="container">
   <header class="page-head">
     <h1>Writeups</h1>
-    <p class="lede">
-      {{ all_writeups.size }} published writeups: HackTheBox machines and CTF challenges,
-      written the way I wish I'd found them when I got stuck.
-    </p>
+    <p class="lede">{{ all_writeups.size }} {% include t.html group="writeups" key="lede" %}</p>
   </header>
 
   <div class="filters" data-filters>
@@ -23,7 +20,9 @@ permalink: /writeups/
     <label for="htb-toggle">HTB</label>
     <input id="ctf-toggle" type="checkbox" class="filter-toggle" data-filter-tag="ctf" checked>
     <label for="ctf-toggle">CTF</label>
-    <input id="writeup-search" class="filter-search" type="search" placeholder="Search writeups…">
+    <input id="writeup-search" class="filter-search" type="search"
+           placeholder="{{ site.data.strings.writeups.search_ph.en }}"
+           data-fr-ph="{{ site.data.strings.writeups.search_ph.fr }}">
   </div>
 
   <div class="card-grid">
@@ -32,5 +31,5 @@ permalink: /writeups/
     {% endfor %}
   </div>
 
-  <p class="filter-empty is-hidden">Nothing matches. Try clearing the filters.</p>
+  <p class="filter-empty is-hidden">{% include t.html group="writeups" key="filter_empty" %}</p>
 </div>

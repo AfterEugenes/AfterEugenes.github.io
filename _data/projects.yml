@@ -4,10 +4,10 @@
   description: Simple shooter game in Python.
   tags: [Python, Game]
 
-- name: Fuzzer
-  url: https://github.com/TheLastOfEugenes/fuzzer
-  description: Web fuzzer adaptable to modules. Still in development.
-  tags: [C, Cysec tools]
+- name: Raft
+  url: https://github.com/AfterEugenes/raft
+  description: Interactive CLI tool in Rust with a REPL-style interface, command parsing and URL handling. In development.
+  tags: [Rust, Cysec tools]
 
 - name: Pentesting Cheatsheet
   url: https://github.com/TheLastOfEugenes/PentestCheatSheet

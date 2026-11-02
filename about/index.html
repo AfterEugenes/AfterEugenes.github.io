@@ -9,14 +9,14 @@ permalink: /about/
 
 <div class="container">
   <header class="page-head">
-    <h1>About me</h1>
+    <h1>{% include t.html group="nav" key="about" %}</h1>
     <p class="lede">{{ cv.profile }}</p>
   </header>
 
   <div class="about-grid">
     <div>
       <div class="cv-block">
-        <h2>Skills</h2>
+        <h2>{% include t.html group="about" key="skills" %}</h2>
         {% for skill in cv.skills %}
         <div class="skill-row">
           <b>{{ skill.name }}</b>
@@ -28,7 +28,7 @@ permalink: /about/
       </div>
 
       <div class="cv-block">
-        <h2>Professional experience</h2>
+        <h2>{% include t.html group="about" key="experience" %}</h2>
         {% for xp in cv.experience %}
         <div class="xp">
           <h3>{{ xp.role }}</h3>
@@ -41,7 +41,7 @@ permalink: /about/
       </div>
 
       <div class="cv-block">
-        <h2>Education</h2>
+        <h2>{% include t.html group="about" key="education" %}</h2>
         {% for entry in cv.education %}
         <div class="xp">
           <h3>{{ entry.org }}</h3>
@@ -54,7 +54,7 @@ permalink: /about/
       </div>
 
       <div class="cv-block">
-        <h2>Achievements &amp; rankings</h2>
+        <h2>{% include t.html group="about" key="achievements" %}</h2>
         <ul class="rank-list">
           {% for a in cv.achievements %}
           <li><b>{{ a.name }}</b><br>{{ a.value }}</li>
@@ -63,7 +63,7 @@ permalink: /about/
       </div>
 
       <div class="cv-block">
-        <h2>Beyond the terminal</h2>
+        <h2>{% include t.html group="about" key="beyond" %}</h2>
         <ul class="rank-list">
           {% for e in cv.extra %}
           <li><b>{{ e.name }}</b><br>{{ e.value }}</li>
@@ -73,13 +73,13 @@ permalink: /about/
     </div>
 
     <aside class="contact-panel">
-      <h2>Contact</h2>
-      <div class="contact-line"><span>E-mail</span><a href="mailto:{{ cv.contact.email }}">{{ cv.contact.email }}</a></div>
+      <h2>{% include t.html group="about" key="contact_h" %}</h2>
+      <div class="contact-line"><span>{% include t.html group="about" key="email" %}</span><a href="mailto:{{ cv.contact.email }}">{{ cv.contact.email }}</a></div>
       <div class="contact-line"><span>GitHub</span><a href="{{ cv.contact.github }}">AfterEugenes</a></div>
       <div class="contact-line"><span>HackTheBox</span><a href="{{ cv.contact.htb }}">TheLastOfEugenes</a></div>
       <div class="contact-line"><span>RootMe</span><a href="{{ cv.contact.rootme }}">LastOfEugenes</a></div>
-      <a class="btn" href="{{ cv.cv_pdf | relative_url }}" download>Download CV (PDF)</a>
-      <a class="btn ghost" href="{{ '/writeups/' | relative_url }}">Read my writeups</a>
+      <a class="btn" href="{{ cv.cv_pdf | relative_url }}" download>{% include t.html group="about" key="download_cv" %}</a>
+      <a class="btn ghost" href="{{ '/writeups/' | relative_url }}">{% include t.html group="about" key="read_writeups" %}</a>
     </aside>
   </div>
 </div>

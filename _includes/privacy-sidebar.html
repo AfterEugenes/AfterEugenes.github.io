@@ -1,11 +1,11 @@
 {% comment %} Persistent privacy tree: overview, categories, files. {% endcomment %}
 {% assign nav = site.data.privacy_nav %}
 <aside class="side-tree" aria-label="Privacy guides navigation">
-  <p class="toc-title">Privacy guides</p>
+  <p class="toc-title">{% include t.html group="privacy" key="guides" %}</p>
 
   {% if nav.latest %}
   <a class="tree-latest" href="{{ nav.latest.url | relative_url }}">
-    <span class="tree-latest-label">Newest</span>
+    <span class="tree-latest-label">{% include t.html group="privacy" key="newest" %}</span>
     <span class="tree-latest-title">{{ nav.latest.title }}</span>
   </a>
   {% endif %}

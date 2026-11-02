@@ -24,6 +24,6 @@
     <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%d %b %Y" }}</time>
     {% if p.os %} · {{ p.os | capitalize }}{% endif %}
     {% if p.event %} · {{ p.event }}{% endif %}
-    {% if p.season %} · Season {{ p.season }}{% endif %}
+    {% if p.season %} · <span class="i18n" data-fr="Saison">Season</span> {{ p.season }}{% endif %}
   </p>
 </a>

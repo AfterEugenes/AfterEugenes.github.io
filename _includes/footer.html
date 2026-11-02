@@ -2,18 +2,18 @@
   <div class="footer-inner">
     <div class="footer-col">
       <p class="brand-mark small">TL;<em>DR</em></p>
-      <p class="muted">Tech Lab; Deep Research. Offensive security, writeups &amp; privacy.</p>
+      <p class="muted">{% include t.html group="footer" key="tagline" %}</p>
     </div>
     <div class="footer-col">
-      <h4>Explore</h4>
-      <a href="{{ '/writeups/' | relative_url }}">Writeups</a>
-      <a href="{{ '/privacy/' | relative_url }}">Privacy guides</a>
-      <a href="{{ '/projects/' | relative_url }}">Projects</a>
-      <a href="{{ '/portfolio/' | relative_url }}">Portfolio</a>
-      <a href="{{ '/about/' | relative_url }}">About &amp; CV</a>
+      <h4>{% include t.html group="footer" key="explore" %}</h4>
+      <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="nav" key="writeups" %}</a>
+      <a href="{{ '/privacy/' | relative_url }}">{% include t.html group="footer" key="privacy_guides" %}</a>
+      <a href="{{ '/projects/' | relative_url }}">{% include t.html group="nav" key="projects" %}</a>
+      <a href="{{ '/portfolio/' | relative_url }}">{% include t.html group="nav" key="portfolio" %}</a>
+      <a href="{{ '/about/' | relative_url }}">{% include t.html group="footer" key="about_cv" %}</a>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
+      <h4>{% include t.html group="footer" key="contact" %}</h4>
       <a href="mailto:{{ site.email }}">{{ site.email }}</a>
       <a href="https://github.com/{{ site.github_username }}">GitHub</a>
       <a href="{{ site.htb_profile }}">HackTheBox</a>
@@ -21,6 +21,6 @@
   </div>
   <div class="footer-bar">
     <span>© {{ 'now' | date: '%Y' }} Eugene TL · eugenetl.com</span>
-    <span class="muted">Published from Obsidian vaults with Jekyll</span>
+    <span class="muted">{% include t.html group="footer" key="published" %}</span>
   </div>
 </footer>

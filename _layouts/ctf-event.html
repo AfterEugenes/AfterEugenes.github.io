@@ -5,7 +5,7 @@ layout: default
   <div class="container">
   <header class="article-header">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> ›
+      <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="article" key="breadcrumb_writeups" %}</a> ›
       <a href="{{ '/writeups/ctf/' | relative_url }}">CTF</a> ›
       <span>{{ page.year }}</span>
     </nav>

@@ -11,17 +11,17 @@ permalink: /writeups/htb/
 <div class="container">
   <header class="page-head">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> › <span>HTB</span>
+      <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="article" key="breadcrumb_writeups" %}</a> › <span>HTB</span>
     </nav>
     <h1>HackTheBox</h1>
-    <p class="lede">{{ htb_posts.size }} retired machines, written from first scan to root.</p>
+    <p class="lede">{{ htb_posts.size }} {% include t.html group="htb" key="lede" %}</p>
   </header>
 
   {% for season in seasons %}
   <section class="listing-group">
     <div class="group-head">
-      <h2>Season {{ season.name }}</h2>
-      <span class="group-count">{{ season.items | size }} machines</span>
+      <h2><span class="i18n" data-fr="Saison">Season</span> {{ season.name }}</h2>
+      <span class="group-count">{{ season.items | size }} {% include t.html group="htb" key="machines" %}</span>
     </div>
     <div class="card-grid">
       {% assign items = season.items | sort: "date" | reverse %}

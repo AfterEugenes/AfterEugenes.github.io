@@ -8,7 +8,7 @@ layout: default
     <header class="article-header">
       {% assign cat = site.data.privacy_nav.categories | where: "name", page.category | first %}
       <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="{{ '/privacy/' | relative_url }}">Privacy</a> ›
+        <a href="{{ '/privacy/' | relative_url }}">{% include t.html group="nav" key="privacy" %}</a> ›
         {% if cat and cat.url %}<a href="{{ cat.url | relative_url }}">{{ page.category }}</a>{% else %}<span>{{ page.category }}</span>{% endif %}
       </nav>
       <h1>{{ page.title }}</h1>
@@ -16,7 +16,7 @@ layout: default
       <div class="badges">
         <span class="badge badge-privacy">PRIVACY</span>
         <span class="badge">{{ page.category }}</span>
-        <span class="badge badge-date">Updated <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></span>
+        <span class="badge badge-date">{% include t.html group="privacy" key="updated" %} <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></span>
       </div>
     </header>
 
@@ -27,7 +27,7 @@ layout: default
     {% assign related = site.privacy_docs | where: "category", page.category | where_exp: "d", "d.layout == 'privacy-doc' and d.url != page.url" %}
     {% if related.size > 0 %}
     <section class="related">
-      <h2>More in {{ page.category }}</h2>
+      <h2>{% include t.html group="privacy" key="more_in" %} {{ page.category }}</h2>
       <ul class="file-list">
         {% for doc in related %}
         <li><a href="{{ doc.url | relative_url }}">{{ doc.title }}</a></li>

@@ -7,11 +7,12 @@
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <nav class="nav-links">
       {% assign here = page.url | replace: 'index.html', '' %}
-      <a href="{{ '/writeups/' | relative_url }}" {% if here == '/writeups/' %}class="active"{% endif %}>Writeups</a>
-      <a href="{{ '/privacy/' | relative_url }}" {% if here == '/privacy/' %}class="active"{% endif %}>Privacy</a>
-      <a href="{{ '/projects/' | relative_url }}" {% if here == '/projects/' %}class="active"{% endif %}>Projects</a>
-      <a href="{{ '/portfolio/' | relative_url }}" {% if here == '/portfolio/' %}class="active"{% endif %}>Portfolio</a>
-      <a href="{{ '/about/' | relative_url }}" {% if here == '/about/' %}class="active"{% endif %}>About</a>
+      <a href="{{ '/writeups/' | relative_url }}" {% if here == '/writeups/' %}class="active"{% endif %}>{% include t.html group="nav" key="writeups" %}</a>
+      <a href="{{ '/privacy/' | relative_url }}" {% if here == '/privacy/' %}class="active"{% endif %}>{% include t.html group="nav" key="privacy" %}</a>
+      <a href="{{ '/projects/' | relative_url }}" {% if here == '/projects/' %}class="active"{% endif %}>{% include t.html group="nav" key="projects" %}</a>
+      <a href="{{ '/portfolio/' | relative_url }}" {% if here == '/portfolio/' %}class="active"{% endif %}>{% include t.html group="nav" key="portfolio" %}</a>
+      <a href="{{ '/about/' | relative_url }}" {% if here == '/about/' %}class="active"{% endif %}>{% include t.html group="nav" key="about" %}</a>
+      <button class="lang-toggle" type="button" title="Switch language">FR</button>
     </nav>
   </div>
 </header>

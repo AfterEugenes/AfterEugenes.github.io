@@ -6,14 +6,14 @@ layout: default
   <header class="article-header">
     {% if page.platform == 'htb' %}
       <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="{{ '/writeups/' | relative_url }}">Writeups</a> ›
+        <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="article" key="breadcrumb_writeups" %}</a> ›
         <a href="{{ '/writeups/htb/' | relative_url }}">HTB</a> ›
-        <span>Season {{ page.season }}</span>
+        <span><span class="i18n" data-fr="Saison">Season</span> {{ page.season }}</span>
       </nav>
     {% else %}
       {% assign event_page = site.documents | where: "layout", "ctf-event" | where: "event", page.event | first %}
       <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="{{ '/writeups/' | relative_url }}">Writeups</a> ›
+        <a href="{{ '/writeups/' | relative_url }}">{% include t.html group="article" key="breadcrumb_writeups" %}</a> ›
         <a href="{{ '/writeups/ctf/' | relative_url }}">CTF</a> ›
         <span>{{ page.year }}</span> ›
         {% if event_page %}<a href="{{ event_page.url | relative_url }}">{{ page.event }}</a>{% else %}<span>{{ page.event }}</span>{% endif %}
@@ -27,7 +27,7 @@ layout: default
       <span class="badge badge-platform badge-{{ page.platform }}">{{ page.platform | upcase }}</span>
       {% if page.difficulty %}<span class="badge badge-{{ page.difficulty | downcase }}">{{ page.difficulty }}</span>{% endif %}
       {% if page.os %}<span class="badge">{{ page.os | capitalize }}</span>{% endif %}
-      {% if page.season %}<span class="badge">Season {{ page.season }}</span>{% endif %}
+      {% if page.season %}<span class="badge"><span class="i18n" data-fr="Saison">Season</span> {{ page.season }}</span>{% endif %}
       {% if page.event %}<span class="badge">{{ page.event }} {{ page.year }}</span>{% endif %}
       <span class="badge badge-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></span>
     </div>
@@ -35,7 +35,7 @@ layout: default
 
   <div class="article-grid">
     <aside class="toc" data-toc>
-      <p class="toc-title">On this page</p>
+      <p class="toc-title">{% include t.html group="article" key="on_this_page" %}</p>
       <ul></ul>
     </aside>
     <div class="prose">
@@ -49,13 +49,13 @@ layout: default
   <nav class="pager">
     {% if prev %}
       <a class="pager-card" href="{{ prev.url | relative_url }}">
-        <span class="pager-dir">← Previous</span>
+        <span class="pager-dir">← {% include t.html group="article" key="prev" %}</span>
         <span class="pager-title">{{ prev.title }}</span>
       </a>
     {% else %}<span></span>{% endif %}
     {% if next %}
       <a class="pager-card right" href="{{ next.url | relative_url }}">
-        <span class="pager-dir">Next →</span>
+        <span class="pager-dir">{% include t.html group="article" key="next" %} →</span>
         <span class="pager-title">{{ next.title }}</span>
       </a>
     {% endif %}

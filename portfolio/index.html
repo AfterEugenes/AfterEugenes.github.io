@@ -7,25 +7,22 @@ permalink: /portfolio/
 
 <div class="container">
   <header class="page-head">
-    <h1>Portfolio &amp; services</h1>
-    <p class="lede">
-      On the side, I design and host websites for people who want something simple,
-      clean and secure, without having to think about the technical side.
-    </p>
+    <h1>{% include t.html group="nav" key="portfolio" %}</h1>
+    <p class="lede">{% include t.html group="portfolio" key="lede" %}</p>
   </header>
 
   <div class="services">
     <div class="service-card">
-      <h3>Design</h3>
-      <p>A clean, fast, modern site built around what you actually need. No page-builder bloat.</p>
+      <h3>{% include t.html group="portfolio" key="s1_t" %}</h3>
+      <p>{% include t.html group="portfolio" key="s1_d" %}</p>
     </div>
     <div class="service-card">
-      <h3>Hosting &amp; maintenance</h3>
-      <p>Deployment, domain, HTTPS, updates and backups, all handled. You get a site that stays up.</p>
+      <h3>{% include t.html group="portfolio" key="s2_t" %}</h3>
+      <p>{% include t.html group="portfolio" key="s2_d" %}</p>
     </div>
     <div class="service-card">
-      <h3>Security-minded</h3>
-      <p>Built by a pentester: hardened defaults, privacy-respecting, no unnecessary trackers.</p>
+      <h3>{% include t.html group="portfolio" key="s3_t" %}</h3>
+      <p>{% include t.html group="portfolio" key="s3_d" %}</p>
     </div>
   </div>
 
@@ -45,9 +42,9 @@ permalink: /portfolio/
   </div>
   {% else %}
   <div class="empty-state">
-    <h3>First projects are in the oven 🍳</h3>
-    <p>This section will list the sites I design and host. Want to be the first? Get in touch.</p>
-    <a class="btn" href="mailto:{{ site.email }}">Start a project</a>
+    <h3>{% include t.html group="portfolio" key="empty_t" %}</h3>
+    <p>{% include t.html group="portfolio" key="empty_d" %}</p>
+    <a class="btn" href="mailto:{{ site.email }}">{% include t.html group="portfolio" key="start" %}</a>
   </div>
   {% endif %}
 </div>

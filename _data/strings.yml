@@ -1,0 +1,138 @@
+# UI strings for the EN/FR language toggle.
+# Key: { en: ..., fr: ... }  — used by _includes/t.html + assets/js/site.js
+nav:
+  writeups: { en: "Writeups", fr: "Write-ups" }
+  privacy: { en: "Privacy", fr: "Vie privée" }
+  projects: { en: "Projects", fr: "Projets" }
+  portfolio: { en: "Portfolio", fr: "Portfolio" }
+  about: { en: "About", fr: "À propos" }
+  lang: { en: "FR", fr: "EN" }
+
+footer:
+  tagline: { en: "Tech Lab; Deep Research. Offensive security, writeups & privacy.", fr: "Tech Lab; Deep Research. Sécurité offensive, writeups et vie privée." }
+  explore: { en: "Explore", fr: "Explorer" }
+  contact: { en: "Contact", fr: "Contact" }
+  privacy_guides: { en: "Privacy guides", fr: "Guides vie privée" }
+  about_cv: { en: "About & CV", fr: "À propos & CV" }
+  published: { en: "Published from Obsidian vaults with Jekyll", fr: "Publié depuis les vaults Obsidian avec Jekyll" }
+
+hero:
+  role: { en: "Offensive security student & pentester", fr: "Étudiant en sécurité offensive & pentester" }
+  lede:
+    en: "Hi, I'm Eugene, an offensive security student and pentester. I break into things and then write down exactly how it happened. Here you'll find my HackTheBox and CTF writeups, privacy guides, and the projects I build along the way."
+    fr: "Salut, moi c'est Eugene, étudiant en sécurité offensive et pentester. J'explore des failles, puis j'écris exactement comment. Vous trouverez ici mes writeups HackTheBox et CTF, des guides vie privée, et les projets que je construis au passage."
+  btn_writeups: { en: "Read the writeups", fr: "Lire les writeups" }
+  btn_about: { en: "About me", fr: "À propos" }
+  stat_htb: { en: "HTB writeups", fr: "Writeups HTB" }
+  stat_ctf: { en: "CTF writeups", fr: "Writeups CTF" }
+  stat_privacy: { en: "Privacy notes", fr: "Notes vie privée" }
+  label_focus: { en: "Focus", fr: "Focus" }
+  label_interests: { en: "Interests", fr: "Intérêts" }
+  label_writing: { en: "Writing", fr: "Rédaction" }
+  label_reach: { en: "Reach me", fr: "Contact" }
+  interests:
+    en: "I like to host and manage services and servers, local stacks and the like."
+    fr: "J'aime héberger et gérer des services et des serveurs, des stacks locales et compagnie."
+  writing: { en: "HTB machines and CTF events, step by step", fr: "Machines HTB et événements CTF, pas à pas" }
+
+home:
+  card_writeups_t: { en: "Writeups", fr: "Write-ups" }
+  card_writeups_d: { en: "HackTheBox machines and CTF challenges, from first scan to root.", fr: "Machines HackTheBox et challenges CTF, du premier scan jusqu'au root." }
+  card_writeups_c: { en: "published", fr: "publiés" }
+  card_privacy_t: { en: "Privacy", fr: "Vie privée" }
+  card_privacy_d: { en: "Guides to messengers, browsers, mail and tools that keep you private.", fr: "Guides sur les messageries, navigateurs, mails et outils pour rester privé." }
+  card_privacy_c: { en: "notes", fr: "notes" }
+  card_projects_t: { en: "Projects", fr: "Projets" }
+  card_projects_d: { en: "Tools and experiments I build: fuzzers, cheatsheets, games.", fr: "Outils et expériences que je construis : fuzzers, cheatsheets, jeux." }
+  card_projects_c: { en: "projects", fr: "projets" }
+  card_portfolio_t: { en: "Portfolio", fr: "Portfolio" }
+  card_portfolio_d: { en: "Websites I design and host for people. Secure by default.", fr: "Des sites que je conçois et héberge. Sécurisés par défaut." }
+  card_portfolio_c: { en: "Services", fr: "Services" }
+  latest: { en: "Latest writeups", fr: "Derniers writeups" }
+  see_all: { en: "See all writeups", fr: "Tous les writeups" }
+  htb: { en: "HackTheBox", fr: "HackTheBox" }
+  ctfs: { en: "CTFs", fr: "CTF" }
+  more_about: { en: "More about me", fr: "Plus sur moi" }
+  about_extra:
+    en: "Right now I'm focused on web application pentesting, Active Directory and Linux privilege escalation, and on documenting everything I learn along the way."
+    fr: "En ce moment je me concentre sur le pentest d'applications web, Active Directory et l'élévation de privilèges Linux, et je documente tout ce que j'apprends."
+  about_extra2:
+    en: "I also design and host websites for people who want something simple, clean and secure."
+    fr: "Je conçois et héberge aussi des sites pour ceux qui veulent quelque chose de simple, propre et sécurisé."
+  full_cv: { en: "Full CV & achievements", fr: "CV complet & réalisations" }
+  get_in_touch: { en: "Get in touch", fr: "Contactez-moi" }
+  contact_text: { en: "Questions, collaboration, or a website project?", fr: "Questions, collaboration, ou un projet de site ?" }
+  email_me: { en: "Email me", fr: "M'écrire" }
+  my_services: { en: "My services", fr: "Mes services" }
+
+writeups:
+  lede:
+    en: "published writeups: HackTheBox machines and CTF challenges, written the way I wish I'd found them when I got stuck."
+    fr: "writeups publiés : machines HackTheBox et challenges CTF, rédigés comme j'aurais aimé les trouver quand je bloquais."
+  search_ph: { en: "Search writeups…", fr: "Rechercher…" }
+  filter_empty: { en: "Nothing matches. Try clearing the filters.", fr: "Rien ne correspond. Réessayez sans filtres." }
+
+htb:
+  lede: { en: "retired machines, written from first scan to root.", fr: "machines retirées, du premier scan jusqu'au root." }
+  season: { en: "Season", fr: "Saison" }
+  machines: { en: "machines", fr: "machines" }
+
+ctf:
+  lede_one: { en: "challenge writeup across", fr: "writeup de challenge sur" }
+  lede_many: { en: "challenge writeups across", fr: "writeups de challenge sur" }
+  seasons_one: { en: "season of CTFs.", fr: "saison de CTF." }
+  seasons_many: { en: "seasons of CTFs.", fr: "saisons de CTF." }
+  challenges_one: { en: "challenge", fr: "challenge" }
+  challenges_many: { en: "challenges", fr: "challenges" }
+  event_page: { en: "Event page", fr: "Page de l'événement" }
+  writeups_from: { en: "challenge write-ups from", fr: "writeups de challenges de" }
+
+privacy:
+  guides: { en: "Privacy guides", fr: "Guides vie privée" }
+  newest: { en: "Newest", fr: "Nouveau" }
+  lede:
+    en: "My running notes on privacy tooling: messengers, browsers, e-mail, cryptography, VPNs and more. Each guide weighs the good, the bad and the ugly, including the cases where the answer is simply \"don't use it\". Browse by category on the left, or start from the newest notes below."
+    fr: "Mes notes en cours sur les outils de vie privée : messageries, navigateurs, e-mails, cryptographie, VPN et plus. Chaque guide pèse le bon, le mauvais et le laid, y compris quand la réponse est simplement \"à ne pas utiliser\". Parcourez par catégorie à gauche, ou commencez par les notes récentes ci-dessous."
+  newest_notes: { en: "Newest notes", fr: "Notes récentes" }
+  categories: { en: "Categories", fr: "Catégories" }
+  files_one: { en: "file", fr: "fichier" }
+  files_many: { en: "files", fr: "fichiers" }
+  updated: { en: "Updated", fr: "Mis à jour" }
+  files_in: { en: "Files in this category", fr: "Fichiers de cette catégorie" }
+  more_in: { en: "More in", fr: "Plus dans" }
+  open_full: { en: "Open the full note", fr: "Ouvrir la note complète" }
+
+article:
+  on_this_page: { en: "On this page", fr: "Sur cette page" }
+  prev: { en: "Previous", fr: "Précédent" }
+  next: { en: "Next", fr: "Suivant" }
+  breadcrumb_writeups: { en: "Writeups", fr: "Write-ups" }
+
+projects:
+  lede: { en: "Tools and experiments I build when a problem annoys me enough, mostly security tooling and games.", fr: "Outils et expériences que je construis quand un problème me gêne assez, surtout de l'outillage sécurité et des jeux." }
+  view_github: { en: "View on GitHub →", fr: "Voir sur GitHub →" }
+
+portfolio:
+  lede:
+    en: "On the side, I design and host websites for people who want something simple, clean and secure, without having to think about the technical side."
+    fr: "À côté, je conçois et héberge des sites pour ceux qui veulent quelque chose de simple, propre et sécurisé, sans se soucier du côté technique."
+  s1_t: { en: "Design", fr: "Design" }
+  s1_d: { en: "A clean, fast, modern site built around what you actually need. No page-builder bloat.", fr: "Un site propre, rapide et moderne construit autour de vos besoins réels. Sans page-builder gonflé." }
+  s2_t: { en: "Hosting & maintenance", fr: "Hébergement & maintenance" }
+  s2_d: { en: "Deployment, domain, HTTPS, updates and backups, all handled. You get a site that stays up.", fr: "Déploiement, domaine, HTTPS, mises à jour et sauvegardes, tout est géré. Un site qui reste en ligne." }
+  s3_t: { en: "Security-minded", fr: "Sécurité avant tout" }
+  s3_d: { en: "Built by a pentester: hardened defaults, privacy-respecting, no unnecessary trackers.", fr: "Conçu par un pentester : durcis par défaut, respectueux de la vie privée, sans trackers inutiles." }
+  empty_t: { en: "First projects are in the oven 🍳", fr: "Les premiers projets sont au four 🍳" }
+  empty_d: { en: "This section will list the sites I design and host. Want to be the first? Get in touch.", fr: "Cette section listera les sites que je conçois et héberge. En être ? Contactez-moi." }
+  start: { en: "Start a project", fr: "Démarrer un projet" }
+
+about:
+  skills: { en: "Skills", fr: "Compétences" }
+  experience: { en: "Professional experience", fr: "Expérience professionnelle" }
+  education: { en: "Education", fr: "Formation" }
+  achievements: { en: "Achievements & rankings", fr: "Réalisations & classements" }
+  beyond: { en: "Beyond the terminal", fr: "Au-delà du terminal" }
+  contact_h: { en: "Contact", fr: "Contact" }
+  email: { en: "E-mail", fr: "E-mail" }
+  download_cv: { en: "Download CV (PDF)", fr: "Télécharger le CV (PDF)" }
+  read_writeups: { en: "Read my writeups", fr: "Lire mes writeups" }

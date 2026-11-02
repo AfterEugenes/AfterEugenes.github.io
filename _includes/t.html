@@ -1,0 +1,6 @@
+{% comment %}
+  Translatable UI string. Usage: {% include t.html group="hero" key="lede" %}
+  Renders <span class="i18n" data-fr="...">English</span>; assets/js/site.js swaps
+  the text for the active language (EN/FR toggle in the nav).
+{% endcomment %}
+{% assign s = site.data.strings[include.group][include.key] %}<span class="i18n" data-fr="{{ s.fr | escape }}">{{ s.en }}</span>

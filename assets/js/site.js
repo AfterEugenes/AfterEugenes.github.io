@@ -3,6 +3,39 @@
 (function () {
   "use strict";
 
+  // -------------------------------------------------------- language toggle
+  var LANG_KEY = "lang";
+  var lang = null;
+  try { lang = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (!lang) {
+    lang = (navigator.language || "en").toLowerCase().indexOf("fr") === 0 ? "fr" : "en";
+  }
+
+  var applyLang = function (code) {
+    document.documentElement.setAttribute("lang", code);
+    Array.prototype.forEach.call(document.querySelectorAll(".i18n"), function (el) {
+      if (el.dataset.en === undefined) el.dataset.en = el.textContent;
+      el.textContent = code === "fr" && el.dataset.fr ? el.dataset.fr : el.dataset.en;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-fr-ph]"), function (el) {
+      if (el.dataset.enPh === undefined) el.dataset.enPh = el.placeholder || "";
+      el.placeholder = code === "fr" ? el.dataset.frPh : el.dataset.enPh;
+    });
+    var btn = document.querySelector(".lang-toggle");
+    if (btn) btn.textContent = code === "fr" ? "EN" : "FR";
+  };
+
+  applyLang(lang);
+
+  var langBtn = document.querySelector(".lang-toggle");
+  if (langBtn) {
+    langBtn.addEventListener("click", function () {
+      lang = lang === "fr" ? "en" : "fr";
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+      applyLang(lang);
+    });
+  }
+
   // ------------------------------------------------------------ mobile nav
   var toggle = document.querySelector(".nav-toggle");
   var links = document.querySelector(".nav-links");

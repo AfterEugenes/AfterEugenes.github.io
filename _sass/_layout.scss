@@ -114,6 +114,26 @@
   cursor: pointer;
 }
 
+.lang-toggle {
+  background: var(--surface);
+  color: var(--brand);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  cursor: pointer;
+  align-self: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--brand);
+    color: var(--brand-strong);
+  }
+}
+
 // ----------------------------------------------------------------- footer
 
 .site-footer {
