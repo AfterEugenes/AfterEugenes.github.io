@@ -6,7 +6,7 @@
 
 - name: PUF (Ports and Urls Filter)
   url: https://github.com/AfterEugenes/puf
-  description: Flask web app to run and manage fuzzing and nmap scans: quick command launch, result storage and filtering, target management. Customisable via config.
+  description: "Flask web app to run and manage fuzzing and nmap scans: quick command launch, result storage and filtering, target management. Customisable via config."
   tags: [Python, Cysec tools]
 
 - name: PyShooter
