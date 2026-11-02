@@ -1,0 +1,21 @@
+{% comment %}
+  Writeup card — the offset-frame card used across the site.
+  Params (via include): post
+{% endcomment %}
+{% assign p = include.post %}
+{% assign ptype = p.platform %}
+<a class="writeup-card {{ ptype }}" href="{{ p.url | relative_url }}"
+   data-type="{{ ptype }}"
+   data-search="{{ p.title | downcase | escape }} {{ p.tags | join: ' ' | downcase | escape }} {{ p.os | default: '' | downcase | escape }} {{ p.difficulty | default: '' | downcase | escape }} {{ p.event | default: '' | downcase | escape }} {{ p.season | default: '' | escape }}">
+  <div class="card-top">
+    <span class="card-kind">{{ ptype | upcase }}</span>
+    {% if p.difficulty %}<span class="badge badge-{{ p.difficulty | downcase }}">{{ p.difficulty }}</span>{% endif %}
+  </div>
+  <h3 class="card-title">{{ p.title }}</h3>
+  <p class="card-meta">
+    <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%d %b %Y" }}</time>
+    {% if p.os %} · {{ p.os | capitalize }}{% endif %}
+    {% if p.event %} · {{ p.event }}{% endif %}
+    {% if p.season %} · Season {{ p.season }}{% endif %}
+  </p>
+</a>

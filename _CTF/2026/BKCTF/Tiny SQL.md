@@ -1,15 +1,20 @@
 ---
+layout: writeup
 title: 'SQLi: "Tiny SQL"'
-description: "Complicated sqli challenge using the alternative database manager: tinysql"
-tags:
-  - CTF
+description: 'Complicated sqli challenge using the alternative database manager: tinysql'
+excerpt: 'Complicated sqli challenge using the alternative database manager: tinysql'
 date: 2026-02-21T17:52
-tasks:
-  - 
-parent files:
-  - 
-category: challenges
+platform: ctf
+permalink: /writeups/ctf/2026/bkctf/tiny-sql/
+year: '2026'
+event: BKCTF
+tags:
+- CTF
+- '2026'
+prev_url: /writeups/ctf/2026/bkctf/my-first-blog/
 ---
+
+{% raw %}
 
 # Recherches
 
@@ -76,3 +81,4 @@ $
 ```
 
 # Documentation
+{% endraw %}

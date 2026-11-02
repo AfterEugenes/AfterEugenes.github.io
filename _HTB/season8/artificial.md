@@ -1,22 +1,22 @@
 ---
-parent: \[[[HTB MOC Linux]]\]
-tags:
-  - 
-  - 
-  - 
-date: 2025-09-10T15:19
-tasks:
-  - mise en page
-category:
-  - writeups
-  - htb
-difficulty: easy
-os: linux
+layout: writeup
 title: Artifical
 description: This is an artificial reconsitution of a Writeup
-season: "8"
-seasonal: yes
+excerpt: This is an artificial reconsitution of a Writeup
+date: 2025-09-10T15:19
+platform: htb
+permalink: /writeups/htb/season8/artificial/
+os: linux
+difficulty: easy
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+next_url: /writeups/htb/season8/editor/
 ---
+
+{% raw %}
 
 # Enumeration
 
@@ -26,7 +26,7 @@ On s'inscrit au site pour tester puis on se connecte et on tombe sur une page qu
 
 # Foothold
 
-En cherchant un peu sur le web (i.e. en cherchant "h5 exploit"), on trouve un [[https://github.com/Splinter0/tensorflow-rce|repo git]] qui nous donne un fichier python nous permettant de créer un exploit. On modifie le fichier exploit.py avec notre IP et port et on ouvre un listener sur ce même port.
+En cherchant un peu sur le web (i.e. en cherchant "h5 exploit"), on trouve un [repo git](https://github.com/Splinter0/tensorflow-rce) qui nous donne un fichier python nous permettant de créer un exploit. On modifie le fichier exploit.py avec notre IP et port et on ouvre un listener sur ce même port.
 
 Ensuite, on se rend sur le site, qui nous donne une config docker pour pouvoir créer un fichier h5. Ca tombe bien, c'est la config qu'il nous faut pour lancer notre exploit. On utilise donc la commande
 ```/artificial
@@ -185,4 +185,5 @@ J'ai eu des bonnes idées tout de même, surtout vers la fin, j'ai pu comprendre
 
 Je dois quand même revoir comment j'ai fait le ssh tunneling, partie que je ne comprends pas et pour laquelle je n'aurais pas eu l'idée (je ne comprends pas comment on forward un port tcp par une connexion ssh).
 
-J'ai aussi passé une journée à comprendre ce qu'étaient docker, les images et containers, kali, les mises à jour de kali, les repo et packages, et malgré les apparences, les tunnels ssh et les différentes façons de bypass un NAT pour obtenir un [reverse shell](ReverseShells) ce qui est vraiment bien. J'en ressors avec pas mal de connaissances en plus, qui m'ont l'air bien solides, surtout sur le côté NAT et les différentes façon de les bypass.
+J'ai aussi passé une journée à comprendre ce qu'étaient docker, les images et containers, kali, les mises à jour de kali, les repo et packages, et malgré les apparences, les tunnels ssh et les différentes façons de bypass un NAT pour obtenir un reverse shell, ce qui est vraiment bien. J'en ressors avec pas mal de connaissances en plus, qui m'ont l'air bien solides, surtout sur le côté NAT et les différentes façon de les bypass.
+{% endraw %}

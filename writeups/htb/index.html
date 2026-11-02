@@ -1,0 +1,34 @@
+---
+layout: default
+title: HackTheBox writeups
+description: HackTheBox machine writeups, grouped by season.
+permalink: /writeups/htb/
+---
+
+{% assign htb_posts = site.HTB | where: "layout", "writeup" %}
+{% assign seasons = htb_posts | group_by: "season" | sort: "name" | reverse %}
+
+<div class="container">
+  <header class="page-head">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> › <span>HTB</span>
+    </nav>
+    <h1>HackTheBox</h1>
+    <p class="lede">{{ htb_posts.size }} retired machines — recon, foothold and privilege escalation, in detail.</p>
+  </header>
+
+  {% for season in seasons %}
+  <section class="listing-group">
+    <div class="group-head">
+      <h2>Season {{ season.name }}</h2>
+      <span class="group-count">{{ season.items | size }} machines</span>
+    </div>
+    <div class="card-grid">
+      {% assign items = season.items | sort: "date" | reverse %}
+      {% for post in items %}
+        {% include writeup-card.html post=post %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</div>

@@ -1,0 +1,43 @@
+---
+layout: default
+title: CTF writeups
+description: CTF event writeups, grouped by year and event.
+permalink: /writeups/ctf/
+---
+
+{% assign ctf_posts = site.CTF | where: "layout", "writeup" %}
+{% assign years = ctf_posts | group_by: "year" | sort: "name" | reverse %}
+
+<div class="container">
+  <header class="page-head">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> › <span>CTF</span>
+    </nav>
+    <h1>CTF events</h1>
+    <p class="lede">{{ ctf_posts.size }} challenge writeups across {{ years | size }} season{% if years.size > 1 %}s{% endif %} of CTFs.</p>
+  </header>
+
+  {% for year in years %}
+  <section class="listing-group">
+    <div class="group-head">
+      <h2>{{ year.name }}</h2>
+    </div>
+
+    {% assign events = year.items | group_by: "event" %}
+    {% for event in events %}
+      {% assign event_page = site.CTF | where: "layout", "ctf-event" | where: "event", event.name | first %}
+      <div class="group-head">
+        <h3>{{ event.name }}</h3>
+        <span class="group-count">{{ event.items | size }} challenges</span>
+        {% if event_page %}<a class="group-link" href="{{ event_page.url | relative_url }}">Event page</a>{% endif %}
+      </div>
+      <div class="card-grid" style="margin-bottom: 32px;">
+        {% assign items = event.items | sort: "date" %}
+        {% for post in items %}
+          {% include writeup-card.html post=post %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </section>
+  {% endfor %}
+</div>

@@ -1,0 +1,55 @@
+# Sync configuration: vault -> site
+#
+# Publishing is folder-based and allowlist-only:
+#   anything under a source's `root` is published; nothing else is ever read.
+
+vault_roots:
+  writeups: "/home/archinn/AfterWork/Saves/Cysec Notes/04 - Writeups"
+  privacy: "/home/archinn/AfterWork/Saves/Personal notes/Privacy Tools"
+
+# Where ![[image.png]] embeds are looked up (walked recursively, matched by file name).
+image_search_roots:
+  - "/home/archinn/AfterWork/Saves/Cysec Notes"
+  - "/home/archinn/AfterWork/Saves/Personal notes"
+
+sources:
+  - name: htb
+    root: "{writeups}/HTB/Released"
+    out_dir: "_HTB"
+    layout: writeup
+    platform: htb
+    url_prefix: /writeups/htb
+  - name: ctf
+    root: "{writeups}/CTF/Released"
+    out_dir: "_CTF"
+    layout: writeup
+    platform: ctf
+    url_prefix: /writeups/ctf
+  - name: privacy
+    root: "{privacy}/Released"
+    out_dir: "_privacy_docs"
+    layout: privacy-doc
+    platform: privacy
+    url_prefix: /privacy
+
+# Never published, even if inside a source root.
+exclude_globs:
+  - "**/*.excalidraw.md"
+  - "**/templates/**"
+
+# Vault bookkeeping fields removed from the website copy.
+drop_frontmatter:
+  - tags
+  - tasks
+  - priority
+  - category
+  - seasonal
+  - Description
+  - parent file
+  - parent files
+
+# Tag pills shown on the site are derived from metadata, not from vault tags.
+derive_tags:
+  htb: ["HTB"]
+  ctf: ["CTF"]
+  privacy: ["Privacy"]

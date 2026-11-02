@@ -1,0 +1,42 @@
+---
+layout: default
+title: Privacy
+description: Guides to staying private — messengers, browsers, mail, crypto and more.
+permalink: /privacy/
+---
+
+{% assign docs = site.privacy_docs %}
+{% assign categories = docs | group_by: "category" | sort: "name" %}
+
+<div class="container">
+  <header class="page-head">
+    <h1>Privacy</h1>
+    <p class="lede">
+      My running notes on privacy tooling: messengers, browsers, e-mail, cryptography, VPNs and more.
+      Each guide weighs the good, the bad and the ugly — including when the answer is "don't use it".
+    </p>
+  </header>
+
+  {% for cat in categories %}
+  <section class="listing-group">
+    <div class="group-head">
+      <h2>{{ cat.name }}</h2>
+      <span class="group-count">{{ cat.items | size }} guide{% if cat.items.size > 1 %}s{% endif %}</span>
+    </div>
+    <div class="card-grid">
+      {% assign items = cat.items | sort: "date" | reverse %}
+      {% for doc in items %}
+        <a class="writeup-card privacy" href="{{ doc.url | relative_url }}"
+           data-search="{{ doc.title | downcase }} {{ cat.name | downcase }}">
+          <div class="card-top"><span class="card-kind">PRIVACY</span></div>
+          <h3 class="card-title">{{ doc.title }}</h3>
+          <p class="card-meta">
+            {% if doc.description and doc.description != '' %}{{ doc.description }} · {% endif %}
+            <time datetime="{{ doc.date | date_to_xmlschema }}">{{ doc.date | date: "%d %b %Y" }}</time>
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</div>

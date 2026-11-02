@@ -1,26 +1,22 @@
 ---
+layout: writeup
 title: Titanic
 description: Nooo don't turn 25 you're so cute haha
-tags:
-  - HTB
-  - machine
-  - pbkdf2
-  - sql
-  - magick
-  - cron
+excerpt: Nooo don't turn 25 you're so cute haha
 date: 2026-04-14T11:26
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season7/titanic/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "7"
-seasonal: yes
+season: '7'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season7/dog/
 ---
+
+{% raw %}
 
 # Outline
 ## Foothold
@@ -41,16 +37,16 @@ seasonal: yes
 Les ports ouverts sont les classiques: `80` et `22`.
 
 Le site est très simple en soi.
-![[Pasted image 20260414114104.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414114104.png" alt="Titanic" loading="lazy">
 
 Il permet notamment de s'inscrire pour la croisière:
-![[Pasted image 20260414114233.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414114233.png" alt="Titanic" loading="lazy">
 
 Et ensuite un lien est envoyé pour télécharger le fichier avec notre ticket `/download?ticket=7aaaab96-e010-4386-b863-f3dbe1c494a9.json`. En changeant cette valeur il est possible de télécharger le fichier que l'on souhaite:
 ```
 /download?ticket=../../../etc/passwd
 ```
-![[Pasted image 20260414114355.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414114355.png" alt="Titanic" loading="lazy">
 
 Cette vulnérabilite est un path traversal doublé d'une local file inclusion, cela nous permet de lire les fichiers du système.
 
@@ -237,7 +233,7 @@ hashcat -a 0 -m 10900 hashes.txt /usr/share/wordlists/rockyou.txt --username
 (Il faut commencer avec `developer` ici, qui a l'air plus intéressant)
 
 Tout cela nous donne les identifiants `developer:25282528`, et ainsi l'accès ssh.
-![[Pasted image 20260414172351.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414172351.png" alt="Titanic" loading="lazy">
 
 # PrivEsc to root
 
@@ -276,7 +272,8 @@ EOF
 
 Et avec ça compilé dès le lancement du cron le shell sera créé et accessible.
 
-![[Pasted image 20260414185240.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414185240.png" alt="Titanic" loading="lazy">
 
-![[Pasted image 20260414185310.png]]
+<img class="content-image" src="/assets/content/htb/season7-titanic/Pasted%20image%2020260414185310.png" alt="Titanic" loading="lazy">
 
+{% endraw %}

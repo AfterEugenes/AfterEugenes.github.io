@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="article ctf-event">
+  <div class="container">
+  <header class="article-header">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ '/writeups/' | relative_url }}">Writeups</a> ›
+      <a href="{{ '/writeups/ctf/' | relative_url }}">CTF</a> ›
+      <span>{{ page.year }}</span>
+    </nav>
+    <h1>{{ page.title }}</h1>
+    {% if page.description and page.description != '' %}<p class="lede">{{ page.description }}</p>{% endif %}
+    <div class="badges">
+      <span class="badge badge-platform badge-ctf">CTF</span>
+      <span class="badge">{{ page.year }}</span>
+    </div>
+  </header>
+
+  {% assign challenges = site.CTF | where: "layout", "writeup" | where: "event", page.event | sort: "date" %}
+  {% if challenges.size > 0 %}
+  <section class="challenge-list">
+    <h2>Challenges</h2>
+    <div class="card-grid">
+      {% for c in challenges %}
+        {% include writeup-card.html post=c %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="article-grid single">
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+  </div>
+</article>

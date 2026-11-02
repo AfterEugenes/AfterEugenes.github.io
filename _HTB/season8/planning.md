@@ -1,23 +1,22 @@
 ---
+layout: writeup
 title: Planning
 description: I'm definitely planning to finish this one
-tags:
-  - HTB
-  - machine
-  - cron
+excerpt: I'm definitely planning to finish this one
 date: 2026-04-07T16:31
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season8/planning/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "8"
-seasonal: no
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/down/
 ---
+
+{% raw %}
 
 On commence avec des identifiants `admin:0D5oT70Fq13EvB5r` mais on ne peut pas se connecter avec ssh avec, on ne peut pas s'en servir pour le moment.
 
@@ -33,19 +32,19 @@ On trouve les ports 22 et 80 avec le scan nmap et, sur le site web, les pages:
 ```
 
 La page principale propose... des cours.
-![[Pasted image 20260407165604.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260407165604.png" alt="Planning" loading="lazy">
 
 On teste quelques injections sql sur la bare de recherche mais rien d'apparent ne ressort.
 
 Bien que cela ne soit pas dans le top 1 million, il nous fallait trouver le sous-domaine `grafana`. On va donc tester ce sous-domaine. On y trouve une page de connexion et, cette fois, les identifiants fonctionnent.
-![[Pasted image 20260409121647.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260409121647.png" alt="Planning" loading="lazy">
 
 
 En haut à droite, sur le point d'interrogation, on retrouve qu'on utilise grafana 11.0
-![[Pasted image 20260409122636.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260409122636.png" alt="Planning" loading="lazy">
 
 Ca tombe bien, on trouve un [exploit]([https://github.com/nollium/CVE-2024-9264](https://github.com/z3k0sec/CVE-2024-9264-RCE-Exploit)) pour cette version exactement. On arrive assez facilement à exploiter la RCE et obtenir un shell.
-![[Pasted image 20260409182728.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260409182728.png" alt="Planning" loading="lazy">
 
 # Privilege Escalation to user
 
@@ -78,10 +77,10 @@ GF_PATHS_CONFIG=/etc/grafana/grafana.ini
 _=/usr/bin/env
 ```
 
-![[Pasted image 20260410094724.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260410094724.png" alt="Planning" loading="lazy">
 
 On a donc des identifiants pour l'utilisateur enzo `enzo:RioTecRANDEntANT!`. On confirme quand même que l'on ne peut pas monter la partition au cas où puis on se connecte en ssh.
-![[Pasted image 20260410100607.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260410100607.png" alt="Planning" loading="lazy">
 
 # PrivEsc to root
 
@@ -122,7 +121,7 @@ On ajoute un cron job:
 ```
 cp /bin/bash /tmp/rootshell && chmod 6777 /tmp/rootshell
 ```
-![[Pasted image 20260410121944.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260410121944.png" alt="Planning" loading="lazy">
 
 Et enfin, sur la machine, en ssh, on utilise le shell nouvellement créé.
 ```
@@ -130,6 +129,7 @@ Et enfin, sur la machine, en ssh, on utilise le shell nouvellement créé.
 ```
 
 Il faut savoir que l'on peut forcer le lancement du script sur le site directement. Et voilà, notre root shell.
-![[Pasted image 20260410122717.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260410122717.png" alt="Planning" loading="lazy">
 
-![[Pasted image 20260410122824.png]]
+<img class="content-image" src="/assets/content/htb/season8-planning/Pasted%20image%2020260410122824.png" alt="Planning" loading="lazy">
+{% endraw %}

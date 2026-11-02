@@ -1,24 +1,23 @@
 ---
+layout: writeup
 title: data
 description: If you find it, that is...
-tags:
-  - HTB
-  - machine
-  - pbkdf2
-  - docker
+excerpt: If you find it, that is...
 date: 2026-04-01T10:14
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season8/data/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "8"
-seasonal: no
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/reset/
+next_url: /writeups/htb/season8/down/
 ---
+
+{% raw %}
 
 # Foothold
 
@@ -134,7 +133,7 @@ sqlite3 grafana.db
 select * from user;
 ```
 
-![[Pasted image 20260401173612.png]]
+<img class="content-image" src="/assets/content/htb/season8-data/Pasted%20image%2020260401173612.png" alt="data" loading="lazy">
 
 Et on a un hash (celui de boris, qui ressemble plus au nom d'un utilisateur), et on le crack avec hashcat
 ```
@@ -167,10 +166,10 @@ Et on obtient assez vite un résultat:
 beautiful1
 ```
 
-![[Pasted image 20260401182859.png]]
+<img class="content-image" src="/assets/content/htb/season8-data/Pasted%20image%2020260401182859.png" alt="data" loading="lazy">
 
 Evidemment, on obtient un accès ssh
-![[Pasted image 20260401183227.png]]
+<img class="content-image" src="/assets/content/htb/season8-data/Pasted%20image%2020260401183227.png" alt="data" loading="lazy">
 Et voilà, notre flag user.
 
 # PrivEsc to root
@@ -209,6 +208,7 @@ cat /mnt/root/root.txt
 ```
 
 Et voilà, on a notre accès root et notre flag!
-![[Pasted image 20260402114637.png]]
+<img class="content-image" src="/assets/content/htb/season8-data/Pasted%20image%2020260402114637.png" alt="data" loading="lazy">
 
-![[Pasted image 20260402114830.png]]
+<img class="content-image" src="/assets/content/htb/season8-data/Pasted%20image%2020260402114830.png" alt="data" loading="lazy">
+{% endraw %}

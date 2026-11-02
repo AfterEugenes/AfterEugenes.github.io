@@ -1,0 +1,30 @@
+# Personal projects shown on /projects/
+- name: PyShooter
+  url: https://github.com/TheLastOfEugenes/Shooterpython
+  description: Simple shooter game in Python.
+  tags: [Python, Game]
+
+- name: Fuzzer
+  url: https://github.com/TheLastOfEugenes/fuzzer
+  description: Web fuzzer adaptable to modules. Still in development.
+  tags: [C, Cysec tools]
+
+- name: Pentesting Cheatsheet
+  url: https://github.com/TheLastOfEugenes/PentestCheatSheet
+  description: Cheat sheet for pentesting different environments.
+  tags: [Cysec tools]
+
+- name: Seem-simi
+  url: https://github.com/TheLastOfEugenes/seemsimi
+  description: A simplistic version of the infamous Simsimi. Still in development.
+  tags: [Python]
+
+- name: Dofus-like
+  url: https://github.com/TheLastOfEugenes/dofus_like
+  description: A simplistic group project version of the famous Dofus game, coded in C.
+  tags: [C, Game]
+
+- name: TheLastOfEugenes.github.io
+  url: https://github.com/TheLastOfEugenes/TheLastOfEugenes.github.io
+  description: My first personal website — the ancestor of this one.
+  tags: [Web]

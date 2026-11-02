@@ -1,17 +1,22 @@
 ---
-tags:
-  - HTB
-  - machine
-date: 2025-09-17T10:37
-tasks:
-  - mise en page
-parent: "[[HTB MOC Linux]]"
-category: writeups
-difficulty: easy
-os: linux
+layout: writeup
 title: Code part II Writeup
 description: This is a writeup for the HTB box "code part II"
+excerpt: This is a writeup for the HTB box "code part II"
+date: 2025-09-17T10:37
+platform: htb
+permalink: /writeups/htb/season9/codeparttwo/
+os: linux
+difficulty: easy
+season: '9'
+tags:
+- HTB
+- linux
+- easy
+next_url: /writeups/htb/season9/soulmate/
 ---
+
+{% raw %}
 
 # Enumeration
 
@@ -29,7 +34,7 @@ En parallèle, l'énumération gobuster ne donne rien du tout, on ne trouve que 
 
 En plus de ça, on trouve un fichier zip sur le site, nous donnant le code du site, ce qui ne nous aide pas à grand chose pour le moment excepté pour savoir où trouver les fichiers intéressants.
 
-Comme on a de quoi exécuter du code, j'ai cherché pendant un looooong moment comment exécuter un RCE en javascript. J'ai donc trouvé un payload sur [revshells.com](revshells.com), qui était en fait un payload en PHP ou Java (je ne sais plus), un programme qui devait en générer un mais qui en fait attendait des connexions distantes comme un listener, et aucune doc. Après un peu de recherches et de temps perdu je me suis rappelé que le JS était exécuté côté client. Il doit y avoir quelques instances de code où le JS est exécuté côté machine (Node.js par exemple), cela vaudrait la peine de rechercher plus tard #TODO .
+Comme on a de quoi exécuter du code, j'ai cherché pendant un looooong moment comment exécuter un RCE en javascript. J'ai donc trouvé un payload sur [revshells.com](https://revshells.com), qui était en fait un payload en PHP ou Java (je ne sais plus), un programme qui devait en générer un mais qui en fait attendait des connexions distantes comme un listener, et aucune doc. Après un peu de recherches et de temps perdu je me suis rappelé que le JS était exécuté côté client. Il doit y avoir quelques instances de code où le JS est exécuté côté machine (Node.js par exemple), cela vaudrait la peine de rechercher plus tard.
 
 On est donc de retour aux scans, comme on ne trouve rien. On repart avec un scan des ports UDP, mais cela ne donne rien. Comme le site est sur le port 8000 et pas 80, cela vaut la peine de chercher un peu plus. On lance donc une commande de plus pour fouiller extensivement les ports TCP
 ```bash
@@ -46,7 +51,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Ce n'est pas le port 80 mais on avance.
 
-![[Pasted image 20251105230145.png]]
+<img class="content-image" src="/assets/content/htb/season9-codeparttwo/Pasted%20image%2020251105230145.png" alt="Code part II Writeup" loading="lazy">
 
 # Foothold
 
@@ -56,7 +61,7 @@ On se connecte sur le port 9009 et on trouve un unique fichier `users.db`. On le
 2|app|a97588c0e2fa3a024876339e27aeb42e
 ```
 
-[Crackstation](crackstation.net) identifie le premier comme un hash md5, correspondant au mot de passe `sweetangelbabylove`. 
+[Crackstation](https://crackstation.net) identifie le premier comme un hash md5, correspondant au mot de passe `sweetangelbabylove`. 
 
 ```
 marco:sweetangelbabylove
@@ -71,7 +76,7 @@ Malheureusement cela ne donne rien. On y reviendra si jamais on en a vraiment be
 
 On tente de se connecter en ssh (qu'on avait vu dans les scans, même si il y a toujours ssh) avec les identifiants de marco et BINGO, on a un accès à la machine. Et juste comme ça, on a notre flag user.
 
-![[Pasted image 20251105230225.png]]
+<img class="content-image" src="/assets/content/htb/season9-codeparttwo/Pasted%20image%2020251105230225.png" alt="Code part II Writeup" loading="lazy">
 
 # Alternative foothold
 
@@ -106,7 +111,6 @@ print(r.text)
 Aucun mouvement latéral à faire, on se concentre directement sur la privilege escalation, merci marco.
 
 # Privilege Escalation
-#npbackup
 
 On commence une petite énumération avec
 ```bash
@@ -304,4 +308,5 @@ restic -r /tmp/restictemp/cpt restore <snapshot_id> --target ./restore
 
 et on peut enfin lire le fichier root.txt
 
-![[Pasted image 20251112181156.png]]
+<img class="content-image" src="/assets/content/htb/season9-codeparttwo/Pasted%20image%2020251112181156.png" alt="Code part II Writeup" loading="lazy">
+{% endraw %}

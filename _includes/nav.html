@@ -1,0 +1,17 @@
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark">TL;<em>DR</em></span>
+      <span class="brand-sub">Eugene's Tech Lab</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      {% assign here = page.url | replace: 'index.html', '' %}
+      <a href="{{ '/writeups/' | relative_url }}" {% if here == '/writeups/' %}class="active"{% endif %}>Writeups</a>
+      <a href="{{ '/privacy/' | relative_url }}" {% if here == '/privacy/' %}class="active"{% endif %}>Privacy</a>
+      <a href="{{ '/projects/' | relative_url }}" {% if here == '/projects/' %}class="active"{% endif %}>Projects</a>
+      <a href="{{ '/portfolio/' | relative_url }}" {% if here == '/portfolio/' %}class="active"{% endif %}>Portfolio</a>
+      <a href="{{ '/about/' | relative_url }}" {% if here == '/about/' %}class="active"{% endif %}>About</a>
+    </nav>
+  </div>
+</header>

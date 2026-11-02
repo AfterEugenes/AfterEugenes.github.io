@@ -1,15 +1,20 @@
 ---
+layout: writeup
 title: 'IDOR: "My first blog"'
 description: Simple IDOR and path traversal challenge
-tags:
-  - CTF
+excerpt: Simple IDOR and path traversal challenge
 date: 2026-02-21T12:17
-tasks:
-  - 
-parent files:
-  - 
-category: challenges
+platform: ctf
+permalink: /writeups/ctf/2026/bkctf/my-first-blog/
+year: '2026'
+event: BKCTF
+tags:
+- CTF
+- '2026'
+next_url: /writeups/ctf/2026/bkctf/tiny-sql/
 ---
+
+{% raw %}
 
 # Recherches
 
@@ -42,3 +47,4 @@ Ce qui nous donne:
 ```
 bkctf{k3ys_in_th3_l0ck5}
 ```
+{% endraw %}

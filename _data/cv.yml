@@ -1,0 +1,60 @@
+# CV / About content — edit freely, no HTML needed.
+profile: >-
+  Student in IT specializing in offensive Cybersecurity and pentesting.
+  I break into things, write down how, and care deeply about privacy.
+
+contact:
+  email: contact@eugenetl.com
+  github: https://github.com/TheLastOfEugenes
+  htb: https://app.hackthebox.com/users/2162889
+
+cv_pdf: /assets/cv/cv.pdf
+
+skills:
+  - name: Web App Pentest
+    items:
+      - OWASP top 10 exploitation (SQLi, XSS, CSRF, LFI, RFI, XXE)
+  - name: Linux Systems
+    items:
+      - Enumeration
+      - Exploitation
+      - Privilege escalation
+  - name: Windows & AD
+    items:
+      - Kerberoasting
+      - Privilege escalation
+  - name: Network
+    items:
+      - TCP/IP protocols
+      - SSH / HTTP / DHCP
+  - name: Scripting
+    items:
+      - Python
+      - C++
+      - Shared objects libraries
+
+experience:
+  - role: Pentester & assistant developer
+    org: Startup in EvilLand
+    items:
+      - "Pentest of the firm's infrastructure (web app, network)"
+      - "Redaction of a complete pentest report"
+      - "Web & app development"
+
+academics:
+  - org: EvilLand's school of informatics
+    items:
+      - "Development projects (C graphic library, C terminal, C++ video game, Java compiler)"
+      - "Network: exploration and construction of a network, Wi-Fi hijacking"
+      - "Computer architecture: pipelined processor"
+      - "Advanced coding in C and Python"
+
+rankings:
+  - name: HackTheBox
+    value: Top 800
+  - name: RootMe
+    value: 50% completion — App-script, Web server and Web client
+  - name: PortSwigger
+    value: Finished all topics
+  - name: TryHackMe
+    value: Top 0.1% reached, all pentest paths done

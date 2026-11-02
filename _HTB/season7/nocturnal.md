@@ -1,24 +1,25 @@
 ---
+layout: writeup
 title: nocturnal
-description: Jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit.
-tags:
-  - HTB
-  - machine
-  - cron
-  - ispconfig
+description: Jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit,
+  jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit.
+excerpt: Jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit, jour,
+  nuit, jour, nuit, jour, nuit, jour, nuit, jour, nuit.
 date: 2026-04-10T12:33
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season7/nocturnal/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "7"
-seasonal: no
+season: '7'
+tags:
+- HTB
+- linux
+- easy
+prev_url: /writeups/htb/season7/strutted/
+next_url: /writeups/htb/season7/dog/
 ---
+
+{% raw %}
 
 # Summary
 ## Foothold
@@ -50,10 +51,10 @@ On voit les ports `22` et `80`. Sur le site web on trouve plusieurs pages intér
 - `uploads2`
 
 Le site en lui-même n'indique rien.
-![[Pasted image 20260410143807.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260410143807.png" alt="nocturnal" loading="lazy">
 
 La page `register.php` permet de s'inscrire et obtenir un accès, après quoi on peut charger des des fichiers via upload.
-![[Pasted image 20260410143903.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260410143903.png" alt="nocturnal" loading="lazy">
 
 Après avoir upload un fichier le site répond avec un lien pour télécharger le fichier.
 ```
@@ -67,11 +68,11 @@ On voit assez vite qu'une idor est possible en changeant le nom pour `leet` l'ut
 ffuf -u "http://nocturnal.htb/view.php?username=FUZZ&file=.pdf" -H 'Cookie: PHPSESSID=n0spgp65idb08uk27jh1vkjr4a' -w /usr/share/wordlists/seclists/Usernames/Names/names.txt -fs 2985
 ```
 
-![[Pasted image 20260410164924.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260410164924.png" alt="nocturnal" loading="lazy">
 
 En se rendant sur sa page on est accueillis en effet avec un fichier intéressant.
 
-![[Pasted image 20260410165001.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260410165001.png" alt="nocturnal" loading="lazy">
 
 On lit le fichier odt et on y lit un mot de passe.
 ```
@@ -85,7 +86,7 @@ Nocturnal's IT team
 ```
 
 On a donc des identifiants: `admanda:arHkG7HAI68X8s1J`. Malheureusement ils ne fonctionnent pas en ssh mais nous permettent d'accéder au panel admin du site web.
-![[Pasted image 20260410165740.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260410165740.png" alt="nocturnal" loading="lazy">
 
 On peut créer une backup ou regarder le contenu des fichiers directement. 
 
@@ -150,7 +151,7 @@ Et on craque ce fichier avec hashcat (md5, mode 0). On finit par en trouver un q
 C'est celui de tobias, on a donc des identifiants en plus: `tobias:slowmotionapocalypse`
 
 Et voilà, notre accès ssh.
-![[Pasted image 20260411142300.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260411142300.png" alt="nocturnal" loading="lazy">
 
 On n'oublie pas le flag user bien sûr.
 
@@ -172,8 +173,9 @@ Enfin on lance l'exploit avec l'utilisateur.
 python3 CVE-2023-46818.py http://localhost:9001 admin slowmotionapocalypse
 ```
 
-![[Pasted image 20260411163651.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260411163651.png" alt="nocturnal" loading="lazy">
 
 Et voilà, on récupère notre flag et on a fini la box.
 
-![[Pasted image 20260411163729.png]]
+<img class="content-image" src="/assets/content/htb/season7-nocturnal/Pasted%20image%2020260411163729.png" alt="nocturnal" loading="lazy">
+{% endraw %}

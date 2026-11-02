@@ -1,26 +1,25 @@
 ---
+layout: writeup
 title: Bizness
 description: monkey bizness really
-tags:
-  - HTB
-  - machine
+excerpt: monkey bizness really
 date: 2026-03-16T17:36
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season4/bizness/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "4"
-seasonal: yes
+season: '4'
+tags:
+- HTB
+- linux
+- easy
 ---
+
+{% raw %}
 
 # Foothold
 
-![[Pasted image 20260318085145.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260318085145.png" alt="Bizness" loading="lazy">
 
 On arrive sur la page de "Bizness incorporate". Alors évidemment, en descendant suffisamment, on peut lire que le framework est Apache OfBiz.
 
@@ -33,9 +32,9 @@ qui nous donne en sortie que la cible a l'air d'être vulnérable. Et lorsque l'
 python3 exploit.py --url https://bizness.htb --cmd 'id'
 ```
 on nous dit de vérifier la sortie de la commande. Il ne faut pas oublier bien sûr qu'il y a une redirection vers https donc il faut bien utiliser cette origine. Aussi vite que ça on a notre revshell.
-![[Pasted image 20260318095918.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260318095918.png" alt="Bizness" loading="lazy">
 
-![[Pasted image 20260318095927.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260318095927.png" alt="Bizness" loading="lazy">
 
 On upgrade notre shell
 
@@ -57,7 +56,7 @@ alias ls='ls $LS_OPTIONS'
 export PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\$\[\033[00m\] '
 ```
 
-![[Pasted image 20260318100022.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260318100022.png" alt="Bizness" loading="lazy">
 
 # Privilege Escalation to root
 
@@ -85,9 +84,9 @@ help;
 show tables;
 select * from OFBIZ.USER_LOGIN;
 ```
-![[Pasted image 20260319101234.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260319101234.png" alt="Bizness" loading="lazy">
 
-![[Pasted image 20260319101849.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260319101849.png" alt="Bizness" loading="lazy">
 
 On trouve un mot de passe:
 ```
@@ -171,7 +170,7 @@ echo 'b8fd3f41a541a435857a8f3e751cc3a91c174362:d' > hash.txt
 hashcat -a 0 -m 120 hash.txt --wordlist /usr/share/wordlists/rockyou.txt
 ```
 
-![[Pasted image 20260319112112.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260319112112.png" alt="Bizness" loading="lazy">
 
 Et on trouve le mot de passe
 ```
@@ -184,8 +183,9 @@ su root
 ```
 Et ça fonctionne, on a notre root shell!
 
-![[Pasted image 20260319112237.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260319112237.png" alt="Bizness" loading="lazy">
 
-![[Pasted image 20260319112325.png]]
+<img class="content-image" src="/assets/content/htb/season4-bizness/Pasted%20image%2020260319112325.png" alt="Bizness" loading="lazy">
 
 
+{% endraw %}

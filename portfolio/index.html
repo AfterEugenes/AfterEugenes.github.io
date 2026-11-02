@@ -1,0 +1,53 @@
+---
+layout: default
+title: Portfolio
+description: Websites designed and hosted for people — simple, clean and secure.
+permalink: /portfolio/
+---
+
+<div class="container">
+  <header class="page-head">
+    <h1>Portfolio &amp; services</h1>
+    <p class="lede">
+      On the side, I design and host websites for people who want something simple,
+      clean and secure — without having to think about the technical side.
+    </p>
+  </header>
+
+  <div class="services">
+    <div class="service-card">
+      <h3>Design</h3>
+      <p>A clean, fast, modern site built around what you actually need. No page-builder bloat.</p>
+    </div>
+    <div class="service-card">
+      <h3>Hosting &amp; maintenance</h3>
+      <p>Deployment, domain, HTTPS, updates and backups — handled. You get a site that stays up.</p>
+    </div>
+    <div class="service-card">
+      <h3>Security-minded</h3>
+      <p>Built by a pentester: hardened defaults, privacy-respecting, no unnecessary trackers.</p>
+    </div>
+  </div>
+
+  {% assign items = site.data.portfolio %}
+  {% if items and items.size > 0 %}
+  <div class="card-grid">
+    {% for site_item in items %}
+    <a class="project-card" href="{{ site_item.url }}">
+      <h3>{{ site_item.name }}</h3>
+      <p>{{ site_item.description }}</p>
+      <div class="tag-row">
+        {% for tag in site_item.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      </div>
+      <p class="repo-link">Visit site →</p>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h3>First projects are in the oven 🍳</h3>
+    <p>This section will list the sites I design and host. Want to be the first? Get in touch.</p>
+    <a class="btn" href="mailto:{{ site.email }}">Start a project</a>
+  </div>
+  {% endif %}
+</div>
