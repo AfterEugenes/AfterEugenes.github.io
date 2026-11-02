@@ -416,6 +416,12 @@
 }
 
 .privacy-main {
+  // category/note content headings read as subsections of the page
+  .prose {
+    h1 { font-size: 1.55rem; }
+    h2 { font-size: 1.3rem; }
+  }
+
   .related {
     margin-top: 44px;
 

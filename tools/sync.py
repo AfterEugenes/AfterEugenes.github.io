@@ -37,6 +37,7 @@ RE_HIGHLIGHT = re.compile(r"==([^=\n]+)==")
 RE_FENCE = re.compile(r"^(```|~~~)")
 RE_INLINE_CODE = re.compile(r"(`[^`]*`)")
 RE_CALLOUT = re.compile(r"^>\s*\[!([a-zA-Z-]+)\]([+-]?)\s*(.*)$")
+RE_HEAD = re.compile(r"^(#{1,6})\s")
 RE_CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 
 
@@ -140,8 +141,9 @@ class Note:
         self.fm, body = split_frontmatter(path.read_text(encoding="utf-8", errors="replace"))
         self.body = RE_CONTROL.sub("", body)
         self.warnings: list[str] = []
-        self.images: dict[str, str] = {}      # copied images for this note
-        self.rendered: str | None = None       # memoized transformed body
+        self.images: dict[str, str] = {}           # copied images for this note
+        self.rendered: str | None = None            # memoized standalone body
+        self.rendered_embed: str | None = None      # memoized transcluded body
 
         self.title = str(self.fm.get("title") or self.parts[-1]).strip()
         desc = self.fm.get("description") or self.fm.get("Description") or ""
@@ -251,15 +253,16 @@ def index_note(ctx: Context, note: Note) -> None:
         ctx.notes_by_key.setdefault(str(key).strip().lower(), note)
 
 
-def render_note(note: Note, ctx: Context, stack: tuple = ()) -> str:
-    if note.rendered is not None:
-        return note.rendered
+def render_note(note: Note, ctx: Context, stack: tuple = (), embed: bool = False) -> str:
+    cached = note.rendered_embed if embed else note.rendered
+    if cached is not None:
+        return cached
     if note in stack:  # embed cycle guard
         return ""
-    return transform_body(note, ctx, stack + (note,))
+    return transform_body(note, ctx, stack + (note,), embed)
 
 
-def transform_body(note: Note, ctx: Context, stack: tuple = ()) -> str:
+def transform_body(note: Note, ctx: Context, stack: tuple = (), embed: bool = False) -> str:
     out_lines: list[str] = []
     lines = note.body.splitlines()
     i = 0
@@ -302,14 +305,23 @@ def transform_body(note: Note, ctx: Context, stack: tuple = ()) -> str:
                 return (f'<img class="content-image" src="{note.images[img.name]}"'
                         f' alt="{alt}" loading="lazy"{attrs}>')
 
-            # note embed: transclude the target note
+            # note embed: transclude the target note as a document card
             key = re.sub(r"\.(md|markdown)$", "", ref, flags=re.I).strip().lower()
             target = ctx.notes_by_key.get(key)
             if target is not None and target is not note:
-                body = render_note(target, ctx, stack)
-                return (f'<div class="note-embed">'
-                        f'<p class="note-embed-title"><a href="{target.url}">{target.title}</a></p>'
-                        f'<div class="note-embed-body">\n\n{body}\n\n</div></div>')
+                body = render_note(target, ctx, stack, embed=True)
+                title = html.escape(target.title, quote=True)
+                return (
+                    f'<div class="note-embed">\n\n'
+                    f'<div class="note-embed-head"><a class="note-embed-title" href="{target.url}">{title}</a>'
+                    f'<span class="note-embed-meta">Updated {target.date[:10]}</span>\n'
+                    f'</div>\n\n'
+                    f'<div class="note-embed-body">\n\n{body}\n\n</div>\n\n'
+                    f'<div class="note-embed-foot">'
+                    f'<a href="{target.url}">Open the full note →</a>\n'
+                    f'</div>\n\n'
+                    f'</div>'
+                )
 
             ctx.unresolved.append(f"{note.rel}: missing embed '![[{ref}]]'")
             return ""
@@ -376,13 +388,21 @@ def transform_body(note: Note, ctx: Context, stack: tuple = ()) -> str:
             continue
 
         # normal markdown line, inline code spans protected
+        if embed:
+            m = RE_HEAD.match(line)
+            if m:
+                level = min(len(m.group(1)) + 2, 6)   # demote: embeds are subsections
+                line = "#" * level + line[len(m.group(1)):]
         parts = RE_INLINE_CODE.split(line)
         out_lines.append("".join(p if p.startswith("`") and p.endswith("`") and len(p) > 1
                                  else convert_part(p) for p in parts))
         i += 1
 
     result = "\n".join(out_lines)
-    note.rendered = result
+    if embed:
+        note.rendered_embed = result
+    else:
+        note.rendered = result
     return result
 
 

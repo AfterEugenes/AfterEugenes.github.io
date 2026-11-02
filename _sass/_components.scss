@@ -333,28 +333,87 @@
   }
 }
 
-// embedded note (obsidian ![[note]] transclusion)
+// embedded note (obsidian ![[note]] transclusion) — document card
 .note-embed {
+  margin: 1.8rem 0;
   border: 1px solid var(--border);
+  border-left: 3px solid var(--privacy);
   border-radius: var(--radius-sm);
   background: var(--bg-alt);
-  padding: 14px 20px;
-  margin: 1.4rem 0;
+  overflow: hidden;
+
+  .note-embed-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 13px 18px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+
+    p {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .note-embed-foot {
+    p { margin: 0; }
+  }
 
   .note-embed-title {
-    margin-bottom: 6px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-soft);
     font-weight: 700;
+    color: var(--text);
+    font-size: 1.02rem;
 
-    a { color: var(--brand); }
+    &::before {
+      content: "▸";
+      color: var(--privacy);
+      margin-right: 8px;
+    }
+
+    &:hover { color: var(--brand); }
+  }
+
+  .note-embed-meta {
+    margin-left: auto;
+    font-size: 0.76rem;
+    color: var(--dim);
+    white-space: nowrap;
   }
 
   .note-embed-body {
-    color: var(--muted);
-    font-size: 0.93rem;
+    padding: 2px 22px 12px;
 
+    > :first-child { margin-top: 14px; }
     > :last-child { margin-bottom: 0; }
+
+    // demoted headings read as subsections of the page
+    h1, h2 {
+      font-size: 1.08rem;
+      margin: 1.5em 0 0.45em;
+      color: var(--text);
+    }
+
+    h3, h4, h5, h6 {
+      font-size: 0.96rem;
+      margin: 1.3em 0 0.4em;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-weight: 700;
+    }
+
+    img.content-image { max-height: 460px; width: auto; }
+  }
+
+  .note-embed-foot {
+    padding: 11px 18px;
+    border-top: 1px dashed var(--border-soft);
+
+    a { font-size: 0.86rem; }
   }
 }
 

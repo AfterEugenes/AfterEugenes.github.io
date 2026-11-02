@@ -45,14 +45,19 @@ Les services de messagerie sont importants ils permettent de communiquer. La dif
 
 # Contenu
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/signal/">Signal</a></p><div class="note-embed-body">
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/signal/">Signal</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# Signal
-## TL;DR
+### Signal
+#### TL;DR
 Très probablement la meilleure messagerie que vous pourrez installer pour une utilisation quotidienne et simple. La sécurité est sans appel. La messagerie est centralisée donc Signal pourrait décider d'enregistrer certaines métadonnées sur les communications mais le groupe a été est prouvé digne de confiance ***a posteriori*** et ***a priori***, un bel avantage.
 
-## Analyse
+#### Analyse
 Signal est une messagerie instantanée, centralisée, proposée comme un service de communication digne de confiance, tant pour la sécurité que pour la vie privée.[^signalattack][^signalprinciples][^signalphoneprivacy] Ils accordent clairement une forte importance à la transparence en effectuant des audits third-party[^signalaudits] et les instructions de la justice.[^signallegal][^signallsubpoena] Pour appuyer ça, ils ont aussi une license AGPLv3.0 sur l'application ET le serveur. [^signallicense][^signalserverlicense] Si vous en doutez encore, vous pouvez opter pour l'option fédérée et faire tourner votre propre serveur.[^signallocalserver]
 
 La théorie: Signal est une application largement tournée vers la vie privée. Tout ce qui est important (contacts, données personnelles, clés, messages, ...) est stocké sur l'appareil de l'utilisateur, nulle part ailleurs.[^signalprivateprofiles] Les seules informations stockées sur les serveurs sont le numéro de l'utilisateur, la date de création de son compte et la dernière date de connexion, tout le reste n'est que sur votre appareil, nulle part ailleurs. Certains articles mettent justement l'accent sur l'importance qu'ils accordent aux profils privés. En plus de ça Signal a développé le "**sealed sender**", qui permet normalement de cacher qui envoie un message (sauf pour le premier message.[^signalsealedsender]
@@ -84,16 +89,26 @@ En somme la conclusion est simple: tout comme un VPN, vous choisissez de faire c
 [^signalindependantaudit]:[Security audit on Signal - independant audit](https://positive-intentions.com/docs/research/Security%20audit/signal-protocol-security-audit/)
 [^signalprotocolresearch]:[Analysis of signal protocol - research paper](https://eprint.iacr.org/2016/1013.pdf)
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/briar/">Briar</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/signal/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/briar/">Briar</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# Briar
-## TL;DR
+### Briar
+#### TL;DR
 Briar est destinée aux personnes dans des situations délicates qui ont besoin de pouvoir communiquer malgré tout (journalistes, utilisateurs en pays sous dictatures, etc) Il fait très bien le travail dans ce cas mais à un certain coût. La cryptographie en elle-même est robuste et les métadonnées sont bien protégées puisque les communications en ligne passent par Tor.
 
-## Analyse
+#### Analyse
 Leur mission est claire: apporter des systèmes de messagerie à ceux pour qui ça peut être difficile de communiquer comme les utilisateurs dans des pays sous dictature, les journalistes, whistleblowers, etc. Il est donc clair dès le départ que l'emphase sera mise sur la sécurité et la vie privée et non sur la maniabilité.[^briarhomepage][^briarusermanual] C'est d'ailleurs très bien illustré par le modèle d'attaquant choisi, stipulé tout en bas de la page d'accueil.[^briarhomepage]
 
 La sécurité elle-même est assurée par leur protocole p2p: Bramble Transport Protocol.[^briarbramble] Le protocole en lui-même est robuste, il a été audité, prouvé, il n'y a aucun doute sur sa capacité à résister.[^briarrelease][^briarcryptography][^briaraudit] En plus de toute cette encryption, Briar utilise Tor pour router ses messages quand ils sont envoyés en ligne, ce qui renforce la sécurité mais aussi le côté privé de l'application.[^briarhomepage][^briarcryptography]
@@ -120,16 +135,26 @@ Enfin l'équipe de développement est plus qu'intéressante. Entre l'accent mis 
 
 [^briarcryptography]: [Cryptography in the wild: Briar - Yuanming Song](https://ethz.ch/content/dam/ethz/special-interest/infk/inst-infsec/appliedcrypto/education/theses/report_YuanmingSong.pdf)
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/simplex/">SimpleX</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/briar/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/simplex/">SimpleX</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# SimpleX
-## TL;DR
+### SimpleX
+#### TL;DR
 SimpleX est une application fédérée en premier lieu. Au-delà du but initial de proposer un réseau de messagerie sécurisé et digne de confiance, ils ont développé, entre autres, les messages directs, le SimpleX network et les addresses anonymes, en faisant une des solutions à la fois les plus sûres et les plus polyvalentes. L'entreprise a en plus l'air d'avoir assuré et bonne base d'utilisateur et continue à se développer, sans promesse de s'éteindre bientôt.
 
-## Analyse
+#### Analyse
 Pour commencer, comme d'habitude, le but de l'application. Ce service de messagerie fédéré est destiné aux utilisateurs professionnels (journalistes, whitleblowers, activistes, victimes de dictatures, anglais, ... Notre lot classique de personnes en milieu sensible.) mais aussi aux utilisateurs particuliers avec un simple but d'améliorer leur vie privée. Eh oui, n'importe qui peut facilement utiliser SimpleX. leur but est d'amener un service de messagerie qui s'adapte à chaque utilisateur. Même si je suis d'habitude assez opposé à utiliser un couteau-suisse, celui-ci est tellement bien pensé qu'il est difficile de l'éviter.[^simplexhomepage]
 
 Déjà pour la partie importante, est-ce sécurisé? Oui. On retrouve le classique E2EE, double ratchet, et même de la post-quantum encryption. Et puis bien sûr le classique audit indépendant a permis de trouver quelques failles mais rien de majeur.[^simplexaudit]
@@ -178,16 +203,26 @@ En plus de ça, de par sa construction, SimpleX, ou plutôt les serveurs privés
 
 [^simplexaudit]: [Independant audit of SimpleX](https://files.safe.de.fi/safe/files/audit/pdf/SimpleXChat.pdf)
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/session/">Session</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/simplex/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/session/">Session</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# Session
-## TL;DR
+### Session
+#### TL;DR
 Cette application est une messagerie qui passe par le réseau tor. La cryptographie est excellente et prouvée. L'application elle-même est facile et agréable à utiliser. Le réseau onion est une idée novatrice qui permet de sécuriser les messages mais le prix pour lancer un tel noeud transforme l'applciation en messagerie centralisée.
 
-## Analyse
+#### Analyse
 La politique de Session est claire et honnête, le but est de proposer un service de messagerie sécurisé et anonyme. [^sessionmainpage] [^sessionlitepaper] [^sessionfinances] En plus d'insister sur l'importance de l'anonymat et les problèmes que représentent l'utilisation d'infos personnelles comme un numéro de téléphone ou un email, ils insistent sur l'absence d'info qui permettent d'identifier un utilisateur et la collecte minimale de métadonnées, ce qui présage de bonnes choses. [^sessionaccount][^sessionmessenger] Ils ont aussi la license AGPLv3 (j'aime cette license).[^sessiongithub]
 
 L'envoi de messages est basé sur l'utilisation d'un réseau de nœuds entretenus par des volontaires.[^sessionnetwork] Ce network est développé comme un onion router, ce qui lui permet de garantir en sortes la sécurité des utilisateurs et leurs données. Un des problèmes majeurs de ce système est qu'un noeud peut décider de stocker les messages jusqu'à ce qu'il arrive à les déchiffrer, même si c'est très improbable. Autrement, l'encryption a l'air très solide, étant basé sur l'idée déjà théorisée des *onion routing*, et permet notamment de supprimer le problème des métadonnées.[^sessiononiontechnical][^sessionnetwork][^sessionmessage] Cette application est d'ailleurs, grâce à ce protocole, une des meilleures en terme de métadonnées actuellement, rien ne peut être obtenu sur les échanges.
@@ -228,16 +263,26 @@ p.s. La preuve qu'il faut vérifier tous les articles que l'on lit avec l'articl
 [^sessionaudit]:[Quarkslab's independant audit of Session's app](https://blog.quarkslab.com/resources/2021-05-04_audit-of-session-secure-messaging-application/20-08-Oxen-REP-v1.4.pdf)
 [^sessionwhitepaper]:[Session's whitepaper](https://arxiv.org/pdf/2002.04609)
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/rvnt/">RVNT</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/session/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/rvnt/">RVNT</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# RVNT
-## TL;DR
+### RVNT
+#### TL;DR
 RVNT a pour but de créer une messagerie privée, sécurisée, p2p. Ils insistent fort sur la vie privée et la sécurité et promettent d'utiliser certains protocoles très, très intéressants, qui en feraient peut-être la messagerie la plus sécurisée. L'application elle-même n'ayant pas encore de release open-source auditée ou d'avis extérieur, on ne peut vérifier leurs promesses.
 
-## Analyse
+#### Analyse
 RVNT se pose comme un service de messagerie p2p dont le but n'est pas de remplacer signal mais putôt une alternative qui ne vous demanderait jamais de faire confiance à quiconque, à l'image de Tor. C'est une alternative d'autant plus utile dans des pays en guerre ou dans lesquels il est dangereux d'être reconnu.[^rvntofflinemesh]
 
 Le service paraît phénoménal. Tout d'abord le plus évident, l'encryption. A travers l'utilisation de **double ratchet**, **tor**, **mixnet**, **sealed enveloppes**, **signing**, il semble impossible de lire quoi que ce soit, c'est à se demander comment ça peut même trouver son destinataire.[^rvntratchet][^rvntprotection] Le double hatchet protège en plus des attaquants, si un attaquant prend le contrôle d'une clé et arrive à lire un message, il ne pourra pas lire le suivant, ce qui rend toute attaque vraiment difficile si elle ne cible pas l'utilisateur directement. Grâce au **mixnet**, aux tailles de paquets et aux paquets aléatoires, même si quelqu'un analyse le réseau, il lui sera impossible de savoir ce qu'il se passe vraiment. [^rvntmixnet] Il en est de même pour la vie privée: rien ne transparaît. De l'expéditeur au contenu du message en comprenant toutes les métadonnées, il semble que les seules infos qui persistent sont les *timestamp* de connexion ainsi que les clés publiques associées aux noms d'utilisateurs. Un point bonus là-dedans est que, selon **RVNT** directement, même si un parti tiers parvenait à prendre le contrôle d'un relais, il ne pourrait absolument rien lire (ce qui est logique puisque tout est basé sur Tor).[^rvntprotection][^rvnttor]
@@ -261,16 +306,26 @@ En regardant les promesses seules ce service a l'air phénoménal, à voir si le
 
 [^rvntcomparison]: [RVNT comparison between federated, P2P and centralised](https://rvntos.io/blog/p2p-vs-federated-vs-centralized-messaging/)
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/matrix/">Matrix</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/rvnt/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/matrix/">Matrix</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# Matrix
-## TL;DR
+### Matrix
+#### TL;DR
 Le but est d'avoir une messagerie fédérée pour échanger des messages dans des communautés. La cryptographie en elle-même est correcte mais pas exceptionnelle, l'ego des développeurs les empêche apparemment d'avancer et corriger leurs erreurs et certaines options sont à revoir pour avoir quelque chose de privé ou agréable à utiliser.
 
-## Analyse
+#### Analyse
 Matrix se présente comme un service orienté vers les communautés, qui permet de joindre des communautés de toutes origines (skype, discord, signal, etc) en une seule application via des réseaux *fédérés*.
 
 Le protocole et l'idée, en eux-même, n'ont pas l'air trop mal du tout. Ils ont l'air d'attacher une certaine importance à l'idée de vie privée et notamment de la développer avec cette idée de messagerie fédérée. En plus de ça leur application est centrée autour de leurs *bridges* qui permettent de connecter une room matrix à beaucoup d'autres types d'applications. Un autre point intéressant est l'absence d'information importante lors de l'inscription, matrix n'a besoin ni d'email ni de numéro de téléphone, rien du tout.
@@ -283,16 +338,26 @@ Le plus gros problème de cette application est les métadonnées. Entre celles 
 
 En plus de ça la mentalité des développeurs est problématique. Ils sont lents, n'arrivent pas vraiment à faire décoller leur application, qui a pourtant maintenant 6 ans, choisissent de développer le côté pratique plutôt que la sécurité et, plutôt que d'accepter leurs problèmes de leur application, ont l'air de tout tenter pour blâmer les autres et les enfoncer, tout en ayant une idée glorifiée de leur travail. Il faudrait leur donner encore du temps pour leur permettre de développer un meilleur protocole, pour leur donner le temps de s'atteler à une meilleure sécurité mais a-t-on vraiment besoin de tant d'années pour se jeter des lauriers pas mérités?
 
-</div></div>
+</div>
 
-<div class="note-embed"><p class="note-embed-title"><a href="/privacy/messaging/rocket-chat/">Rocket.chat</a></p><div class="note-embed-body">
+<div class="note-embed-foot"><a href="/privacy/messaging/matrix/">Open the full note →</a>
+</div>
+
+</div>
+
+<div class="note-embed">
+
+<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/rocket-chat/">Rocket.chat</a><span class="note-embed-meta">Updated 2026-09-08</span>
+</div>
+
+<div class="note-embed-body">
 
 
-# Rocket.chat
-## TL;DR
+### Rocket.chat
+#### TL;DR
 Rocket.chat est une application orientée vers la commercialisation et la surveillance de votre communauté, ils font eux-même la pub de leur service comme un hébergement sur cloud d'un service de messagerie à la demande ou le déploiement d'une messagerie "sécurisée" en local. Ils ne sont pas du tout orientés vers la vie privée.
 
-## Analyse
+#### Analyse
 Rocket.chat se présente comme un service de messagerie fédéré.[^rocketgetstarted] Plus que proche de matrix, ils se basent carrément sur le protocole de matrix pour faire tourner leur service.[^rocketmatrix] Ils bénéficient donc des systèmes de sécurité de Matrix plus ceux qu'ils rajoutent eux-même. Leur plus-value principale est de proposer différents déploiements: local, cloud ou air-gapped, un déploiement sur une version, selon leurs dires, isolée du reste du web.[^rocketplans] Local est bien évidemment un déploiement sur un serveur local tandis que cloud est une option hébergée sur leurs serveurs.
 
 Le problème de s'être basé sur matrix est qu'ils continuent les erreurs précédentes de matrix, ils auraient pu décider de renforcer la sécurité mais à la place ont décidé de renforcer le logging et faire machine arrière sur certaines choses comme le E2EE ou les informations sur les utilisateurs.[^rocketauthentication] Un administrateur a maintenant les pleins pouvoirs: il peut forcer les utilisateurs à se connecter avec LDAP, oAuth, 2FA, etc.[^rocketauthentication] En plus de ça il a également les pleins pouvoirs sur le E2EE, il doit activer l'E2EE sur un workspace avant de pouvoir le mettre en place sur un chat, même privé, ce qui lui permet de décider que personne ne peut lui cacher des messages.[^rockete2ee] J'ai mentionné les informations sur les utilisateurs, il se trouve que les développeurs ont eu l'idée géniale de remettre en place des informations comme les marqueurs de lecture ou de connexion des utilisateurs. En bref leur but n'est clairement pas de limiter les informations mais plutôt de les multiplier et les centraliser vers un seul utilisateur. Pire que ça, ils assument clairement le côté surveillance et proposent des outils pour obtenir des données sur les utilisateurs et utilisations.[^rocketmetrics] Encore une preuve de la mentalité de l'application, le document qui permet de comparer les options est bloqué derrière un login...[^rocketdocumenthidden]
@@ -321,6 +386,11 @@ En bref on fait face à une entreprise qui est assoiffée d'argent et met l'acce
 [^rocket2fabypass]:[CVE affecting rocket 2FA](https://vulners.com/cve/CVE-2026-30831)
 [^rocketcvelist]:[List of CVEs affecting Rocket.chat (and not matrix, for the bigger part)](https://app.opencve.io/cve/?vendor=rocketchat)
 
-</div></div>
+</div>
+
+<div class="note-embed-foot"><a href="/privacy/messaging/rocket-chat/">Open the full note →</a>
+</div>
+
+</div>
 
 {% endraw %}

