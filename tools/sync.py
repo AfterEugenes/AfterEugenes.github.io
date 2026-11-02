@@ -16,8 +16,6 @@ from __future__ import annotations
 import datetime as dt
 import fnmatch
 import html
-import os
-import posixpath
 import re
 import shutil
 import sys
@@ -33,12 +31,13 @@ CONFIG_PATH = Path(__file__).resolve().parent / "sync.yml"
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".bmp"}
 
 RE_EMBED = re.compile(r"!\[\[([^\]|#]+?)(?:#([^\]|]*))?(?:\|([^\]]*))?\]\]")
+RE_WIKILINK_HEAD = re.compile(r"\[\[#([^\]|]+?)(?:\|([^\]]*))?\]\]")
 RE_WIKILINK = re.compile(r"(?<!!)\[\[([^\]|#]+?)(?:#([^\]|]*))?(?:\|([^\]]*))?\]\]")
 RE_HIGHLIGHT = re.compile(r"==([^=\n]+)==")
 RE_FENCE = re.compile(r"^(```|~~~)")
 RE_INLINE_CODE = re.compile(r"(`[^`]*`)")
 RE_CALLOUT = re.compile(r"^>\s*\[!([a-zA-Z-]+)\]([+-]?)\s*(.*)$")
-RE_FM_KEY = re.compile(r"^([A-Za-z0-9 _-]+):")
+RE_CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 
 
 # ---------------------------------------------------------------- utilities
@@ -53,9 +52,7 @@ def slugify(text: str) -> str:
 
 def load_config() -> dict:
     cfg = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
-    for key, value in cfg.get("vault_roots", {}).items():
-        cfg.setdefault("_roots", {})[key] = value
-    # expand {vault} placeholders
+
     def expand(s: str) -> str:
         for k, v in cfg.get("vault_roots", {}).items():
             s = s.replace("{" + k + "}", v)
@@ -110,12 +107,12 @@ class ImageIndex:
                 if p.is_file() and p.suffix.lower() in IMAGE_EXTS:
                     self.by_name.setdefault(p.name.lower(), []).append(p)
 
-    def resolve(self, ref: str, note: Path) -> Path | None:
+    def resolve(self, ref: str, note: "Note") -> Path | None:
         ref = ref.strip()
-        cands = self.by_name.get(posixpath.basename(ref).lower(), [])
+        cands = self.by_name.get(posix_basename(ref).lower(), [])
         if not cands:
             return None
-        same_dir = [c for c in cands if note.parent in c.parents]
+        same_dir = [c for c in cands if note.path.parent in c.parents]
         if same_dir:
             return same_dir[0]
         if "/" in ref:
@@ -123,6 +120,10 @@ class ImageIndex:
             if exact:
                 return exact[0]
         return cands[0]
+
+
+def posix_basename(ref: str) -> str:
+    return ref.replace("\\", "/").rsplit("/", 1)[-1]
 
 
 # -------------------------------------------------------------------- notes
@@ -136,21 +137,42 @@ class Note:
         self.slugs = [slugify(p) for p in self.parts]
         self.platform = src["platform"]
 
-        # event overview candidate: note named like its folder (BKCTF/BKCTF.md,
-        # 0xFUN/0xFUN CTF.md). The actual overview is elected after collection.
-        self.overview_candidate = (
-            src["platform"] == "ctf"
-            and len(self.slugs) >= 2
-            and (self.slugs[-1] == self.slugs[-2]
-                 or self.slugs[-1] in (self.slugs[-2] + "-ctf", self.slugs[-2] + "-writeups"))
-        )
-        self.kind = "note"
-        self.url = src["url_prefix"] + "/" + "/".join(self.slugs) + "/"
-
-        self.fm, self.body = split_frontmatter(path.read_text(encoding="utf-8", errors="replace"))
-        # drop control characters (NUL bytes survive in some vault notes)
-        self.body = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", self.body)
+        self.fm, body = split_frontmatter(path.read_text(encoding="utf-8", errors="replace"))
+        self.body = RE_CONTROL.sub("", body)
         self.warnings: list[str] = []
+        self.images: dict[str, str] = {}      # copied images for this note
+        self.rendered: str | None = None       # memoized transformed body
+
+        self.title = str(self.fm.get("title") or self.parts[-1]).strip()
+        desc = self.fm.get("description") or self.fm.get("Description") or ""
+        self.description = str(desc).strip()
+        self.date = normalize_date(self.fm.get("date"), dt.datetime.fromtimestamp(path.stat().st_mtime))
+
+        # ---- classification --------------------------------------------
+        self.layout = src["layout"]
+        self.kind = "note"
+
+        if self.platform == "ctf":
+            # event overview candidate: named like its folder (BKCTF/BKCTF.md,
+            # 0xFUN/0xFUN CTF.md). The winner is elected after collection.
+            self.overview_candidate = (
+                len(self.slugs) >= 2
+                and (self.slugs[-1] == self.slugs[-2]
+                     or self.slugs[-1] in (self.slugs[-2] + "-ctf", self.slugs[-2] + "-writeups"))
+            )
+        else:
+            self.overview_candidate = False
+
+        if self.platform == "privacy":
+            if len(self.parts) == 1:
+                self.kind = "privacy-hub"
+                self.layout = "privacy-hub"
+                if self.rel.as_posix() == src.get("overview_note"):
+                    self.kind = "privacy-overview"
+                self.category = self.title
+            else:
+                self.layout = "privacy-doc"
+                self.category = self.parts[0]
 
         # folder-derived metadata
         self.year = self.parts[0] if self.platform == "ctf" and len(self.parts) >= 2 else None
@@ -159,19 +181,19 @@ class Note:
         if self.platform == "htb" and len(self.parts) >= 2:
             m = re.search(r"(\d+)", self.parts[0])
             self.season = m.group(1) if m else self.parts[0]
-        self.category = self.parts[0] if self.platform == "privacy" and len(self.parts) >= 2 else "General"
 
-        self.title = str(self.fm.get("title") or self.parts[-1]).strip()
-        desc = self.fm.get("description") or self.fm.get("Description") or ""
-        self.description = str(desc).strip()
-        self.date = normalize_date(self.fm.get("date"), dt.datetime.fromtimestamp(path.stat().st_mtime))
+        self.url = src["url_prefix"] + "/" + "/".join(self.slugs) + "/"
 
-        # images copied for this note: basename -> site url
-        self.images: dict[str, str] = {}
+    @property
+    def priority(self) -> int:
+        try:
+            return int(self.fm.get("priority", 99))
+        except (TypeError, ValueError):
+            return 99
 
     def meta(self, prev_url: str | None, next_url: str | None) -> dict:
         m: dict = {
-            "layout": "ctf-event" if self.kind == "event-overview" else self.src["layout"],
+            "layout": self.layout,
             "title": self.title,
             "description": self.description,
             # explicit excerpt avoids Jekyll auto-splitting the {% raw %} body
@@ -202,7 +224,7 @@ class Note:
             if self.year and str(self.year) not in tags:
                 tags.append(str(self.year))
         elif self.platform == "privacy":
-            if self.category != "General" and self.category not in tags:
+            if self.category and self.category not in tags:
                 tags.append(self.category)
         m["tags"] = tags
 
@@ -215,8 +237,29 @@ class Note:
 
 # --------------------------------------------------------------- transforms
 
-def transform_body(note: Note, link_index: dict[str, str], img_index: ImageIndex,
-                   unresolved: list[str]) -> str:
+class Context:
+    """Shared state for rendering: image index, note index, unresolved refs."""
+
+    def __init__(self, img_index: ImageIndex):
+        self.img_index = img_index
+        self.notes_by_key: dict[str, Note] = {}
+        self.unresolved: list[str] = []
+
+
+def index_note(ctx: Context, note: Note) -> None:
+    for key in [note.title, note.parts[-1], *(note.fm.get("aliases") or [])]:
+        ctx.notes_by_key.setdefault(str(key).strip().lower(), note)
+
+
+def render_note(note: Note, ctx: Context, stack: tuple = ()) -> str:
+    if note.rendered is not None:
+        return note.rendered
+    if note in stack:  # embed cycle guard
+        return ""
+    return transform_body(note, ctx, stack + (note,))
+
+
+def transform_body(note: Note, ctx: Context, stack: tuple = ()) -> str:
     out_lines: list[str] = []
     lines = note.body.splitlines()
     i = 0
@@ -225,64 +268,78 @@ def transform_body(note: Note, link_index: dict[str, str], img_index: ImageIndex
     def handle_embed(line: str) -> str:
         def rep(m: re.Match) -> str:
             ref, _anchor, size = m.group(1).strip(), m.group(2), m.group(3)
+            name = posix_basename(ref)
+
             # excalidraw drawing: try an exported image first
-            if ref.lower().endswith(".excalidraw"):
-                export = img_index.resolve(ref.rsplit(".", 1)[0] + ".png", note.path)
+            if name.lower().endswith(".excalidraw"):
+                export = ctx.img_index.resolve(name.rsplit(".", 1)[0] + ".png", note)
                 if export:
-                    ref = export.name
+                    ref = name = export.name
                 else:
-                    unresolved.append(f"{note.rel}: dropped drawing embed '![[{ref}]]'")
+                    ctx.unresolved.append(f"{note.rel}: dropped drawing embed '![[{ref}]]'")
                     return ""
-            img = img_index.resolve(ref, note.path)
-            if img is None:
-                unresolved.append(f"{note.rel}: missing image '![[{ref}]]'")
-                return ""
-            if img.name not in note.images:
-                # one folder per note, derived from its vault path
-                slug = "-".join(note.slugs)
-                dest = ROOT / "assets" / "content" / note.platform / slug / img.name
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                if not dest.exists():
-                    shutil.copy2(img, dest)
-                site_url = "/assets/content/" + "/".join(dest.relative_to(ROOT / "assets" / "content").parts)
-                note.images[img.name] = quote(site_url, safe="/")
-            attrs = ""
-            if size:
-                size = size.strip()
-                if re.fullmatch(r"\d+", size):
-                    attrs += f' width="{size}"'
-                elif re.fullmatch(r"\d+x\d+", size):
-                    w, h = size.split("x")
-                    attrs += f' width="{w}" height="{h}"'
-            alt = img.stem if not img.stem.lower().startswith("pasted image") else note.title
-            alt = html.escape(re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", alt), quote=True)
-            return (f'<img class="content-image" src="{note.images[img.name]}"'
-                    f' alt="{alt}" loading="lazy"{attrs}>')
+
+            img = ctx.img_index.resolve(ref, note)
+            if img is not None:
+                if img.name not in note.images:
+                    slug = "-".join(note.slugs)
+                    dest = ROOT / "assets" / "content" / note.platform / slug / img.name
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    if not dest.exists():
+                        shutil.copy2(img, dest)
+                    site_url = "/assets/content/" + "/".join(dest.relative_to(ROOT / "assets" / "content").parts)
+                    note.images[img.name] = quote(site_url, safe="/")
+                attrs = ""
+                if size:
+                    size = size.strip()
+                    if re.fullmatch(r"\d+", size):
+                        attrs += f' width="{size}"'
+                    elif re.fullmatch(r"\d+x\d+", size):
+                        w, h = size.split("x")
+                        attrs += f' width="{w}" height="{h}"'
+                alt = img.stem if not img.stem.lower().startswith("pasted image") else note.title
+                alt = html.escape(RE_CONTROL.sub("", alt), quote=True)
+                return (f'<img class="content-image" src="{note.images[img.name]}"'
+                        f' alt="{alt}" loading="lazy"{attrs}>')
+
+            # note embed: transclude the target note
+            key = re.sub(r"\.(md|markdown)$", "", ref, flags=re.I).strip().lower()
+            target = ctx.notes_by_key.get(key)
+            if target is not None and target is not note:
+                body = render_note(target, ctx, stack)
+                return (f'<div class="note-embed">'
+                        f'<p class="note-embed-title"><a href="{target.url}">{target.title}</a></p>'
+                        f'<div class="note-embed-body">\n\n{body}\n\n</div></div>')
+
+            ctx.unresolved.append(f"{note.rel}: missing embed '![[{ref}]]'")
+            return ""
 
         return RE_EMBED.sub(rep, line)
 
     def handle_links(line: str) -> str:
+        def rep_head(m: re.Match) -> str:
+            anchor, alias = m.group(1).strip(), m.group(2)
+            text = (alias or anchor).strip()
+            return f'<a class="obsidian-link" href="#{slugify(anchor)}">{text}</a>'
+
         def rep(m: re.Match) -> str:
             target, anchor, alias = m.group(1).strip(), m.group(2), m.group(3)
             key = re.sub(r"\.(md|markdown)$", "", target, flags=re.I).strip().lower()
-            url = link_index.get(key)
+            hit = ctx.notes_by_key.get(key)
             text = (alias or target).strip()
-            if url is None:
-                unresolved.append(f"{note.rel}: link to unpublished note '[[{target}]]' shown as text")
+            if hit is None:
+                ctx.unresolved.append(f"{note.rel}: link to unpublished note '[[{target}]]' shown as text")
                 return f'<span class="obsidian-link-missing" title="Not published">{text}</span>'
-            if anchor:
-                url += "#" + slugify(anchor)
+            url = hit.url + ("#" + slugify(anchor) if anchor else "")
             return f'<a class="obsidian-link" href="{url}">{text}</a>'
 
+        line = RE_WIKILINK_HEAD.sub(rep_head, line)
         return RE_WIKILINK.sub(rep, line)
-
-    def handle_highlights(line: str) -> str:
-        return RE_HIGHLIGHT.sub(r"<mark>\1</mark>", line)
 
     def convert_part(part: str) -> str:
         part = handle_embed(part)
         part = handle_links(part)
-        part = handle_highlights(part)
+        part = RE_HIGHLIGHT.sub(r"<mark>\1</mark>", part)
         return part
 
     while i < len(lines):
@@ -324,7 +381,48 @@ def transform_body(note: Note, link_index: dict[str, str], img_index: ImageIndex
                                  else convert_part(p) for p in parts))
         i += 1
 
-    return "\n".join(out_lines)
+    result = "\n".join(out_lines)
+    note.rendered = result
+    return result
+
+
+# ------------------------------------------------------------- privacy nav
+
+def write_privacy_nav(notes: list[Note], dry_run: bool) -> None:
+    privacy = [n for n in notes if n.platform == "privacy"]
+    if not privacy:
+        return
+    overview = next((n for n in privacy if n.kind == "privacy-overview"), None)
+    hubs = {n.category: n for n in privacy if n.kind == "privacy-hub"}
+    docs: dict[str, list[Note]] = {}
+    for n in privacy:
+        if n.kind == "note":
+            docs.setdefault(n.category, []).append(n)
+
+    categories = []
+    for name in sorted(set(hubs) | set(docs)):
+        hub = hubs.get(name)
+        cat_docs = sorted(docs.get(name, []), key=lambda n: n.date, reverse=True)
+        categories.append({
+            "name": name,
+            "url": hub.url if hub else None,
+            "priority": hub.priority if hub else 99,
+            "notes": [{"title": d.title, "url": d.url, "date": d.date[:10]} for d in cat_docs],
+        })
+    categories.sort(key=lambda c: (c["priority"], c["name"].lower()))
+
+    recent = [n for n in privacy if n.kind == "note"] or privacy
+    latest = max(recent, key=lambda n: n.date)
+    data = {
+        "overview": {"title": overview.title, "url": overview.url} if overview else None,
+        "latest": {"title": latest.title, "url": latest.url},
+        "categories": categories,
+    }
+    if not dry_run:
+        (ROOT / "_data").mkdir(exist_ok=True)
+        out = ("# GENERATED by tools/sync.py -- do not edit by hand\n"
+               + yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
+        (ROOT / "_data" / "privacy_nav.yml").write_text(out, encoding="utf-8")
 
 
 # --------------------------------------------------------------------- main
@@ -333,11 +431,9 @@ def main() -> int:
     dry_run = "--dry-run" in sys.argv
     cfg = load_config()
 
-    img_index = ImageIndex(cfg["image_search_roots"])
-    unresolved: list[str] = []
+    ctx = Context(ImageIndex(cfg["image_search_roots"]))
 
     notes: list[Note] = []
-    stubs: list[dict] = []
     for src in cfg["sources"]:
         root: Path = src["root"]
         if not root.is_dir():
@@ -357,13 +453,11 @@ def main() -> int:
     for group in groups.values():
         winner = min(group, key=lambda n: len(n.slugs[-1]))
         winner.kind = "event-overview"
+        winner.layout = "ctf-event"
         winner.url = winner.src["url_prefix"] + "/" + "/".join(winner.slugs[:-1]) + "/"
 
-    # link index: title + file stem (+ aliases) -> url
-    link_index: dict[str, str] = {}
     for n in notes:
-        for key in [n.title, n.parts[-1], *(n.fm.get("aliases") or [])]:
-            link_index.setdefault(str(key).strip().lower(), n.url)
+        index_note(ctx, n)
 
     # prev/next within a series (same folder), ordered by date
     series: dict[tuple, list[Note]] = {}
@@ -393,7 +487,7 @@ def main() -> int:
     for n in notes:
         prev_url, next_url = neighbors.get(n.url, (None, None))
         meta = n.meta(prev_url, next_url)
-        body = transform_body(n, link_index, img_index, unresolved)
+        body = render_note(n, ctx)
         img_count += len(n.images)
         # {% raw %} keeps payloads like {{7*7}} in writeups from being
         # interpreted as Liquid templates
@@ -406,6 +500,7 @@ def main() -> int:
         counts[n.src["name"]] += 1
 
     # stub landing pages for CTF events without an overview note
+    stubs: list[str] = []
     overview_urls = {n.url for n in notes if n.kind == "event-overview"}
     ctf_src = next(s for s in cfg["sources"] if s["platform"] == "ctf")
     events: dict[tuple, list[Note]] = {}
@@ -431,18 +526,46 @@ def main() -> int:
         if not dry_run:
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(stub, encoding="utf-8")
-        stubs.append({"event": event, "year": year})
+        stubs.append(f"event page for {event} {year} (no overview note)")
+
+    # stub category hubs for privacy folders without a hub note
+    privacy_srcs = [s for s in cfg["sources"] if s["platform"] == "privacy"]
+    if privacy_srcs:
+        psrc = privacy_srcs[0]
+        hub_slugs = {n.slugs[0] for n in notes if n.platform == "privacy" and len(n.slugs) == 1}
+        for folder in sorted(psrc["root"].iterdir()):
+            if not folder.is_dir() or folder.name.startswith((".", "_")):
+                continue
+            if slugify(folder.name) in hub_slugs:
+                continue
+            meta = {
+                "layout": "privacy-hub",
+                "title": folder.name,
+                "description": f"Notes about {folder.name.lower()}.",
+                "platform": "privacy",
+                "category": folder.name,
+                "tags": ["Privacy", folder.name],
+                "permalink": f"{psrc['url_prefix']}/{slugify(folder.name)}/",
+            }
+            stub = "---\n" + yaml.safe_dump(meta, sort_keys=False, allow_unicode=True) + "---\n"
+            dest = psrc["out_dir"] / f"{slugify(folder.name)}.md"
+            if not dry_run:
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_text(stub, encoding="utf-8")
+            stubs.append(f"category page for {folder.name} (no hub note)")
+
+    write_privacy_nav(notes, dry_run)
 
     # report
     print("== vault -> site sync ==")
     for name, count in counts.items():
         print(f"  {name:8s} {count:3d} notes")
     for s in stubs:
-        print(f"  stub     event page generated for {s['event']} {s['year']} (no overview note)")
+        print(f"  stub     {s}")
     print(f"  images   {img_count} copied")
-    if unresolved:
-        print(f"\n!! {len(unresolved)} unresolved reference(s):")
-        for u in unresolved:
+    if ctx.unresolved:
+        print(f"\n!! {len(ctx.unresolved)} unresolved reference(s):")
+        for u in ctx.unresolved:
             print(f"   - {u}")
     else:
         print("  links    all resolved")

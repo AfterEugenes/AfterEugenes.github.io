@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Mails
 description: ''
 excerpt: ''
 date: 2026-09-08T16:35
 platform: privacy
 permalink: /privacy/mails/
-category: General
+category: Mails
 tags:
 - Privacy
+- Mails
 ---
 
 {% raw %}

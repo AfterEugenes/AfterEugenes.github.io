@@ -5,17 +5,18 @@ layout: default
 {% assign htb_posts = site.HTB | where: "layout", "writeup" | sort: "date" | reverse %}
 {% assign ctf_posts = site.CTF | where: "layout", "writeup" | sort: "date" | reverse %}
 {% assign all_writeups = htb_posts | concat: ctf_posts | sort: "date" | reverse %}
-{% assign privacy_count = site.privacy_docs | size %}
+{% assign privacy_count = site.privacy_docs | where: "layout", "privacy-doc" | size %}
 
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <p class="hero-kicker">Eugene's Tech Lab</p>
+      <p class="hero-kicker">Tech Lab; Deep Research</p>
       <h1 class="hero-title">TL;<em>DR</em></h1>
       <p class="hero-lede">
-        <strong>Offensive security student &amp; pentester.</strong>
-        I break things, write down exactly how — and I care about privacy.
-        CTF &amp; HackTheBox writeups, privacy guides and security projects.
+        Hi, I'm Eugene, an offensive security student and pentester.
+        I break into things and then write down exactly how it happened.
+        Here you'll find my HackTheBox and CTF writeups, privacy guides,
+        and the projects I build along the way.
       </p>
       <div class="hero-actions">
         <a class="btn" href="{{ '/writeups/' | relative_url }}">Read the writeups</a>
@@ -24,21 +25,20 @@ layout: default
       <div class="stats-strip">
         <div class="stat"><b>{{ htb_posts.size }}</b><span>HTB writeups</span></div>
         <div class="stat"><b>{{ ctf_posts.size }}</b><span>CTF writeups</span></div>
-        <div class="stat"><b>{{ privacy_count }}</b><span>Privacy guides</span></div>
+        <div class="stat"><b>{{ privacy_count }}</b><span>Privacy notes</span></div>
       </div>
     </div>
 
-    <div class="terminal" aria-hidden="true">
-      <div class="terminal-bar"><span></span><span></span><span></span><b>~/techlab</b></div>
-      <div class="terminal-body">
-        <p><span class="prompt">eugene@techlab</span>:<span class="path">~</span>$ <span class="cmd">whoami</span></p>
-        <p class="out">pentester · writer · privacy enthusiast</p>
-        <p><span class="prompt">eugene@techlab</span>:<span class="path">~</span>$ <span class="cmd">ls writeups --sort date | head -2</span></p>
-        {% for post in all_writeups limit: 2 %}
-        <p class="out"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></p>
-        {% endfor %}
-        <p><span class="prompt">eugene@techlab</span>:<span class="path">~</span>$ <span class="cursor"></span></p>
-      </div>
+    <div class="profile-panel">
+        <div class="profile-monogram">ETL</div>
+      <h2 class="profile-name">Eugene TL</h2>
+      <p class="profile-role">Offensive security student &amp; pentester</p>
+      <ul class="profile-facts">
+        <li><span>Focus</span>Web apps, Active Directory, Linux, privacy</li>
+        <li><span>Writing</span>HTB machines and CTF events, step by step</li>
+        <li><span>Side quest</span>Designing and hosting sites for people</li>
+        <li><span>Reach me</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -49,25 +49,25 @@ layout: default
       <a class="section-card writeups" href="{{ '/writeups/' | relative_url }}">
         <div class="sc-icon">✍️</div>
         <h3>Writeups</h3>
-        <p>HTB machines &amp; CTF challenges — from first scan to root.</p>
+        <p>HackTheBox machines and CTF challenges, from first scan to root.</p>
         <span class="sc-count">{{ all_writeups.size }} published</span>
       </a>
       <a class="section-card privacy" href="{{ '/privacy/' | relative_url }}">
         <div class="sc-icon">🕶️</div>
         <h3>Privacy</h3>
-        <p>Guides on messengers, browsers, mail and tools to stay private.</p>
-        <span class="sc-count">{{ privacy_count }} guides</span>
+        <p>Guides to messengers, browsers, mail and tools that keep you private.</p>
+        <span class="sc-count">{{ privacy_count }} notes</span>
       </a>
       <a class="section-card projects" href="{{ '/projects/' | relative_url }}">
         <div class="sc-icon">🛠️</div>
         <h3>Projects</h3>
-        <p>Personal tools and experiments: fuzzers, cheatsheets, games.</p>
+        <p>Tools and experiments I build: fuzzers, cheatsheets, games.</p>
         <span class="sc-count">{{ site.data.projects | size }} projects</span>
       </a>
       <a class="section-card portfolio" href="{{ '/portfolio/' | relative_url }}">
         <div class="sc-icon">🌐</div>
         <h3>Portfolio</h3>
-        <p>Sites I design and host for people — secure by default.</p>
+        <p>Websites I design and host for people. Secure by default.</p>
         <span class="sc-count">Services</span>
       </a>
     </div>
@@ -99,10 +99,6 @@ layout: default
         </div>
       </div>
     </div>
-
-    <div class="all-writeups">
-      <a class="btn ghost" href="{{ '/writeups/' | relative_url }}">See all writeups</a>
-    </div>
   </div>
 </section>
 
@@ -112,13 +108,13 @@ layout: default
       <h2>More about me</h2>
       <p class="muted">
         {{ site.data.cv.profile }}
-        Currently focused on web app pentesting, Active Directory and Linux privilege escalation —
-        and on documenting everything I learn along the way.
+        Right now I'm focused on web application pentesting, Active Directory and Linux
+        privilege escalation, and on documenting everything I learn along the way.
       </p>
       <p class="muted">
         I also design and host websites for people who want something simple, clean and secure.
       </p>
-      <a class="btn" href="{{ '/about/' | relative_url }}">Full CV &amp; rankings</a>
+      <a class="btn" href="{{ '/about/' | relative_url }}">Full CV &amp; achievements</a>
     </div>
     <div class="contact-box">
       <h3>Get in touch</h3>

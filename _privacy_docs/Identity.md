@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Identity
 description: ''
 excerpt: ''
 date: 2026-09-08T16:35
 platform: privacy
 permalink: /privacy/identity/
-category: General
+category: Identity
 tags:
 - Privacy
+- Identity
 ---
 
 {% raw %}

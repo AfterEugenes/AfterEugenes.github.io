@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Cryptography
 description: ''
 excerpt: ''
 date: 2026-09-08T16:35
 platform: privacy
 permalink: /privacy/cryptography/
-category: General
+category: Cryptography
 tags:
 - Privacy
+- Cryptography
 ---
 
 {% raw %}

@@ -1,23 +1,24 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: VPN
 description: ''
 excerpt: ''
 date: 2026-09-08T16:36
 platform: privacy
 permalink: /privacy/vpn/
-category: General
+category: VPN
 tags:
 - Privacy
+- VPN
 ---
 
 {% raw %}
 
 # VPNs
 
-- [ ] [[#Tor]]
-- [ ] [[#Mullvad]]
-- [ ] [[#NordVPN]]
+- [ ] <a class="obsidian-link" href="#tor">Tor</a>
+- [ ] <a class="obsidian-link" href="#mullvad">Mullvad</a>
+- [ ] <a class="obsidian-link" href="#nordvpn">NordVPN</a>
 
 ### Tor
 - [x] Tor

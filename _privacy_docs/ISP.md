@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: ISP
 description: ''
 excerpt: ''
 date: 2026-09-08T16:35
 platform: privacy
 permalink: /privacy/isp/
-category: General
+category: ISP
 tags:
 - Privacy
+- ISP
 ---
 
 {% raw %}

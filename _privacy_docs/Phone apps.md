@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Phone apps
 description: ''
 excerpt: ''
 date: 2026-09-08T16:35
 platform: privacy
 permalink: /privacy/phone-apps/
-category: General
+category: Phone apps
 tags:
 - Privacy
+- Phone apps
 ---
 
 {% raw %}

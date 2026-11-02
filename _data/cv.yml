@@ -1,60 +1,72 @@
 # CV / About content — edit freely, no HTML needed.
+# Details drawn from cv/typst/cv_eb_pentest_en.typ
 profile: >-
-  Student in IT specializing in offensive Cybersecurity and pentesting.
-  I break into things, write down how, and care deeply about privacy.
+  I'm Eugène, a cybersecurity student at ENSIMAG in Grenoble with a taste for
+  offensive security. I break into things, write down exactly how it happened,
+  and help people stay private online.
 
 contact:
   email: contact@eugenetl.com
-  github: https://github.com/TheLastOfEugenes
+  github: https://github.com/AfterEugenes
   htb: https://app.hackthebox.com/users/2162889
+  rootme: https://www.root-me.org/LastOfEugenes
 
 cv_pdf: /assets/cv/cv.pdf
 
 skills:
-  - name: Web App Pentest
+  - name: Pentest
     items:
-      - OWASP top 10 exploitation (SQLi, XSS, CSRF, LFI, RFI, XXE)
-  - name: Linux Systems
+      - "Web applications: OWASP Top 10 exploitation, XSS, SSRF, GraphQL injection, SQLi, LFI and path traversal (PortSwigger labs)"
+      - "Linux: exploitation and privilege escalation through sudo, SUIDs and misconfigured services (gtfobins, linpeas)"
+      - "Windows & AD: Kerberoasting and privilege escalation"
+      - "Methodology: recon, exploitation, post-exploitation and a clean report at the end"
+  - name: Scripting & development
     items:
-      - Enumeration
-      - Exploitation
-      - Privilege escalation
-  - name: Windows & AD
+      - "C: memory management, data structures, multithreading"
+      - "C++: libraries, optimisation, parallel execution"
+      - "Python: tooling, graphs, databases"
+      - "Bash: automation of recon and exploitation workflows"
+  - name: Also
     items:
-      - Kerberoasting
-      - Privilege escalation
-  - name: Network
-    items:
-      - TCP/IP protocols
-      - SSH / HTTP / DHCP
-  - name: Scripting
-    items:
-      - Python
-      - C++
-      - Shared objects libraries
+      - "English C1 (fluent), French native"
+      - "Technical writing: pentest reports, writeups and reviews"
 
 experience:
-  - role: Pentester & assistant developer
-    org: Startup in EvilLand
+  - role: Research internship on side-channel attacks
+    org: NAIST, Nara, Japan
+    when: June to August 2026
     items:
-      - "Pentest of the firm's infrastructure (web app, network)"
-      - "Redaction of a complete pentest report"
-      - "Web & app development"
-
-academics:
-  - org: EvilLand's school of informatics
+      - "Side-channel analysis: SPA, DPA and CPA against AES, up to the 9th round"
+      - "Study of deanonymization attacks on Tor"
+  - role: Pentest internship
+    org: Maestro startup, Grenoble
+    when: July to August 2025
     items:
-      - "Development projects (C graphic library, C terminal, C++ video game, Java compiler)"
-      - "Network: exploration and construction of a network, Wi-Fi hijacking"
-      - "Computer architecture: pipelined processor"
-      - "Advanced coding in C and Python"
+      - "Security assessment of a web, cloud and mobile infrastructure (Supabase, Flutter, Android Studio)"
+      - "Vulnerability report with remediation guidance delivered to the team"
 
-rankings:
+education:
+  - org: ENSIMAG, Grenoble
+    when: 2023 to 2027
+    detail: Double degree, Master in Cybersecurity & Information Systems Engineering
+    items:
+      - "Advanced cryptography and protocols (RSA, side-channel analysis)"
+      - "Networks: ARP, HTTP, TCP, DHCP, VPNs and tunnels"
+      - "Computer architecture: VHDL CPU design"
+      - "Development projects: C window handler, Java game, compiler written in C++"
+
+achievements:
+  - name: CTFs
+    value: "Top 17 at K17, top 90 at Hack.LU, top 100 at Cryptonite. Also played CSAW, Patriot CTF and the French Navy CTF."
   - name: HackTheBox
-    value: Top 800
+    value: "Seasonal machines and the 2025 university CTF, all documented as writeups."
   - name: RootMe
-    value: 50% completion — App-script, Web server and Web client
+    value: "Half of App-Script completed: CSP bypass, SQLi, de-obfuscation, cron jobs, SUIDs."
   - name: PortSwigger
-    value: Finished all topics
-  - name: TryHackMe
-    value: Top 0.1% reached, all pentest paths done
+    value: "Labs across XSS, SSRF, GraphQL injection, SQLi and path traversal."
+
+extra:
+  - name: Student life
+    value: "Vice-president of a cinema club: weekly screenings, finances and arthouse discovery events."
+  - name: Side projects
+    value: "Made a student short-film, and I still write about films from time to time."

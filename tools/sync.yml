@@ -31,6 +31,7 @@ sources:
     layout: privacy-doc
     platform: privacy
     url_prefix: /privacy
+    overview_note: "Privacy tools.md"
 
 # Never published, even if inside a source root.
 exclude_globs:

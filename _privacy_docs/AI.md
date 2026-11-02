@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: AI
 description: ''
 excerpt: ''
 date: 2026-09-08T16:34
 platform: privacy
 permalink: /privacy/ai/
-category: General
+category: AI
 tags:
 - Privacy
+- AI
 ---
 
 {% raw %}

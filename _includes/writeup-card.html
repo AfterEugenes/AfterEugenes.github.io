@@ -1,5 +1,5 @@
 {% comment %}
-  Writeup card — the offset-frame card used across the site.
+  Writeup card — the offset-shadow card used across the site.
   Params (via include): post
 {% endcomment %}
 {% assign p = include.post %}
@@ -9,7 +9,15 @@
    data-search="{{ p.title | downcase | escape }} {{ p.tags | join: ' ' | downcase | escape }} {{ p.os | default: '' | downcase | escape }} {{ p.difficulty | default: '' | downcase | escape }} {{ p.event | default: '' | downcase | escape }} {{ p.season | default: '' | escape }}">
   <div class="card-top">
     <span class="card-kind">{{ ptype | upcase }}</span>
-    {% if p.difficulty %}<span class="badge badge-{{ p.difficulty | downcase }}">{{ p.difficulty }}</span>{% endif %}
+    {% if p.difficulty %}
+      <span class="badge badge-{{ p.difficulty | downcase }}">{{ p.difficulty }}</span>
+    {% elsif p.event %}
+      <span class="badge badge-ctf">{{ p.event }}</span>
+    {% elsif p.category %}
+      <span class="badge badge-privacy">{{ p.category }}</span>
+    {% else %}
+      <span class="badge">{{ p.date | date: "%b %Y" }}</span>
+    {% endif %}
   </div>
   <h3 class="card-title">{{ p.title }}</h3>
   <p class="card-meta">

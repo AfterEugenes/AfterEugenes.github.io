@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<div class="container privacy-shell">
+  {% include privacy-sidebar.html %}
+
+  <div class="privacy-main">
+    <header class="article-header">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="{{ '/privacy/' | relative_url }}">Privacy</a> ›
+        <span>{{ page.category }}</span>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.description and page.description != '' %}<p class="lede">{{ page.description }}</p>{% endif %}
+      <div class="badges">
+        <span class="badge badge-privacy">PRIVACY</span>
+        <span class="badge">{{ page.category }}</span>
+        <span class="badge badge-date">Updated <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></span>
+      </div>
+    </header>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    {% assign items = site.privacy_docs | where: "layout", "privacy-doc" | where: "category", page.category | sort: "date" | reverse %}
+    {% if items.size > 0 %}
+    <section class="related">
+      <h2>Files in this category</h2>
+      <ul class="file-list">
+        {% for doc in items %}
+        <li>
+          <a href="{{ doc.url | relative_url }}">{{ doc.title }}</a>
+          {% if doc.description and doc.description != '' %}<span class="muted"> · {{ doc.description }}</span>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+  </div>
+</div>

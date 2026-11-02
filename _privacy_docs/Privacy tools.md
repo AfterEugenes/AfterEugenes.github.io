@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Privacy tools
 description: ''
 excerpt: ''
 date: 2026-09-19T21:43
 platform: privacy
 permalink: /privacy/privacy-tools/
-category: General
+category: Privacy tools
 tags:
 - Privacy
+- Privacy tools
 ---
 
 {% raw %}
@@ -66,41 +67,41 @@ Legend:
 
 - Meilleurs services
 	- [x] Browsing
-		- [x] [[#Tor]]
-		- [x] [[#Mullvad]] Browser
+		- [x] <a class="obsidian-link" href="#tor">Tor</a>
+		- [x] <a class="obsidian-link" href="#mullvad">Mullvad</a> Browser
 	- [ ] VPN
 		- [ ] Mullvad VPN
 	- [ ] Mail
 	- [ ] Messages (group and direct)
-		- [ ] [[#Signal]]
+		- [ ] <a class="obsidian-link" href="#signal">Signal</a>
 	- [x] Cryptocurrency
-		- [x] [[#Monero]]
-		- [?] [[#Feather wallet]]
-		- [?] [[#Haveno]]
-		- [?] [[#RetoSwap]]
+		- [x] <a class="obsidian-link" href="#monero">Monero</a>
+		- [?] <a class="obsidian-link" href="#feather-wallet">Feather wallet</a>
+		- [?] <a class="obsidian-link" href="#haveno">Haveno</a>
+		- [?] <a class="obsidian-link" href="#retoswap">RetoSwap</a>
 - Autres options
 	- [ ] Browsing
 	- [ ] VPN
-	- [ ] [[#secure messaging]]
-		- [n] [[#RVNT]]
-	- [ ] [[#Cryptocurrencies]]
+	- [ ] <a class="obsidian-link" href="#secure-messaging">secure messaging</a>
+		- [n] <a class="obsidian-link" href="#rvnt">RVNT</a>
+	- [ ] <a class="obsidian-link" href="#cryptocurrencies">Cryptocurrencies</a>
 		- [ ] Blockchains
-		- [ ] [[#Monero nodes]]
-			- [ ] [[#Monerod]]
-		- [ ] [[#Monero wallets]]
-			- [ ] [[#Monero GUI]]
-			- [ ] [[#Cake wallet]]
-		- [ ] [[#Monero funds]]
-			- [ ] [[#Monero gift cards]]
-	- [ ] [[#VPN]]
-	- [ ] [[#email]]
-		- [ ] [[#Throaway email (long-lived)]]
-		- [ ] [[#Throaway email (short-lived)]]
-	- [ ] [[#Phone service]]
-	- [ ] [[#Protecting against ISP]]
-	- [ ] [[#OS security]]
-	- [ ] [[#Ansible for local-stack?]]
-	- [ ] [[#Sudos]]
+		- [ ] <a class="obsidian-link" href="#monero-nodes">Monero nodes</a>
+			- [ ] <a class="obsidian-link" href="#monerod">Monerod</a>
+		- [ ] <a class="obsidian-link" href="#monero-wallets">Monero wallets</a>
+			- [ ] <a class="obsidian-link" href="#monero-gui">Monero GUI</a>
+			- [ ] <a class="obsidian-link" href="#cake-wallet">Cake wallet</a>
+		- [ ] <a class="obsidian-link" href="#monero-funds">Monero funds</a>
+			- [ ] <a class="obsidian-link" href="#monero-gift-cards">Monero gift cards</a>
+	- [ ] <a class="obsidian-link" href="#vpn">VPN</a>
+	- [ ] <a class="obsidian-link" href="#email">email</a>
+		- [ ] <a class="obsidian-link" href="#throaway-email-long-lived">Throaway email (long-lived)</a>
+		- [ ] <a class="obsidian-link" href="#throaway-email-short-lived">Throaway email (short-lived)</a>
+	- [ ] <a class="obsidian-link" href="#phone-service">Phone service</a>
+	- [ ] <a class="obsidian-link" href="#protecting-against-isp">Protecting against ISP</a>
+	- [ ] <a class="obsidian-link" href="#os-security">OS security</a>
+	- [ ] <a class="obsidian-link" href="#ansible-for-local-stack">Ansible for local-stack?</a>
+	- [ ] <a class="obsidian-link" href="#sudos">Sudos</a>
 - Autres catégories
 	- [ ] Freetube/PipePipe
 

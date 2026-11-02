@@ -1,14 +1,15 @@
 ---
-layout: privacy-doc
+layout: privacy-hub
 title: Cryptocurrencies
 description: ''
 excerpt: ''
 date: 2026-09-08T16:34
 platform: privacy
 permalink: /privacy/cryptocurrencies/
-category: General
+category: Cryptocurrencies
 tags:
 - Privacy
+- Cryptocurrencies
 ---
 
 {% raw %}
@@ -72,7 +73,7 @@ Pour ce qui est des attaques il ne semble pas y avoir eu de quelconque attaque i
 Tout ce qui reste est donc basé sur la confiance qu'on accorde à Feather wallet. Le souci est qu'il n'y a jamais eu d'audit indépendant apparemment, aucun article sur ce qu'il y a pu y avoir comme information tirée d'une évaluation.
 L'avantage est que le code est open source et que l'on a aucune nouvelle sur une quelconque attaque déjà faite ou une partie du code douteuse trouvée, ce qui nous permet tout de même de pencher vers l'idée que ce *wallet* est sécurisé et ne pose aucun risque.
 
-Le plus gros risque après la blockchain n'est pas le wallet mais bien le *node* auquel un utilisateur se connecte. **Feather** maintient une liste de *nodes* fiables (considérés comme tel tout du moins) auxquels il est possible de se connecter. Bien que cette liste vienne d'un organisme de confiance, elle n'est pas totalement imperméable aux risques. L'idéal dans ce cas est de se connecter à un *node* en local en utilisant [[#Monerod]]. Sinon les *nodes* auront accès à des infos telles que
+Le plus gros risque après la blockchain n'est pas le wallet mais bien le *node* auquel un utilisateur se connecte. **Feather** maintient une liste de *nodes* fiables (considérés comme tel tout du moins) auxquels il est possible de se connecter. Bien que cette liste vienne d'un organisme de confiance, elle n'est pas totalement imperméable aux risques. L'idéal dans ce cas est de se connecter à un *node* en local en utilisant <a class="obsidian-link" href="#monerod">Monerod</a>. Sinon les *nodes* auront accès à des infos telles que
 - *Refresh height and access paterns*: Les infos qui sont normalement utilisées pour synchroniser deux clients/*nodes* peuvent être utilisées pour traquer l'instant de création du *wallet*.
 - *Output requests*: Le client demande une liste de *ring members* qui serviront de *decoys*. Combiné avec l'IP, il est possible de l'utiliser pour retracer la transaction.
 - *Transaction submission*: Le *remote node* étant le premier que l'on contact, **Dandelion++** ne s'appliquera que pour les *nodes* suivants, ne protégeant pas l'utilisateur ici.
