@@ -22,7 +22,7 @@
       el.placeholder = code === "fr" ? el.dataset.frPh : el.dataset.enPh;
     });
     var btn = document.querySelector(".lang-toggle");
-    if (btn) btn.textContent = code === "fr" ? "EN" : "FR";
+    if (btn) btn.textContent = code === "fr" ? "FR" : "EN";
   };
 
   applyLang(lang);

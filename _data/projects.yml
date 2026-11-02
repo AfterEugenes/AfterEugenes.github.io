@@ -1,18 +1,18 @@
 # Personal projects shown on /projects/
-- name: PyShooter
-  url: https://github.com/TheLastOfEugenes/Shooterpython
-  description: Simple shooter game in Python.
-  tags: [Python, Game]
-
 - name: Raft
   url: https://github.com/AfterEugenes/raft
   description: Interactive CLI tool in Rust with a REPL-style interface, command parsing and URL handling. In development.
   tags: [Rust, Cysec tools]
 
-- name: Pentesting Cheatsheet
-  url: https://github.com/TheLastOfEugenes/PentestCheatSheet
-  description: Cheat sheet for pentesting different environments.
-  tags: [Cysec tools]
+- name: PUF (Ports and Urls Filter)
+  url: https://github.com/AfterEugenes/puf
+  description: Flask web app to run and manage fuzzing and nmap scans: quick command launch, result storage and filtering, target management. Customisable via config.
+  tags: [Python, Cysec tools]
+
+- name: PyShooter
+  url: https://github.com/TheLastOfEugenes/Shooterpython
+  description: Simple shooter game in Python.
+  tags: [Python, Game]
 
 - name: Seem-simi
   url: https://github.com/TheLastOfEugenes/seemsimi
