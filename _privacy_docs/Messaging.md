@@ -16,7 +16,7 @@ tags:
 
 # Introduction
 
-Les services de messagerie sont importants ils permettent de communiquer. La différence principale réside dans la différence entre centralisé, fédéré et p2p, c'est la différence la plus conséquente sur la vie privée. [^decentralizedcomparison]
+Les services de messagerie sont importants ils permettent de communiquer. La différence principale réside dans la différence entre centralisé, fédéré et p2p, la comprendre donne des indications sur le fonctionnement de chacune et l'importance accordée à la vie privée. [^decentralizedcomparison]
 
 [^decentralizedcomparison]: [P2P, federated et centralized comparaison - RVNT](https://rvntos.io/blog/p2p-vs-federated-vs-centralized-messaging/)
 
