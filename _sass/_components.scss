@@ -415,6 +415,24 @@
 
     a { font-size: 0.86rem; }
   }
+
+  // scoped footnotes: kept inside the embed card, not at the page bottom
+  .note-embed-footnotes {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-soft);
+    font-size: 0.82rem;
+    color: var(--muted);
+
+    ol {
+      margin: 0;
+      padding-left: 1.5em;
+    }
+
+    li { margin: 0.3em 0; }
+    a.fn-back { color: var(--dim); }
+    a.fn-back:hover { color: var(--brand); }
+  }
 }
 
 // ----------------------------------------------------------------------- toc

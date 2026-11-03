@@ -6,9 +6,16 @@ latest:
   title: Proton
   url: /privacy/mails/proton/
 categories:
+- name: Mails
+  url: /privacy/mails/
+  priority: 99
+  notes:
+  - title: Proton
+    url: /privacy/mails/proton/
+    date: '2026-09-08'
 - name: Messaging
   url: /privacy/messaging/
-  priority: 3
+  priority: 99
   notes:
   - title: RVNT
     url: /privacy/messaging/rvnt/
@@ -33,11 +40,4 @@ categories:
     date: '2026-09-08'
   - title: Matrix
     url: /privacy/messaging/matrix/
-    date: '2026-09-08'
-- name: Mails
-  url: /privacy/mails/
-  priority: 4
-  notes:
-  - title: Proton
-    url: /privacy/mails/proton/
     date: '2026-09-08'

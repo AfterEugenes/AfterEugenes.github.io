@@ -38,6 +38,8 @@ RE_FENCE = re.compile(r"^(```|~~~)")
 RE_INLINE_CODE = re.compile(r"(`[^`]*`)")
 RE_CALLOUT = re.compile(r"^>\s*\[!([a-zA-Z-]+)\]([+-]?)\s*(.*)$")
 RE_HEAD = re.compile(r"^(#{1,6})\s")
+RE_FN_DEF = re.compile(r"^\[\^([^\]]+)\]:\s?(.*)$")
+RE_FN_REF = re.compile(r"\[\^([^\]]+)\]")
 RE_CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 
 
@@ -267,6 +269,37 @@ def render_note(note: Note, ctx: Context, stack: tuple = (), embed: bool = False
 def transform_body(note: Note, ctx: Context, stack: tuple = (), embed: bool = False) -> str:
     out_lines: list[str] = []
     lines = note.body.splitlines()
+
+    # Footnote scoping for embeds: kramdown renders footnotes at the bottom of
+    # the whole page, but a transcluded note must keep its footnotes inside its
+    # own card. Extract the definitions, number the references, and append a
+    # scoped footnote list at the end of the embed body.
+    fn_key = "-".join(note.slugs)
+    fn_defs: dict[str, str] = {}
+    fn_nums: dict[str, int] = {}
+    if embed:
+        kept: list[str] = []
+        j = 0
+        fenced = False
+        while j < len(lines):
+            if RE_FENCE.match(lines[j]):
+                fenced = not fenced
+                kept.append(lines[j])
+                j += 1
+                continue
+            m = RE_FN_DEF.match(lines[j]) if not fenced else None
+            if m:
+                fid, text = m.group(1), m.group(2)
+                j += 1
+                while j < len(lines) and lines[j][:1] in (" ", "\t") and lines[j].strip():
+                    text += " " + lines[j].strip()
+                    j += 1
+                fn_defs[fid] = text
+                continue
+            kept.append(lines[j])
+            j += 1
+        lines = kept
+
     i = 0
     in_fence = False
 
@@ -350,10 +383,25 @@ def transform_body(note: Note, ctx: Context, stack: tuple = (), embed: bool = Fa
         line = RE_WIKILINK_HEAD.sub(rep_head, line)
         return RE_WIKILINK.sub(rep, line)
 
+    def handle_fn_refs(line: str) -> str:
+        def rep(m: re.Match) -> str:
+            fid = m.group(1)
+            if fid not in fn_defs:
+                return m.group(0)          # no definition: leave untouched
+            if fid not in fn_nums:
+                fn_nums[fid] = len(fn_nums) + 1
+                return (f'<sup class="fn-ref" id="fnref-{fn_key}-{fid}">'
+                        f'<a href="#fn-{fn_key}-{fid}">{fn_nums[fid]}</a></sup>')
+            return (f'<sup class="fn-ref">'
+                    f'<a href="#fn-{fn_key}-{fid}">{fn_nums[fid]}</a></sup>')
+        return RE_FN_REF.sub(rep, line)
+
     def convert_part(part: str) -> str:
         part = handle_embed(part)
         part = handle_links(part)
         part = RE_HIGHLIGHT.sub(r"<mark>\1</mark>", part)
+        if fn_defs:
+            part = handle_fn_refs(part)
         return part
 
     while i < len(lines):
@@ -401,6 +449,17 @@ def transform_body(note: Note, ctx: Context, stack: tuple = (), embed: bool = Fa
         i += 1
 
     result = "\n".join(out_lines)
+
+    # scoped footnote list at the bottom of the embed card
+    if embed and fn_nums:
+        items = []
+        for fid, n in sorted(fn_nums.items(), key=lambda kv: kv[1]):
+            text = convert_part(fn_defs[fid])
+            items.append(f'{n}. <span id="fn-{fn_key}-{fid}"></span>{text} '
+                         f'<a class="fn-back" href="#fnref-{fn_key}-{fid}">↩</a>')
+        result += ("\n\n<div class=\"note-embed-footnotes\">\n\n"
+                   + "\n".join(items) + "\n\n</div>")
+
     if embed:
         note.rendered_embed = result
     else:
