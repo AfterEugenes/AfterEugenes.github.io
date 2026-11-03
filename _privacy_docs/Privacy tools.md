@@ -3,7 +3,7 @@ layout: privacy-hub
 title: Privacy tools
 description: ''
 excerpt: ''
-date: 2026-09-19T21:43
+date: 2026-11-03T10:12
 platform: privacy
 permalink: /privacy/privacy-tools/
 category: Privacy tools
@@ -110,9 +110,16 @@ Avec le développement d'internet et sa conception actuelle, les achats et vente
 Bien que je pourrais rentrer dans les détails et continuer, cela me semble inutile quand Mullvad VPN a écrit un si bon article sur tout ce que ces entreprises sont prêtes à faire pour récupérer vos infos et pourquoi votre vie privée est importante.
 [Total surveillance - Mullvad VPN](https://mullvad.net/pdfs/Total_surveillance.pdf)
 
-La vie privée est, plus qu'une légende qu'un informaticien raconte à ses enfants avant qu'ils s'endorment, un droit. Pour certaines personnes comme les activistes, les *whistle blowers* et les personnes recherchées (svp ne traffiquez pas de drogue, c'est dangereux la drogue), la vie privée est encore plus, elle représente une sécurité, une assurance 
+La vie privée est, plus qu'une histoire qu'un informaticien raconte à ses enfants afin qu'ils se tiennent sages en attendant noël, un droit. Pour certaines personnes comme les activistes, les *whistle blowers* et les personnes recherchées (Ne vendez pas de drogue, s'ilv ous plaît, c'est dangereux la drogue), la vie privée est encore plus, elle représente une sécurité, une assurance 
+
+Puisque je suis le seul et tout puissant auteur je me permet de vous lier quelques sites ou projets qui sont très intéressants et ont à coeur de protéger vos droits.
+
+[Free your android - Free software foundation Europe](https://fsfe.org/activities/android/android.en.html)
+[Quadrature du net](quadrature du net)
 
 # Validated services
+
+Dans cette catégorie vous trouverez tous les services qui ont passé tous mes critères de sélection et que j'utilise, parfois au quotidien. (Sans être traffiquant de drogue, je précise.)
 
 ### Tor
 - [x] Tor
