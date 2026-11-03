@@ -74,7 +74,9 @@ def normalize_date(value, fallback: dt.datetime) -> str:
         return value.isoformat()
     if isinstance(value, str) and value.strip():
         return value.strip()
-    return fallback.isoformat(timespec="minutes")
+    # mtime fallback: keep the local UTC offset so CI (UTC) can't read it
+    # as a future date
+    return fallback.astimezone().isoformat(timespec="minutes")
 
 
 def split_frontmatter(text: str) -> tuple[dict, str]:
@@ -216,7 +218,7 @@ class Note:
         elif self.platform == "privacy":
             m["category"] = self.category
 
-        # derived tags (vault emoji tags are dropped on purpose)
+        # derived tags (site tags come from metadata, not vault frontmatter)
         tags = list(self.src.get("derive_tags", []))
         if self.platform == "htb":
             for v in (self.fm.get("os"), self.fm.get("difficulty")):

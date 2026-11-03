@@ -26,8 +26,8 @@ of publishing it.
 
 On the website copy the sync script:
 
-- drops vault bookkeeping frontmatter (emoji `tags:`, `tasks`, `priority`, …)
-  and derives site tags from metadata (platform, OS, difficulty, event);
+- generates the frontmatter (title, date, and tags derived from metadata like
+  platform, OS, difficulty, event; vault bookkeeping fields never reach the site);
 - rewrites `![[image.png]]` into real `<img>` tags and copies the images;
 - rewrites `[[wikilink]]` into links **only when the target is published** —
   links to unpublished notes render as plain text, so nothing leaks;

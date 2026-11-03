@@ -14,29 +14,6 @@ tags:
 
 {% raw %}
 
-# Index
-
-Messaging apps
-- Centralised
-	- [x] Signal
-- Federated
-	- [x] SimpleX
-	- [>] Matrix
-	- [-] Rocket.chat
-- P2P
-	- [x] Briar
-	- [>] Session
-	- [t] RVNT
-- [ ] xmpp
-- [ ] Tox
-- [ ] Wickr
-- [ ] meshtastic/meshcore
-- [ ] bitchat
-- [ ] anonomi
-- [ ] lora
-- [ ] bridgeify
-- [ ] telegram
-
 # Introduction
 
 Les services de messagerie sont importants ils permettent de communiquer. La différence principale réside dans la différence entre centralisé, fédéré et p2p, c'est la différence la plus conséquente sur la vie privée. [^decentralizedcomparison]
@@ -44,6 +21,8 @@ Les services de messagerie sont importants ils permettent de communiquer. La dif
 [^decentralizedcomparison]: [P2P, federated et centralized comparaison - RVNT](https://rvntos.io/blog/p2p-vs-federated-vs-centralized-messaging/)
 
 # Contenu
+
+Dans cette partie vous verrez tous les services de messagerie que je trouve intéressants, sûrs, pratiques, enfin bref ce que je juge suffisamment sûr d'utiliser. Les critères de sélection pouvant être très personnels, je vous invite fortement à prendre cette décision par vous-même, c'est pourquoi chaque page contient aussi des liens permettant de se faire une meilleure idée sur le sujet.
 
 <div class="note-embed">
 
@@ -309,86 +288,6 @@ En regardant les promesses seules ce service a l'air phénoménal, à voir si le
 </div>
 
 <div class="note-embed-foot"><a href="/privacy/messaging/rvnt/">Open the full note →</a>
-</div>
-
-</div>
-
-<div class="note-embed">
-
-<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/matrix/">Matrix</a><span class="note-embed-meta">Updated 2026-09-08</span>
-</div>
-
-<div class="note-embed-body">
-
-
-### Matrix
-#### TL;DR
-Le but est d'avoir une messagerie fédérée pour échanger des messages dans des communautés. La cryptographie en elle-même est correcte mais pas exceptionnelle, l'ego des développeurs les empêche apparemment d'avancer et corriger leurs erreurs et certaines options sont à revoir pour avoir quelque chose de privé ou agréable à utiliser.
-
-#### Analyse
-Matrix se présente comme un service orienté vers les communautés, qui permet de joindre des communautés de toutes origines (skype, discord, signal, etc) en une seule application via des réseaux *fédérés*.
-
-Le protocole et l'idée, en eux-même, n'ont pas l'air trop mal du tout. Ils ont l'air d'attacher une certaine importance à l'idée de vie privée et notamment de la développer avec cette idée de messagerie fédérée. En plus de ça leur application est centrée autour de leurs *bridges* qui permettent de connecter une room matrix à beaucoup d'autres types d'applications. Un autre point intéressant est l'absence d'information importante lors de l'inscription, matrix n'a besoin ni d'email ni de numéro de téléphone, rien du tout.
-
-Le problème est que c'est un service trop dispersé, à vouloir tout faire il ne fait pas grand chose de bien. De plus, ils se démarquent un peu des derniers en corrigeant certains bugs mais n'ont pas pour autant réinventé la roue. Du côté de la protection, elle est suffisante dans beaucoup de cas mais a quand même des lacunes.
-
-Déjà, les messages sont envoyés de bout en bout par TLS, c'est la seule sécurité qui existe par défaut. Certes cela permet de cacher certaines parties du message mais pas tout. Un tiers qui écoute sur le réseau obtient ainsi des métadonnées. En plus de ça, l'encryption E2EE est disponible, mais optionnelle, ce qui est sensiblement embêtant, ça fait notamment que, par défaut, les serveurs impliqués peuvent tout à fait lire les messages, ce qui est notamment embêtant quand matrix.org est hôte pour plus de 30% des utilisateurs. 
-
-Le plus gros problème de cette application est les métadonnées. Entre celles collectées pour l'amélioration des services, celles collectées pour transmettre les messages ou celles collectées lors de l'inscription d'un utilisateur, tout est log. Alors certains pourraient vous dire que si l'on a rien à se reprocher, on a rien à craindre, auquel cas j'aimerais vous rappeler que oui c'est vrai en un sens mais aussi que "big brother is watching you", eux aussi n'avaient rien à cacher... Cela va jusqu'à leur obtenir le surnom d'"éponge à métadonnées" par un utilisateur reddit, surnom largement mérité en mon opinion. Pour couronner le tout un bon 30% des connexions se font sur les serveurs principaux de matrix ou sur leur application principale qui, si je comprends bien, force les utilisateurs à s'inscrire sur le réseau principal, recentralisant donc le service.
-
-En plus de ça la mentalité des développeurs est problématique. Ils sont lents, n'arrivent pas vraiment à faire décoller leur application, qui a pourtant maintenant 6 ans, choisissent de développer le côté pratique plutôt que la sécurité et, plutôt que d'accepter leurs problèmes de leur application, ont l'air de tout tenter pour blâmer les autres et les enfoncer, tout en ayant une idée glorifiée de leur travail. Il faudrait leur donner encore du temps pour leur permettre de développer un meilleur protocole, pour leur donner le temps de s'atteler à une meilleure sécurité mais a-t-on vraiment besoin de tant d'années pour se jeter des lauriers pas mérités?
-
-</div>
-
-<div class="note-embed-foot"><a href="/privacy/messaging/matrix/">Open the full note →</a>
-</div>
-
-</div>
-
-<div class="note-embed">
-
-<div class="note-embed-head"><a class="note-embed-title" href="/privacy/messaging/rocket-chat/">Rocket.chat</a><span class="note-embed-meta">Updated 2026-09-08</span>
-</div>
-
-<div class="note-embed-body">
-
-
-### Rocket.chat
-#### TL;DR
-Rocket.chat est une application orientée vers la commercialisation et la surveillance de votre communauté, ils font eux-même la pub de leur service comme un hébergement sur cloud d'un service de messagerie à la demande ou le déploiement d'une messagerie "sécurisée" en local. Ils ne sont pas du tout orientés vers la vie privée.
-
-#### Analyse
-Rocket.chat se présente comme un service de messagerie fédéré.[^rocketgetstarted] Plus que proche de matrix, ils se basent carrément sur le protocole de matrix pour faire tourner leur service.[^rocketmatrix] Ils bénéficient donc des systèmes de sécurité de Matrix plus ceux qu'ils rajoutent eux-même. Leur plus-value principale est de proposer différents déploiements: local, cloud ou air-gapped, un déploiement sur une version, selon leurs dires, isolée du reste du web.[^rocketplans] Local est bien évidemment un déploiement sur un serveur local tandis que cloud est une option hébergée sur leurs serveurs.
-
-Le problème de s'être basé sur matrix est qu'ils continuent les erreurs précédentes de matrix, ils auraient pu décider de renforcer la sécurité mais à la place ont décidé de renforcer le logging et faire machine arrière sur certaines choses comme le E2EE ou les informations sur les utilisateurs.[^rocketauthentication] Un administrateur a maintenant les pleins pouvoirs: il peut forcer les utilisateurs à se connecter avec LDAP, oAuth, 2FA, etc.[^rocketauthentication] En plus de ça il a également les pleins pouvoirs sur le E2EE, il doit activer l'E2EE sur un workspace avant de pouvoir le mettre en place sur un chat, même privé, ce qui lui permet de décider que personne ne peut lui cacher des messages.[^rockete2ee] J'ai mentionné les informations sur les utilisateurs, il se trouve que les développeurs ont eu l'idée géniale de remettre en place des informations comme les marqueurs de lecture ou de connexion des utilisateurs. En bref leur but n'est clairement pas de limiter les informations mais plutôt de les multiplier et les centraliser vers un seul utilisateur. Pire que ça, ils assument clairement le côté surveillance et proposent des outils pour obtenir des données sur les utilisateurs et utilisations.[^rocketmetrics] Encore une preuve de la mentalité de l'application, le document qui permet de comparer les options est bloqué derrière un login...[^rocketdocumenthidden]
-
-Les versions commerciales sont largement développées, à l'inverse des versions gratuites.[^rocketplans] La version gratuite a un nombre limité d'utilisateur, d'applications tierces pour l'utilisation de rocket, etc etc. Tout ce qui mérite d'être utilisé, même la version air-gapped, est payant, et bloqué derrière un abonnement pour entreprise. Même la license MIT qu'ils ont obtenue ne concerne qu'une partie de leur code sur github, la license commerciale, elle, concerne en revanche bien tout leur code sans exception.[^rocketgithub] (Il faut souligner d'ailleurs que leur point majeur de vente est la solution air-gapped mais que personne ne décrit vraiment ce qu'on y trouve, ça reste un mystère... hermétique !)
-
-Dans ce qui est des avis utilisateurs, malgré la possibilité d'utiliser des applications tierces, les avis ressortent majoritairement négatifs. Les utilisateurs trouvent l'application peu pratique et la campagne aggressive pour la commercialisation de leurs plans est apparemment mal passée.[^rocketreview][^rocketreddit] Ironiquement le seul site sur lequel on trouve une grande majorité des avis positifs semble pouvoir être acheté puisque les avis ressemblent fort à de faux avis. Bien sûr je n'ai aucune preuve mais quelque chose (mon petit doigt) me dit qu'il y a de la corruption dans l'air.[^rocketfakereview]
-
-Pour ce qui est de la sécurité en elle-même, ce qu'ils ont réutilisé, c'est à dire le protocole de matrix, semble robuste, il faut dire qu'il avait déjà fait ses preuves par le passé, tout le reste semble fragile comme du papier mâché. NoSQLi, auth bypass et autres CVEs, tout y est. Du moment qu'ils ne l'ont pas piqué, c'est vulnérable. C'est d'autant plus dommage qu'ils ont l'air de destiner leurs services à des organisations telles que l'armée des états-unis (déjà clients), l'air force et autres organisations gouvernementales ayant des missions secrètes à mettre à bien.
-
-En bref on fait face à une entreprise qui est assoiffée d'argent et met l'accent sur vendre. Quand ses développeurs ne sont pas trop concentrés sur les chiffres, il semble qu'ils passent leur temps à dévier une application dédiée à la vie privée (en partie) et en faire un outil de surveillance isolé du monde extérieur, une petite corée du nord dans votre salon...
-
-[^rocketgetstarted]:[Rocket presentation page](https://docs.rocket.chat/docs/rocketchat)
-[^rocketmatrix]:[Rocket.chat base: matrix](https://www.rocket.chat/blog/delivering-matrix-federation-as-a-built-in-standard)
-[^Rocketplans]:[Rocket plans](https://docs.rocket.chat/docs/our-plans)
-[^rocketauthentication]:[Rocket.chat authentication methods](https://docs.rocket.chat/docs/authentication)
-[^rockete2ee]:[Rocket.chat approach to E2EE](https://docs.rocket.chat/docs/configure-e2e-encryption)
-[^rocketdocumenthidden]:[Rocket documentation on plans using document360](https://portal.us.document360.io/v1/docs/choose-your-deployment-model)
-[^rocketgithub]:[Rocket.chat on github](https://github.com/RocketChat/Rocket.Chat?tab=License-1-ov-file)
-
-[^rocketfakereview]:[Rocket fake reviews](https://www.capterra.com/p/161575/Rocket-Chat/reviews/)
-[^rocketreview]:[Rocket review on technical blog](https://www.techradar.com/reviews/rocketchat)
-[^rocketreddit]:[Rocket pushing premium options, reddit](https://www.reddit.com/r/selfhosted/comments/ynzakd/why_is_rocketchat_recommended/)
-
-[^rocketnosqli]:[CVE affecting rocket: NoSQLi](https://www.sentinelone.com/vulnerability-database/cve-2026-30833/)
-[^rocket2fabypass]:[CVE affecting rocket 2FA](https://vulners.com/cve/CVE-2026-30831)
-[^rocketcvelist]:[List of CVEs affecting Rocket.chat (and not matrix, for the bigger part)](https://app.opencve.io/cve/?vendor=rocketchat)
-
-</div>
-
-<div class="note-embed-foot"><a href="/privacy/messaging/rocket-chat/">Open the full note →</a>
 </div>
 
 </div>

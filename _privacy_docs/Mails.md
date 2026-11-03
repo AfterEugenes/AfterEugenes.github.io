@@ -13,18 +13,5 @@ tags:
 ---
 
 {% raw %}
-
-### email
-- [ ] What logs are necessary?
-- [ ] no log, no personal information
-- [ ] long-lived throaway
-- [ ] short-lived throaway
-
-#### Throaway email (long-lived)
-- [ ] What logs are necessary?
-- [ ] no log, no personal information
-
-#### Throaway email (short-lived)
-- [ ] What logs are necessary?
-- [ ] no log, no personal information
+Cette page est encore en cours de construction, J'y viens, mais pas tout de suite.
 {% endraw %}

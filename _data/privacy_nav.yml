@@ -6,20 +6,6 @@ latest:
   title: Proton
   url: /privacy/mails/proton/
 categories:
-- name: Browsers
-  url: /privacy/browsers/
-  priority: 1
-  notes:
-  - title: Mullvad
-    url: /privacy/browsers/mullvad/
-    date: '2026-09-08'
-  - title: Tor
-    url: /privacy/browsers/tor/
-    date: '2026-09-08'
-- name: VPN
-  url: /privacy/vpn/
-  priority: 2
-  notes: []
 - name: Messaging
   url: /privacy/messaging/
   priority: 3
@@ -55,39 +41,3 @@ categories:
   - title: Proton
     url: /privacy/mails/proton/
     date: '2026-09-08'
-- name: Cryptocurrencies
-  url: /privacy/cryptocurrencies/
-  priority: 5
-  notes: []
-- name: AI
-  url: /privacy/ai/
-  priority: 6
-  notes: []
-- name: Password handlers
-  url: /privacy/password-handlers/
-  priority: 6
-  notes: []
-- name: Hardware
-  url: /privacy/hardware/
-  priority: 7
-  notes: []
-- name: OS security
-  url: /privacy/os-security/
-  priority: 8
-  notes: []
-- name: Phone apps
-  url: /privacy/phone-apps/
-  priority: 9
-  notes: []
-- name: Cryptography
-  url: /privacy/cryptography/
-  priority: 10
-  notes: []
-- name: Identity
-  url: /privacy/identity/
-  priority: 11
-  notes: []
-- name: ISP
-  url: /privacy/isp/
-  priority: 12
-  notes: []

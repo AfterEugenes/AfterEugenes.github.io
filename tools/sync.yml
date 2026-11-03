@@ -38,17 +38,6 @@ exclude_globs:
   - "**/*.excalidraw.md"
   - "**/templates/**"
 
-# Vault bookkeeping fields removed from the website copy.
-drop_frontmatter:
-  - tags
-  - tasks
-  - priority
-  - category
-  - seasonal
-  - Description
-  - parent file
-  - parent files
-
 # Tag pills shown on the site are derived from metadata, not from vault tags.
 derive_tags:
   htb: ["HTB"]
